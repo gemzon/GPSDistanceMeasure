@@ -6,4 +6,6 @@ This applciation is desgined to take in 2 GPS positions in degrees and then, wor
 2. Greater Circle
 3. Haversine Formula
 
-this applicaiton is open for modification
+This applicaiton is open for modification
+
+We developed initial project live on stream - https://www.twitch.tv/copperbeardy 5th October 2019
