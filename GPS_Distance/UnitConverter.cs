@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace GPS_Distance
 {
@@ -8,11 +6,17 @@ namespace GPS_Distance
     {
         public static double DegreesToRadians(double degree)
         {
-           return (degree * Math.PI/180);
+           return ( degree * (Math.PI/180));
         }
         public static double RadiansToDegrees(double radian)
         {
-            return (Math.PI / radian * 180 / Math.PI);
+            //return ((Math.PI / radian) * (180 / Math.PI));
+            return Math.PI/radian * 180/Math.PI;
+        }
+
+        public static double MetresToMiles(double metre)
+        {
+            return metre * 0.00062137;
         }
     }
 }

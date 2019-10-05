@@ -98,7 +98,7 @@
                 Margin="0,8,0,0"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
-                Content="Start GPS Position"
+                Content="End GPS Position"
                 FontSize="20"
                 FontWeight="Bold" />
             <Label
@@ -178,7 +178,7 @@
                 Width="180"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
-                Content="Modified Pythagorous"
+                Content="Modified Pythagorous (mi)"
                 FontSize="14" />
             <TextBox
                 x:Name="ModifiedPythagorousResultTxtBx"
@@ -208,14 +208,14 @@
                 Width="180"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
-                Content="Greater Circle"
+                Content="Greater Circle (mi)"
                 FontSize="14" />
             <Label
                 Grid.Row="3"
                 Width="180"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
-                Content="Haversine Formula"
+                Content="Haversine Formula (mi)"
                 FontSize="14" />
             <TextBox
                 x:Name="GreaterCircleResultTxtBx"

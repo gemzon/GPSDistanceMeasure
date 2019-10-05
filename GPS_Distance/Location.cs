@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace GPS_Distance
+﻿namespace GPS_Distance
 {
     public class Location
     {
