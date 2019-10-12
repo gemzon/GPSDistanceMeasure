@@ -23,7 +23,8 @@ namespace GPS_Distance.MeasurementFormulas
 
             double squared = squaredSinDlat + squaredSinLon * squaredCos;
             double distanceMetres = radius * 2 * Math.Asin(Math.Sqrt(squared));
-            return UnitConverter.MetresToMiles(distanceMetres);
+
+            return FormatResult.FormatDouble( UnitConverter.MetresToMiles(distanceMetres));
         }
 
     }

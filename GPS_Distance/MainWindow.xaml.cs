@@ -44,6 +44,7 @@ namespace GPS_Distance
             ModifiedPythagorousResultTxtBx.Text = ModifiedPythagoras.Measure(StartLocationInDegrees, EndLocationInDegrees).ToString();
             GreaterCircleResultTxtBx.Text = GreaterCircle.Measure(StartLocationInRadian, EndLocationInRadian, EarthRadius).ToString();
             HaversineFormulaResultTxtBx.Text = HaversineFormula.Measure(StartLocationInRadian, EndLocationInRadian, EarthRadius).ToString();
+      
         }
 
         private void GetPositionsValues()
