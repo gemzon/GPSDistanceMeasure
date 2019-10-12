@@ -50,9 +50,9 @@ namespace GPS_Distance
 
         private void ReturnMeasurementValues(object sender, PropertyChangedEventArgs e)
         {
-            ModifiedPythagorousResultTxtBx.Text = ModifiedPythagoras.Measure(StartLocationInDegrees, EndLocationInDegrees, vm.SelectedUnit).ToString();
-            GreaterCircleResultTxtBx.Text = GreaterCircle.Measure(StartLocationInRadian, EndLocationInRadian, EarthRadius, vm.SelectedUnit).ToString();
-            HaversineFormulaResultTxtBx.Text = HaversineFormula.Measure(StartLocationInRadian, EndLocationInRadian, EarthRadius, vm.SelectedUnit).ToString();
+            ModifiedPythagorousResultTxtBx.Text = FormatResult.FormatDouble( ModifiedPythagoras.Measure(StartLocationInDegrees, EndLocationInDegrees, vm.SelectedUnit)).ToString();
+            GreaterCircleResultTxtBx.Text = FormatResult.FormatDouble(GreaterCircle.Measure(StartLocationInRadian, EndLocationInRadian, EarthRadius, vm.SelectedUnit)).ToString();
+            HaversineFormulaResultTxtBx.Text = FormatResult.FormatDouble(HaversineFormula.Measure(StartLocationInRadian, EndLocationInRadian, EarthRadius, vm.SelectedUnit)).ToString();
         }
 
         private void GetPositionsValues()
