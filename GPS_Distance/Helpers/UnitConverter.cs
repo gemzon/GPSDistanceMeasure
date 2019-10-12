@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace GPS_Distance
+namespace GPS_Distance.Helpers
 {
     public static class UnitConverter
     {
