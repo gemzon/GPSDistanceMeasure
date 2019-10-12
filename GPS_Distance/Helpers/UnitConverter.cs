@@ -6,12 +6,13 @@ namespace GPS_Distance.Helpers
     {
         public static double DegreesToRadians(double degree)
         {
-           return ( degree * (Math.PI/180));
+            return degree * (Math.PI / 180);
         }
+
         public static double RadiansToDegrees(double radian)
         {
             //return ((Math.PI / radian) * (180 / Math.PI));
-            return Math.PI/radian * 180/Math.PI;
+            return Math.PI / radian * 180 / Math.PI;
         }
 
         public static double MetresToMiles(double metre)
