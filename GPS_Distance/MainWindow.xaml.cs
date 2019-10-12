@@ -1,5 +1,8 @@
 ﻿using GPS_Distance.Helpers;
 using GPS_Distance.MeasurementFormulas;
+using GPS_Distance.Models;
+using GPS_Distance.ViewModels;
+using System.ComponentModel;
 using System.Windows;
 
 namespace GPS_Distance
@@ -9,26 +12,32 @@ namespace GPS_Distance
     /// </summary>
     public partial class MainWindow : Window
     {
-         public double EarthRadius;
+        public double EarthRadius;
         public Location StartLocationInDegrees;
         public Location StartLocationInRadian;
         public Location EndLocationInDegrees;
         public Location EndLocationInRadian;
-      
+
+        private MainWindowViewModel vm = new MainWindowViewModel();
 
         public MainWindow()
         {
-            InitializeComponent();
-           StartLocationInDegrees = new Location();
+            vm.PropertyChanged += ReturnMeasurementValues;
+
+            DataContext = vm;
+
+            StartLocationInDegrees = new Location();
             EndLocationInDegrees = new Location();
             StartLocationInRadian = new Location();
             EndLocationInRadian = new Location();
+
+            InitializeComponent();
         }
 
         private void MeasureDistanceBtn_Click(object sender, RoutedEventArgs e)
         {
             InitilizeVariables();
-            ReturnMeasurementValues();
+            ReturnMeasurementValues(sender, null);
         }
 
         private void InitilizeVariables()
@@ -39,11 +48,11 @@ namespace GPS_Distance
             EarthRadius = RadiusLatitudeAdjustment.LatitudeAdjustment(StartLocationInDegrees.Latitude);
         }
 
-        private void ReturnMeasurementValues()
+        private void ReturnMeasurementValues(object sender, PropertyChangedEventArgs e)
         {
-            ModifiedPythagorousResultTxtBx.Text = ModifiedPythagoras.Measure(StartLocationInDegrees, EndLocationInDegrees).ToString();
-            GreaterCircleResultTxtBx.Text = GreaterCircle.Measure(StartLocationInRadian, EndLocationInRadian, EarthRadius).ToString();
-            HaversineFormulaResultTxtBx.Text = HaversineFormula.Measure(StartLocationInRadian, EndLocationInRadian, EarthRadius).ToString();
+            ModifiedPythagorousResultTxtBx.Text = ModifiedPythagoras.Measure(StartLocationInDegrees, EndLocationInDegrees, vm.SelectedUnit).ToString();
+            GreaterCircleResultTxtBx.Text = GreaterCircle.Measure(StartLocationInRadian, EndLocationInRadian, EarthRadius, vm.SelectedUnit).ToString();
+            HaversineFormulaResultTxtBx.Text = HaversineFormula.Measure(StartLocationInRadian, EndLocationInRadian, EarthRadius, vm.SelectedUnit).ToString();
         }
 
         private void GetPositionsValues()
@@ -54,14 +63,11 @@ namespace GPS_Distance
             EndLocationInDegrees.Longitude = double.Parse(EndLonTxtBx.Text);
         }
 
-       
-  
         private void ClearStartValuesBtn_Click(object sender, RoutedEventArgs e)
         {
             StartLatTxtBx.Text = "";
             StartLonTxtBx.Text = "";
             StartLocationInDegrees = new Location();
-          
         }
 
         private void ClearEndValuesBtn_Click(object sender, RoutedEventArgs e)
@@ -69,14 +75,13 @@ namespace GPS_Distance
             EndLatTxtBx.Text = "";
             EndLonTxtBx.Text = "";
             EndLocationInDegrees = new Location();
-            
         }
 
         private void ClearResultsValuesBtn_Click(object sender, RoutedEventArgs e)
         {
             ModifiedPythagorousResultTxtBx.Text = "";
             GreaterCircleResultTxtBx.Text = "";
-            HaversineFormulaResultTxtBx.Text = "";    
+            HaversineFormulaResultTxtBx.Text = "";
         }
 
         private void ClearAllBtn_Click(object sender, RoutedEventArgs e)
@@ -84,7 +89,6 @@ namespace GPS_Distance
             ClearStartValuesBtn_Click(this, null);
             ClearEndValuesBtn_Click(this, null);
             ClearResultsValuesBtn_Click(this, null);
-
         }
     }
 }
