@@ -1,4 +1,4 @@
-﻿using GPS_Distance.Helpers;
+using GPS_Distance.Helpers;
 using GPS_Distance.Models;
 using System;
 
