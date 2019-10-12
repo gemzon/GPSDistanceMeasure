@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using GPS_Distance.Helpers;
+
 
 namespace GPS_Distance.MeasurementFormulas
 {
@@ -14,7 +16,9 @@ namespace GPS_Distance.MeasurementFormulas
             double squaredLat = Math.Pow(69.1 * lat, 2);
             double squaredLon = Math.Pow(53.0 * lon, 2);
 
-            return  Math.Sqrt(squaredLat + squaredLon);
+         
+
+            return FormatResult.FormatDouble(Math.Sqrt(squaredLat + squaredLon));
         }
     }
 }
