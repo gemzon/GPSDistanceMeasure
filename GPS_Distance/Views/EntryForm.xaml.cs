@@ -1,5 +1,8 @@
-﻿using System;
+﻿using GPS_Distance.Models;
+using GPS_Distance.ViewModels;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -16,11 +19,21 @@ namespace GPS_Distance.Views
     /// <summary>
     /// Interaction logic for EntryForm.xaml
     /// </summary>
-    public partial class EntryForm : Page
+    public partial class EntryForm : UserControl
     {
+        //todo constrain the maximum size of the listbox 
+        //todo add scrollable to the listbox control
+
+
+        private EntryFormViewModel vm  = new EntryFormViewModel();
         public EntryForm()
         {
-            InitializeComponent();
+             InitializeComponent();
+           
+            vm.EndPointsLocations = new ObservableCollection<Location> ();
+            DataContext = vm;
+            EndGPSPointsListBox.ItemsSource = vm.EndPointsLocations;
+            
         }
         private void MeasureDistanceBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -31,7 +44,25 @@ namespace GPS_Distance.Views
 
         private void AddEndPointBtn_Click(object sender, RoutedEventArgs e)
         {
-            //Todo add end point to List of end points
+           //Todo clear endpoint entry boxes
+
+            var location = new Location() {
+                Latitude = double.Parse(EndLatTxtBx.Text),
+                Longitude = double.Parse(EndLonTxtBx.Text)
+            };
+
+            try
+            {
+    vm.EndPointsLocations.Add(location); 
+            }
+            catch (Exception ex )
+            {
+
+                Console.WriteLine(ex); 
+            }
+        
+          
+
         }
 
         #region clearvalues

@@ -1,4 +1,4 @@
-﻿<Page
+﻿<UserControl
     x:Class="GPS_Distance.Views.EntryForm"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -8,7 +8,7 @@
     mc:Ignorable="d"
     d:DesignHeight="450"
     d:DesignWidth="800"
-    Title="EntryForm">
+    >
 
     <Grid Background="white">
         <Grid.RowDefinitions>
@@ -133,12 +133,15 @@
             <ListBox
                 x:Name="EndGPSPointsListBox"
                 MinHeight="250"
-                Margin="10,5">
+                Margin="10,5"
+                ItemsSource="{Binding EndPointsLocations}"
+                >
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
+                            <Label Content="Lat"/>
                             <Label Content="{Binding Latitude}" />
-                            <Label Content="," />
+                            <Label Content=", Lon" />
                             <Label Content="{Binding Longitude}" />
                         </StackPanel>
                     </DataTemplate>
@@ -172,4 +175,4 @@
         </StackPanel>
     </Grid>
 
-</Page>
+</UserControl>
