@@ -6,20 +6,14 @@ using System.Linq;
 
 namespace GPS_Distance.ViewModels
 {
-    public class MainWindowViewModel : INotifyPropertyChanged
+    public class MainWindowViewModel : BaseViewModel
     {
         private Unit _selectedUnit;
-
-        public event PropertyChangedEventHandler PropertyChanged;
 
         public Unit SelectedUnit
         {
             get { return _selectedUnit; }
-            set
-            {
-                _selectedUnit = value;
-                OnPropertyChanged("SelectedUnit");
-            }
+            set { SetProperty(ref _selectedUnit, value); }
         }
 
         public IEnumerable<Unit> Units
@@ -30,14 +24,6 @@ namespace GPS_Distance.ViewModels
             }
         }
 
-        protected void OnPropertyChanged(string name)
-        {
-            OnPropertyChanged(new PropertyChangedEventArgs(name));
-        }
-
-        protected void OnPropertyChanged(PropertyChangedEventArgs e)
-        {
-            PropertyChanged?.Invoke(this, e);
-        }
+       
     }
 }

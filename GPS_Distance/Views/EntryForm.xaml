@@ -1,14 +1,16 @@
-﻿<Page
+﻿<UserControl
     x:Class="GPS_Distance.Views.EntryForm"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:GPS_Distance.Views"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewModels="clr-namespace:GPS_Distance.ViewModels"
     mc:Ignorable="d"
     d:DesignHeight="450"
     d:DesignWidth="800"
-    Title="EntryForm">
+    d:DataContext="{d:DesignInstance viewModels:EntryFormViewModel, IsDesignTimeCreatable=True}"
+    >
 
     <Grid Background="white">
         <Grid.RowDefinitions>
@@ -45,7 +47,7 @@
                     Content="Latitude"
                     FontSize="14" />
                 <TextBox
-                    x:Name="StartLatTxtBx"
+                    Text="{Binding StartLatitude}"
                     Width="150"
                     Height="25"
                     Margin="11,0,0,0"
@@ -57,19 +59,17 @@
                 Orientation="Horizontal">
                 <Label Content="Longitude" FontSize="14" />
                 <TextBox
-                    x:Name="StartLonTxtBx"
+                    Text="{Binding StartLongitude}"
                     Width="150"
                     Height="25"
                     TextAlignment="Center" />
             </StackPanel>
             <Button
-                x:Name="ClearStartValuesBtn"
+                Command="{Binding ClearStartValuesCommand}"
                 Style="{StaticResource BtnRed}"
                 Width="110"
                 Height="25"               
-                Click="ClearStartValuesBtn_Click"
                 Content="Clear start values"
-               
                 />
         </StackPanel>
         <StackPanel Grid.Row="2">
@@ -90,7 +90,7 @@
                     Content="Latitude"
                     FontSize="14" />
                 <TextBox
-                    x:Name="EndLatTxtBx"
+                    Text="{Binding EndLatitude}"
                     Width="150"
                     Height="25"
                     Margin="11,0,0,0"
@@ -102,23 +102,22 @@
                 Orientation="Horizontal">
                 <Label Content="Longitude" FontSize="14" />
                 <TextBox
-                    x:Name="EndLonTxtBx"
+                    Text="{Binding EndLongitude}"
                     Width="150"
                     Height="25"
                     TextAlignment="Center" />
             </StackPanel>
             <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
                 <Button
-                    x:Name="ClearEndValuesBtn"
+                    Command="{Binding ClearEndValuesCommand}"
                     Style="{StaticResource BtnRed}"
-                    Click="ClearEndValuesBtn_Click"
                     Content="Clear start values" />
                 <Button
-                    x:Name="AddEndPointBtn"
+                    Command="{Binding AddEndPointCommand}"
                     Margin="10,0,0,0"
                     Style="{StaticResource BtnGreen}"
                     Content="Add EndPoint" 
-                    Click="AddEndPointBtn_Click"/>
+                    />
             </StackPanel>
         </StackPanel>
         <StackPanel
@@ -131,14 +130,16 @@
                 FontSize="20"
                 FontWeight="Bold" />
             <ListBox
-                x:Name="EndGPSPointsListBox"
                 MinHeight="250"
-                Margin="10,5">
+                Margin="10,5"
+                ItemsSource="{Binding EndPointsLocations}"
+                >
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
+                            <Label Content="Lat"/>
                             <Label Content="{Binding Latitude}" />
-                            <Label Content="," />
+                            <Label Content=", Lon" />
                             <Label Content="{Binding Longitude}" />
                         </StackPanel>
                     </DataTemplate>
@@ -149,27 +150,25 @@
                 HorizontalAlignment="Center"
                 Orientation="Horizontal">
                 <Button
-                    x:Name="ClearEndGPSListBtn"
+                    Command="{Binding ClearEndPositionsListCommand}"
                     Margin="0,0,25,0"
-                   Style="{StaticResource BtnRed}"
+                    Style="{StaticResource BtnRed}"
                     Content="Clear List"
-                    Click="ClearEndGPSListBtn_Click"
                     />
                 <Button
-                    x:Name="MeasureDistanceBtn"
-                   Style="{StaticResource BtnGreen}"
+                    Command="{Binding MessureDistanceCommand}"
+                    Style="{StaticResource BtnGreen}"
                     Content="Measure Distances"
-                    Click="MeasureDistanceBtn_Click"
                     />
             </StackPanel>
-            <Button
-                x:Name="ClearAllBtn"
+                <Button
+                Command="{Binding ResetFormCommand}"
                 Margin="0,15,0,0"
                 HorizontalAlignment="Center"
                 Style="{StaticResource BtnRed}"
                 Content="Reset Form"
-                Click="ClearAllBtn_Click"/>
-        </StackPanel>
+                />
+            </StackPanel>
     </Grid>
 
-</Page>
+</UserControl>

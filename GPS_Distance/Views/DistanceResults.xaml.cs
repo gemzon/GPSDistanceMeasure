@@ -18,7 +18,7 @@ namespace GPS_Distance.Views
     /// <summary>
     /// Interaction logic for DistanceResults.xaml
     /// </summary>
-    public partial class DistanceResults : Page
+    public partial class DistanceResults : UserControl
     {
         //Todo replace string with a collection or a new class for results
         public ObservableCollection<string> DistanceResultsList { get; set; }
