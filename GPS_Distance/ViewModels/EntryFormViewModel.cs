@@ -13,10 +13,7 @@ namespace GPS_Distance.ViewModels
         public ObservableCollection<Location> EndPointsLocations
         {
             get { return endPointLocations; }
-            set {
-                endPointLocations = value;
-                OnPropertyChanged("EndPointsLocations");
-            }
+            set { SetProperty(ref endPointLocations, value); }
         }
        
       

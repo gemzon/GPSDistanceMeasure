@@ -13,11 +13,7 @@ namespace GPS_Distance.ViewModels
         public Unit SelectedUnit
         {
             get { return _selectedUnit; }
-            set
-            {
-                _selectedUnit = value;
-                OnPropertyChanged("SelectedUnit");
-            }
+            set { SetProperty(ref _selectedUnit, value); }
         }
 
         public IEnumerable<Unit> Units
