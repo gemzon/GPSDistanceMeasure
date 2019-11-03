@@ -87,8 +87,8 @@
                     Text="{Binding StartLongitude, UpdateSourceTrigger=PropertyChanged}"
                     Width="150"
                     Height="25"
-                    TextAlignment="Center" 
-                    Validation.ErrorTemplate="{StaticResource validationErrorTemplate}"/>
+                    TextAlignment="Center"
+                    />
             </StackPanel>
             <Button
                 Command="{Binding ClearStartValuesCommand}"
