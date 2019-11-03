@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Windows.Input;
 
 namespace GPS_Distance.ViewModels
@@ -10,15 +11,15 @@ namespace GPS_Distance.ViewModels
     //todo constrain the maximum size of the listbox 
     //todo add scrollable to the listbox control
 
-    public class EntryFormViewModel : BaseViewModel
+    public class EntryFormViewModel : ValidationBaseViewModel
     {
         #region Fields
 
         private ObservableCollection<Location> _endPointLocations;
-        private string _startLatitude;
-        private string _startLongitude;
-        private string _endLatitude;
-        private string _endLongitude;
+        private string _startLatitude = "0";
+        private string _startLongitude = "0";
+        private string _endLatitude = "0";
+        private string _endLongitude = "0";
 
         #endregion
 
@@ -33,25 +34,41 @@ namespace GPS_Distance.ViewModels
         public string StartLatitude
         {
             get => _startLatitude;
-            set => SetProperty(ref _startLatitude, value);
+            set
+            {
+                if (SetProperty(ref _startLatitude, value))
+                    ValidateProperty(value, (v) => TryParseLatitude(v, out _), "Not a valid latitude");
+            }
         }
 
         public string StartLongitude
         {
             get => _startLongitude;
-            set => SetProperty(ref _startLongitude, value);
+            set
+            {
+                if (SetProperty(ref _startLongitude, value))
+                    ValidateProperty(value, (v) => TryParseLongitude(v, out _), "Not a valid longitude");
+            }
         }
 
         public string EndLatitude
         {
             get => _endLatitude;
-            set => SetProperty(ref _endLatitude, value);
+            set
+            {
+                if (SetProperty(ref _endLatitude, value))
+                    ValidateProperty(value, (v) => TryParseLatitude(v, out _), "Not a valid latitude");
+            }
         }
 
         public string EndLongitude
         {
             get => _endLongitude;
-            set => SetProperty(ref _endLongitude, value);
+            set
+            {
+                if (SetProperty(ref _endLongitude, value))
+                    ValidateProperty(value, (v) => TryParseLongitude(v, out _), "Not a valid longitude");
+            }
         }
 
         #endregion
@@ -88,22 +105,28 @@ namespace GPS_Distance.ViewModels
 
         private void ClearStartValues()
         {
-            StartLatitude = null;
-            StartLongitude = null;
+            StartLatitude = "0";
+            StartLongitude = "0";
         }
 
         private void ClearEndValues()
         {
-            EndLatitude = null;
-            EndLongitude = null;
+            EndLatitude = "0";
+            EndLongitude = "0";
         }
 
         private void AddEndPoint()
         {
+            if (!TryParseLatitude(EndLatitude, out var latitude))
+                return;
+
+            if (!TryParseLongitude(EndLongitude, out var longitude))
+                return;
+
             var location = new Location()
             {
-                Latitude = double.Parse(EndLatitude),
-                Longitude = double.Parse(EndLongitude)
+                Latitude = latitude,
+                Longitude = longitude
             };
 
             EndPointsLocations.Add(location);
@@ -128,7 +151,31 @@ namespace GPS_Distance.ViewModels
             //todo pass the values to the result tab
             //todo navigate to the result tab
 
-            throw new NotImplementedException();
+            if (!TryParseLatitude(StartLatitude, out var latitude))
+                return;
+
+            if (!TryParseLongitude(StartLongitude, out var longitude))
+                return;
+        }
+
+        private bool TryParseLatitude(string input, out double latitude)
+        {
+            var regex = @"^(\+|-)?(?:90(?:(?:\.0{1,6})?)|(?:[0-9]|[1-8][0-9])(?:(?:\.[0-9]{1,6})?))$";
+            return TryParseRegexToDouble(input, regex, out latitude);
+        }
+
+        private bool TryParseLongitude(string input, out double longitude)
+        {
+            var regex = @"^(\+|-)?(?:180(?:(?:\.0{1,6})?)|(?:[0-9]|[1-9][0-9]|1[0-7][0-9])(?:(?:\.[0-9]{1,6})?))$";
+            return TryParseRegexToDouble(input, regex, out longitude);
+        }
+
+        private bool TryParseRegexToDouble(string input, string regex, out double value)
+        {
+            var valid = !string.IsNullOrWhiteSpace(input) && Regex.IsMatch(input, regex);
+            value = valid ? double.Parse(input) : 0;
+
+            return valid;
         }
 
         #endregion
