@@ -12,6 +12,31 @@
     d:DataContext="{d:DesignInstance viewModels:EntryFormViewModel, IsDesignTimeCreatable=True}"
     >
 
+    <UserControl.Resources>
+        <ControlTemplate x:Key="validationErrorTemplate">
+            <Grid>
+                <Border BorderBrush="Red" BorderThickness="1">
+                    <AdornedElementPlaceholder x:Name="adorner" ToolTip="Test"/>
+                </Border>
+
+                <Polygon 
+                    Points="9,9 9,0 0,0"
+                    Stroke="Red"
+                    StrokeThickness="1"
+                    Fill="Red"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Top"
+                    ToolTip="{Binding ElementName=adorner, Path=AdornedElement.(Validation.Errors)[0].ErrorContent}" 
+                    />
+            </Grid>
+        </ControlTemplate>
+
+        <Style TargetType="{x:Type TextBox}" >
+            <Setter Property="Validation.ErrorTemplate" Value="{StaticResource validationErrorTemplate}" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+        </Style>
+    </UserControl.Resources>
+
     <Grid Background="white">
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
@@ -47,7 +72,7 @@
                     Content="Latitude"
                     FontSize="14" />
                 <TextBox
-                    Text="{Binding StartLatitude}"
+                    Text="{Binding StartLatitude, UpdateSourceTrigger=PropertyChanged}"
                     Width="150"
                     Height="25"
                     Margin="11,0,0,0"
@@ -59,16 +84,16 @@
                 Orientation="Horizontal">
                 <Label Content="Longitude" FontSize="14" />
                 <TextBox
-                    Text="{Binding StartLongitude}"
+                    Text="{Binding StartLongitude, UpdateSourceTrigger=PropertyChanged}"
                     Width="150"
                     Height="25"
-                    TextAlignment="Center" />
+                    TextAlignment="Center"
+                    />
             </StackPanel>
             <Button
                 Command="{Binding ClearStartValuesCommand}"
                 Style="{StaticResource BtnRed}"
                 Width="110"
-                Height="25"               
                 Content="Clear start values"
                 />
         </StackPanel>
@@ -90,7 +115,7 @@
                     Content="Latitude"
                     FontSize="14" />
                 <TextBox
-                    Text="{Binding EndLatitude}"
+                    Text="{Binding EndLatitude, UpdateSourceTrigger=PropertyChanged}"
                     Width="150"
                     Height="25"
                     Margin="11,0,0,0"
@@ -102,7 +127,7 @@
                 Orientation="Horizontal">
                 <Label Content="Longitude" FontSize="14" />
                 <TextBox
-                    Text="{Binding EndLongitude}"
+                    Text="{Binding EndLongitude, UpdateSourceTrigger=PropertyChanged}"
                     Width="150"
                     Height="25"
                     TextAlignment="Center" />
@@ -161,14 +186,14 @@
                     Content="Measure Distances"
                     />
             </StackPanel>
-                <Button
+            <Button
                 Command="{Binding ResetFormCommand}"
                 Margin="0,15,0,0"
                 HorizontalAlignment="Center"
                 Style="{StaticResource BtnRed}"
                 Content="Reset Form"
                 />
-            </StackPanel>
+        </StackPanel>
     </Grid>
 
 </UserControl>
