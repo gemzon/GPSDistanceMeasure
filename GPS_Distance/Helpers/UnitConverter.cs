@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GPS_Distance.Models;
+using System;
 
 namespace GPS_Distance.Helpers
 {
@@ -15,9 +16,18 @@ namespace GPS_Distance.Helpers
             return Math.PI / radian * 180 / Math.PI;
         }
 
-        public static double MetresToMiles(double metre)
+        public static double ConvertUnit(Unit unit ,double distance)
         {
-            return metre * 0.00062137;
+            switch (unit)
+            {
+                case Unit.Metres:
+                    return distance;
+                case Unit.Kilometres:
+                    return distance / 1000;
+                default:
+                    return distance * 0.00062137;
+            }
+           
         }
-    }
+}
 }

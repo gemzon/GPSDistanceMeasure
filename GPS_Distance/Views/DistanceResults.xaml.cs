@@ -20,23 +20,10 @@ namespace GPS_Distance.Views
     /// </summary>
     public partial class DistanceResults : UserControl
     {
-        //Todo replace string with a collection or a new class for results
-        public ObservableCollection<string> DistanceResultsList { get; set; }
-
+      //TODO Hook up the vm and result to the View
         public DistanceResults()
         {
             InitializeComponent();
         }
-
-        private void CreateStartLabelText(Location startLocation)
-        {
-            StartGPS.Content = $"Start GPS Position Latitude={startLocation.Latitude},Longitude={startLocation.Latitude} ";
-
-        }
-
-        //Todo create the distancResultList and bind it to the ResultListView
-        //Todo handle the unit change for the ResultLisview
-        //Todo add sorting to each of the measurement result columns
-
     }
 }

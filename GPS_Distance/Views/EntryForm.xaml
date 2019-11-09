@@ -6,11 +6,11 @@
     xmlns:local="clr-namespace:GPS_Distance.Views"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:viewModels="clr-namespace:GPS_Distance.ViewModels"
-    mc:Ignorable="d"
+    d:DataContext="{d:DesignInstance viewModels:EntryFormViewModel,
+                                     IsDesignTimeCreatable=True}"
     d:DesignHeight="450"
     d:DesignWidth="800"
-    d:DataContext="{d:DesignInstance viewModels:EntryFormViewModel, IsDesignTimeCreatable=True}"
-    >
+    mc:Ignorable="d">
 
     <Grid Background="white">
         <Grid.RowDefinitions>
@@ -47,10 +47,10 @@
                     Content="Latitude"
                     FontSize="14" />
                 <TextBox
-                    Text="{Binding StartLatitude}"
                     Width="150"
                     Height="25"
                     Margin="11,0,0,0"
+                    Text="{Binding StartLatitude}"
                     TextAlignment="Center" />
             </StackPanel>
             <StackPanel
@@ -59,18 +59,17 @@
                 Orientation="Horizontal">
                 <Label Content="Longitude" FontSize="14" />
                 <TextBox
-                    Text="{Binding StartLongitude}"
                     Width="150"
                     Height="25"
+                    Text="{Binding StartLongitude}"
                     TextAlignment="Center" />
             </StackPanel>
             <Button
-                Command="{Binding ClearStartValuesCommand}"
-                Style="{StaticResource BtnRed}"
                 Width="110"
-                Height="25"               
+                Height="25"
+                Command="{Binding ClearStartValuesCommand}"
                 Content="Clear start values"
-                />
+                Style="{StaticResource BtnRed}" />
         </StackPanel>
         <StackPanel Grid.Row="2">
             <Label
@@ -90,10 +89,10 @@
                     Content="Latitude"
                     FontSize="14" />
                 <TextBox
-                    Text="{Binding EndLatitude}"
                     Width="150"
                     Height="25"
                     Margin="11,0,0,0"
+                    Text="{Binding EndLatitude}"
                     TextAlignment="Center" />
             </StackPanel>
             <StackPanel
@@ -102,22 +101,21 @@
                 Orientation="Horizontal">
                 <Label Content="Longitude" FontSize="14" />
                 <TextBox
-                    Text="{Binding EndLongitude}"
                     Width="150"
                     Height="25"
+                    Text="{Binding EndLongitude}"
                     TextAlignment="Center" />
             </StackPanel>
             <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
                 <Button
                     Command="{Binding ClearEndValuesCommand}"
-                    Style="{StaticResource BtnRed}"
-                    Content="Clear start values" />
+                    Content="Clear start values"
+                    Style="{StaticResource BtnRed}" />
                 <Button
-                    Command="{Binding AddEndPointCommand}"
                     Margin="10,0,0,0"
-                    Style="{StaticResource BtnGreen}"
-                    Content="Add EndPoint" 
-                    />
+                    Command="{Binding AddEndPointCommand}"
+                    Content="Add EndPoint"
+                    Style="{StaticResource BtnGreen}" />
             </StackPanel>
         </StackPanel>
         <StackPanel
@@ -132,12 +130,11 @@
             <ListBox
                 MinHeight="250"
                 Margin="10,5"
-                ItemsSource="{Binding EndPointsLocations}"
-                >
+                ItemsSource="{Binding EndPointsLocations}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
-                            <Label Content="Lat"/>
+                            <Label Content="Lat" />
                             <Label Content="{Binding Latitude}" />
                             <Label Content=", Lon" />
                             <Label Content="{Binding Longitude}" />
@@ -150,25 +147,22 @@
                 HorizontalAlignment="Center"
                 Orientation="Horizontal">
                 <Button
-                    Command="{Binding ClearEndPositionsListCommand}"
                     Margin="0,0,25,0"
-                    Style="{StaticResource BtnRed}"
+                    Command="{Binding ClearEndPositionsListCommand}"
                     Content="Clear List"
-                    />
+                    Style="{StaticResource BtnRed}" />
                 <Button
-                    Command="{Binding MessureDistanceCommand}"
-                    Style="{StaticResource BtnGreen}"
+                    Command="{Binding MeasureDistanceCommand}"
                     Content="Measure Distances"
-                    />
+                    Style="{StaticResource BtnGreen}" />
             </StackPanel>
-                <Button
-                Command="{Binding ResetFormCommand}"
+            <Button
                 Margin="0,15,0,0"
                 HorizontalAlignment="Center"
-                Style="{StaticResource BtnRed}"
+                Command="{Binding ResetFormCommand}"
                 Content="Reset Form"
-                />
-            </StackPanel>
+                Style="{StaticResource BtnRed}" />
+        </StackPanel>
     </Grid>
 
 </UserControl>

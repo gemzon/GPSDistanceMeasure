@@ -63,7 +63,7 @@ namespace GPS_Distance.ViewModels
         public ICommand AddEndPointCommand { get; }
         public ICommand ClearEndPositionsListCommand { get; }
         public ICommand ResetFormCommand { get; }
-        public ICommand MessureDistanceCommand { get; }
+        public ICommand MeasureDistanceCommand { get; }
 
         #endregion
 
@@ -79,7 +79,7 @@ namespace GPS_Distance.ViewModels
             AddEndPointCommand = new RelayCommand(AddEndPoint);
             ClearEndPositionsListCommand = new RelayCommand(ClearEndPositionsList);
             ResetFormCommand = new RelayCommand(ResetForm);
-            MessureDistanceCommand = new RelayCommand(MessureDistance);
+            MeasureDistanceCommand = new RelayCommand(MeasureDistance);
         }
 
         #endregion
@@ -122,8 +122,13 @@ namespace GPS_Distance.ViewModels
             ClearEndPositionsList();
         }
 
-        private void MessureDistance()
+        private void MeasureDistance()
         {
+            var Startlocation = new Location()
+            {
+                Latitude = double.Parse(StartLatitude),
+                Longitude = double.Parse(StartLongitude)
+            };
             //todo iterate through he list of the end points and measure there distance
             //todo pass the values to the result tab
             //todo navigate to the result tab

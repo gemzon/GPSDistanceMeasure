@@ -6,7 +6,7 @@ namespace GPS_Distance.MeasurementFormulas
 {
     public static class HaversineFormula
     {
-        public static double Measure(Location startLocation, Location endLocation, double radius, Unit unit)
+        public static double Measure(Location startLocation, Location endLocation, double radius)
         {
             double dlat = endLocation.Latitude - startLocation.Latitude;
 
@@ -21,18 +21,10 @@ namespace GPS_Distance.MeasurementFormulas
             double squared = squaredSinDlat + squaredSinLon * squaredCos;
             double distanceMetres = radius * 2 * Math.Asin(Math.Sqrt(squared));
 
-            if (unit == Unit.Metres)
-            {
-                return distanceMetres;
-            }
-            else if (unit == Unit.Kilometres)
-            {
-                return distanceMetres / 1000;
-            }
-            else
-            {
-                return UnitConverter.MetresToMiles(distanceMetres);
-            }
+
+           return distanceMetres;
+           
+            
         }
     }
 }
