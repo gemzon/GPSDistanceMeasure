@@ -1,5 +1,6 @@
 ﻿using FluentAssertions;
 using GPS_Distance.Helpers;
+using GPS_Distance.Models;
 using Xunit;
 
 namespace UnitConverterTests.MetresToMiles_spec
@@ -17,7 +18,7 @@ namespace UnitConverterTests.MetresToMiles_spec
         public void Should_return_correctly_converted_miles(double meters, double expectedMiles)
         {
             // Act
-            var actualMiles = UnitConverter.MetresToMiles(meters);
+            var actualMiles = UnitConverter.ConvertUnit(Unit.Miles, meters);
 
             // Assert
             actualMiles.Should().BeApproximately(expectedMiles, ExpectedPrecision);

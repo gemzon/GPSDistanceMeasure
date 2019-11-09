@@ -6,7 +6,7 @@ namespace GPS_Distance.MeasurementFormulas
 {
     public static class GreaterCircle
     {
-        public static double Measure(Location startLocation, Location endLocation, double radius, Unit unit)
+        public static double Measure(Location startLocation, Location endLocation, double radius)
         {     
             double sineAngle = Math.Sin(startLocation.Latitude) * Math.Sin(endLocation.Latitude);
             double cosAngle = Math.Cos(startLocation.Latitude) * Math.Cos(endLocation.Latitude) *
@@ -14,18 +14,7 @@ namespace GPS_Distance.MeasurementFormulas
 
             double distanceMetres = radius * Math.Acos(sineAngle + cosAngle);
 
-            if (unit == Unit.Metres)
-            {
-                return distanceMetres;
-            }
-            else if (unit == Unit.Kilometres)
-            {
-                return distanceMetres / 1000;
-            }
-            else
-            {
-                return UnitConverter.MetresToMiles(distanceMetres);
-            }
+            return  distanceMetres;
         }
     }
 }

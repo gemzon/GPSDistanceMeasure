@@ -6,7 +6,7 @@ namespace GPS_Distance.MeasurementFormulas
 {
     public static class ModifiedPythagoras
     {
-        public static double Measure(Location startlocation, Location endLocation, Unit unit)
+        public static double Measure(Location startlocation, Location endLocation)
         {
             double lat = endLocation.Latitude - startlocation.Latitude;
             double lon = endLocation.Longitude - startlocation.Longitude;
@@ -16,18 +16,7 @@ namespace GPS_Distance.MeasurementFormulas
 
             var distanceMetres = Math.Sqrt(squaredLat + squaredLon);
 
-            if (unit == Unit.Metres)
-            {
-                return distanceMetres;
-            }
-            else if (unit == Unit.Kilometres)
-            {
-                return distanceMetres / 1000;
-            }
-            else
-            {
-                return UnitConverter.MetresToMiles(distanceMetres);
-            }
+            return  distanceMetres;
         }
     }
 }
