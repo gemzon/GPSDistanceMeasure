@@ -16,21 +16,21 @@
         <ControlTemplate x:Key="validationErrorTemplate">
             <Grid>
                 <Border BorderBrush="Red" BorderThickness="1">
-                    <AdornedElementPlaceholder x:Name="adorner" ToolTip="Test"/>
+                    <AdornedElementPlaceholder x:Name="adorner" ToolTip="Test" />
                 </Border>
 
-                <Polygon 
-                    Points="9,9 9,0 0,0"
-                    Stroke="Red"
-                    StrokeThickness="1"
-                    Fill="Red"
+                <Polygon
                     HorizontalAlignment="Right"
                     VerticalAlignment="Top"
+                    Fill="Red"
+                    Points="9,9 9,0 0,0"
+                    Stroke="Red"
+                    StrokeThickness="1"                 
                     ToolTip="{Binding ElementName=adorner, Path=AdornedElement.(Validation.Errors)[0].ErrorContent}"/>
             </Grid>
         </ControlTemplate>
 
-        <Style TargetType="{x:Type TextBox}" >
+        <Style TargetType="{x:Type TextBox}">
             <Setter Property="Validation.ErrorTemplate" Value="{StaticResource validationErrorTemplate}" />
             <Setter Property="VerticalContentAlignment" Value="Center" />
         </Style>
@@ -71,10 +71,10 @@
                     Content="Latitude"
                     FontSize="14" />
                 <TextBox
-                    Text="{Binding StartLatitude, UpdateSourceTrigger=PropertyChanged}"
                     Width="150"
                     Height="25"
-                    Margin="11,0,0,0"                   
+                    Margin="11,0,0,0"
+                    Text="{Binding StartLatitude, UpdateSourceTrigger=PropertyChanged}"
                     TextAlignment="Center" />
             </StackPanel>
             <StackPanel
@@ -113,10 +113,10 @@
                     Content="Latitude"
                     FontSize="14" />
                 <TextBox
-                    Text="{Binding EndLatitude, UpdateSourceTrigger=PropertyChanged}"
                     Width="150"
                     Height="25"
-                    Margin="11,0,0,0"                    
+                    Margin="11,0,0,0"
+                    Text="{Binding EndLatitude, UpdateSourceTrigger=PropertyChanged}"
                     TextAlignment="Center" />
             </StackPanel>
             <StackPanel
@@ -125,9 +125,9 @@
                 Orientation="Horizontal">
                 <Label Content="Longitude" FontSize="14" />
                 <TextBox
-                    Text="{Binding EndLongitude, UpdateSourceTrigger=PropertyChanged}"
                     Width="150"
-                    Height="25"               
+                    Height="25"
+                    Text="{Binding EndLongitude, UpdateSourceTrigger=PropertyChanged}"
                     TextAlignment="Center" />
             </StackPanel>
             <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
