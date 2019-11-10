@@ -12,8 +12,8 @@ namespace GPS_Distance.Helpers
 
         public static double RadiansToDegrees(double radian)
         {
-            //return ((Math.PI / radian) * (180 / Math.PI));
-            return Math.PI / radian * 180 / Math.PI;
+          
+            return (Math.PI / radian) * (180 / Math.PI);
         }
 
         public static double ConvertUnit(Unit unit ,double distance)
