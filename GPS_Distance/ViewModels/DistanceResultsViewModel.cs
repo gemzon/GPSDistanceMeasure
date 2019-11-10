@@ -9,7 +9,7 @@ using System.Windows.Input;
 
 namespace GPS_Distance.ViewModels
 {
-    public class DistanceResultsViewModel:BaseViewModel
+    public class DistanceResultsViewModel : BaseViewModel
     {
 
 
@@ -17,13 +17,13 @@ namespace GPS_Distance.ViewModels
 
         private MeasurementInputs _measurementInputs;
         private ObservableCollection<Location> _endLocations;
-        private string _startLocation;    
+        private string _startLocation;
         private ObservableCollection<DistanceResult> _distanceResult;
         private Unit _unit;
         #endregion
-        
+
         #region Properties
- public ObservableCollection<DistanceResult> DistanceResult
+        public ObservableCollection<DistanceResult> DistanceResult
         {
             get => _distanceResult;
             set => SetProperty(ref _distanceResult, value);
@@ -37,7 +37,7 @@ namespace GPS_Distance.ViewModels
 
         public MeasurementInputs MeasurementInputs
         {
-            get => _measurementInputs ;
+            get => _measurementInputs;
             set => SetProperty(ref _measurementInputs, value);
         }
 
@@ -82,8 +82,8 @@ namespace GPS_Distance.ViewModels
         private void GenreateSourceData()
         {
             DistanceResult = MeasureDistanceHelper.MeasureDistance(EndPositions, Unit, MeasurementInputs);
-        }  
-        
+        }
+
         private void SetStartLocation()
         {
             StartLocation = $"Start GPS Position Latitude={MeasurementInputs.StartLocationInDegrees.Latitude},Longitude={MeasurementInputs.StartLocationInDegrees.Longitude} ";
