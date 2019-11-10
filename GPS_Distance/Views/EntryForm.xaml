@@ -26,7 +26,10 @@
                     Points="9,9 9,0 0,0"
                     Stroke="Red"
                     StrokeThickness="1"
-                    ToolTip="{Binding ElementName=adorner, Path=AdornedElement.(Validation.Errors)[0].ErrorContent}" />
+                    Fill="Red"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Top"
+                    ToolTip="{Binding ElementName=adorner, Path=AdornedElement.(Validation.Errors)[0].ErrorContent}"/>
             </Grid>
         </ControlTemplate>
 
@@ -83,11 +86,10 @@
                 Orientation="Horizontal">
                 <Label Content="Longitude" FontSize="14" />
                 <TextBox
+                    Text="{Binding StartLongitude, UpdateSourceTrigger=PropertyChanged}"
                     Width="150"
                     Height="25"
-                    Text="{Binding StartLongitude, UpdateSourceTrigger=PropertyChanged}"
-                    TextAlignment="Center" />
-
+                    TextAlignment="Center"/>
             </StackPanel>
             <Button
                 Width="110"
@@ -134,7 +136,7 @@
             <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
                 <Button
                     Command="{Binding ClearEndValuesCommand}"
-                    Content="Clear start values"
+                    Content="Clear end values"
                     Style="{StaticResource BtnRed}" />
                 <Button
                     Margin="10,0,0,0"
