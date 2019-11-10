@@ -1,10 +1,8 @@
-﻿using GPS_Distance.Models;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Text;
+﻿using System.Collections.ObjectModel;
 using System.Text.RegularExpressions;
 using System.Windows.Input;
+
+using GPS_Distance.Models;
 
 namespace GPS_Distance.ViewModels
 {
@@ -165,20 +163,22 @@ namespace GPS_Distance.ViewModels
 
         private bool TryParseLatitude(string input, out double latitude)
         {
-            var regex = @"^(\+|-)?(?:90(?:(?:\.0{1,6})?)|(?:[0-9]|[1-8][0-9])(?:(?:\.[0-9]{1,6})?))$";
+            var regex = @"^(?:\+|-)?(?:90(?:(?:(?:\.|,)0{1,6})?)|(?:[0-9]|[1-8][0-9])(?:(?:(?:\.|,)[0-9]{1,6})?))$";
+
             return TryParseRegexToDouble(input, regex, out latitude);
         }
 
         private bool TryParseLongitude(string input, out double longitude)
         {
-            var regex = @"^(\+|-)?(?:180(?:(?:\.0{1,6})?)|(?:[0-9]|[1-9][0-9]|1[0-7][0-9])(?:(?:\.[0-9]{1,6})?))$";
+            var regex = @"^(?:\+|-)?(?:180(?:(?:(?:\.|,)0{1,6})?)|(?:[0-9]|[1-9][0-9]|1[0-7][0-9])(?:(?:(?:\.|,)[0-9]{1,6})?))$";
+
             return TryParseRegexToDouble(input, regex, out longitude);
         }
 
         private bool TryParseRegexToDouble(string input, string regex, out double value)
         {
             var valid = !string.IsNullOrWhiteSpace(input) && Regex.IsMatch(input, regex);
-            value = valid ? double.Parse(input) : 0;
+            value = valid ? double.Parse(input.Replace(',', '.'), System.Globalization.NumberFormatInfo.InvariantInfo) : 0;
 
             return valid;
         }

@@ -26,8 +26,7 @@
                     Fill="Red"
                     HorizontalAlignment="Right"
                     VerticalAlignment="Top"
-                    ToolTip="{Binding ElementName=adorner, Path=AdornedElement.(Validation.Errors)[0].ErrorContent}" 
-                    />
+                    ToolTip="{Binding ElementName=adorner, Path=AdornedElement.(Validation.Errors)[0].ErrorContent}"/>
             </Grid>
         </ControlTemplate>
 
@@ -84,18 +83,10 @@
                 Orientation="Horizontal">
                 <Label Content="Longitude" FontSize="14" />
                 <TextBox
-
-                    Width="150"
-                    Height="25"
-               
-                    TextAlignment="Center" />
-
                     Text="{Binding StartLongitude, UpdateSourceTrigger=PropertyChanged}"
                     Width="150"
                     Height="25"
-                    TextAlignment="Center"
-                    />
-
+                    TextAlignment="Center"/>
             </StackPanel>
             <Button
                 Width="110"
@@ -122,7 +113,7 @@
                     Content="Latitude"
                     FontSize="14" />
                 <TextBox
-                         Text="{Binding EndLatitude, UpdateSourceTrigger=PropertyChanged}"
+                    Text="{Binding EndLatitude, UpdateSourceTrigger=PropertyChanged}"
                     Width="150"
                     Height="25"
                     Margin="11,0,0,0"                    
@@ -142,7 +133,7 @@
             <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
                 <Button
                     Command="{Binding ClearEndValuesCommand}"
-                    Content="Clear start values"
+                    Content="Clear end values"
                     Style="{StaticResource BtnRed}" />
                 <Button
                     Margin="10,0,0,0"
