@@ -4,6 +4,7 @@ using GPS_Distance.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Text;
 using System.Windows.Input;
 
@@ -19,7 +20,7 @@ namespace GPS_Distance.ViewModels
         private ObservableCollection<Location> _endLocations;
         private string _startLocation;
         private ObservableCollection<DistanceResult> _distanceResult;
-        private Unit _unit;
+        private Unit _selectedUnit;
         #endregion
 
         #region Properties
@@ -47,10 +48,10 @@ namespace GPS_Distance.ViewModels
             set => SetProperty(ref _endLocations, value);
         }
 
-        public Unit Unit
+        public Unit SelectedUnit
         {
-            get => _unit;
-            set => SetProperty(ref _unit, value);
+            get => _selectedUnit;
+            set => SetProperty(ref _selectedUnit, value);
         }
         #endregion
 
@@ -81,7 +82,7 @@ namespace GPS_Distance.ViewModels
 
         private void GenreateSourceData()
         {
-            DistanceResult = MeasureDistanceHelper.MeasureDistance(EndPositions, Unit, MeasurementInputs);
+            DistanceResult = MeasureDistanceHelper.MeasureDistance(EndPositions, SelectedUnit, MeasurementInputs);
         }
 
         private void SetStartLocation()
@@ -89,6 +90,18 @@ namespace GPS_Distance.ViewModels
             StartLocation = $"Start GPS Position Latitude={MeasurementInputs.StartLocationInDegrees.Latitude},Longitude={MeasurementInputs.StartLocationInDegrees.Longitude} ";
 
         }
-        #endregion  
+        #endregion
+
+
+        //Todo not implmented yet
+       
+        public IEnumerable<Unit> Units
+        {
+            get
+            {
+                return Enum.GetValues(typeof(Unit)).Cast<Unit>();
+            }
+        }
+
     }
 }

@@ -24,6 +24,7 @@ namespace GPS_Distance.Views
         public DistanceResults()
         {
             InitializeComponent();
+
         }
     }
 }
