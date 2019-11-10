@@ -8,9 +8,10 @@ namespace GPS_Distance.MeasurementFormulas
     {
         public static double Measure(Location startLocation, Location endLocation, double radius)
         {     
-            double sineAngle = Math.Sin(startLocation.Latitude) * Math.Sin(endLocation.Latitude);
-            double cosAngle = Math.Cos(startLocation.Latitude) * Math.Cos(endLocation.Latitude) *
-                Math.Cos(endLocation.Longitude - startLocation.Longitude);
+            double sineAngle = Math.Sin(startLocation.LatitudeRadians) * Math.Sin(endLocation.LatitudeRadians);
+
+            double cosAngle = Math.Cos(startLocation.LatitudeRadians) * Math.Cos(endLocation.LatitudeRadians)
+                            * Math.Cos(endLocation.LongitudeRadians - startLocation.LongitudeRadians);
 
             double distanceMetres = radius * Math.Acos(sineAngle + cosAngle);
 

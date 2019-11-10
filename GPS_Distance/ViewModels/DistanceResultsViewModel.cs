@@ -1,29 +1,22 @@
-﻿using GPS_Distance.Helpers;
-using GPS_Distance.Models;
-
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Text;
+﻿using System.Collections.ObjectModel;
 using System.Windows.Input;
+using GPS_Distance.Helpers;
+using GPS_Distance.Models;
 
 namespace GPS_Distance.ViewModels
 {
-    public class DistanceResultsViewModel:BaseViewModel
+    public class DistanceResultsViewModel : BaseViewModel
     {
-
-
         #region Fields
-
         private MeasurementInputs _measurementInputs;
         private ObservableCollection<Location> _endLocations;
-        private string _startLocation;    
+        private string _startLocation;
         private ObservableCollection<DistanceResult> _distanceResult;
         private Unit _unit;
         #endregion
-        
+
         #region Properties
- public ObservableCollection<DistanceResult> DistanceResult
+        public ObservableCollection<DistanceResult> DistanceResult
         {
             get => _distanceResult;
             set => SetProperty(ref _distanceResult, value);
@@ -37,7 +30,7 @@ namespace GPS_Distance.ViewModels
 
         public MeasurementInputs MeasurementInputs
         {
-            get => _measurementInputs ;
+            get => _measurementInputs;
             set => SetProperty(ref _measurementInputs, value);
         }
 
@@ -53,7 +46,6 @@ namespace GPS_Distance.ViewModels
             set => SetProperty(ref _unit, value);
         }
         #endregion
-
 
         #region Commands
         public ICommand GenerateSourceDataCommand { get; }
@@ -75,19 +67,18 @@ namespace GPS_Distance.ViewModels
         private void SetMeasurmentInputs()
         {
             MeasurementInputs = new MeasurementInputs();
-            MeasurementInputs.StartLocationInRadians = MeasureDistanceHelper.ConvertStartLocationToRadians(MeasurementInputs.StartLocationInDegrees);
-            MeasurementInputs.EarthRadius = MeasureDistanceHelper.GetEarthRadius(MeasurementInputs.StartLocationInDegrees.Latitude);
+            //MeasurementInputs.StartLocationInRadians = MeasureDistanceHelper.ConvertStartLocationToRadians(MeasurementInputs.StartLocationInDegrees);
+            //MeasurementInputs.EarthRadius = MeasureDistanceHelper.GetEarthRadius(MeasurementInputs.Latitude);
         }
 
         private void GenreateSourceData()
         {
             DistanceResult = MeasureDistanceHelper.MeasureDistance(EndPositions, Unit, MeasurementInputs);
-        }  
-        
+        }
+
         private void SetStartLocation()
         {
-            StartLocation = $"Start GPS Position Latitude={MeasurementInputs.StartLocationInDegrees.Latitude},Longitude={MeasurementInputs.StartLocationInDegrees.Longitude} ";
-
+            StartLocation = $"Start GPS Position Latitude={MeasurementInputs.Latitude},Longitude={MeasurementInputs.Longitude} ";
         }
         #endregion  
     }

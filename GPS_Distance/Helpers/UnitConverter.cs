@@ -1,33 +1,21 @@
-﻿using GPS_Distance.Models;
-using System;
+﻿using System;
+using GPS_Distance.Models;
 
 namespace GPS_Distance.Helpers
 {
     public static class UnitConverter
     {
-        public static double DegreesToRadians(double degree)
+        public static double DegreesToRadians(double degree) => degree * (Math.PI / 180);
+        public static double RadiansToDegrees(double radian) => radian * (180 / Math.PI);
+        public static double ConvertUnit(Unit unit, double distance) => unit switch
         {
-            return degree * (Math.PI / 180);
-        }
-
-        public static double RadiansToDegrees(double radian)
-        {
-            //return ((Math.PI / radian) * (180 / Math.PI));
-            return Math.PI / radian * 180 / Math.PI;
-        }
-
-        public static double ConvertUnit(Unit unit ,double distance)
-        {
-            switch (unit)
-            {
-                case Unit.Metres:
-                    return distance;
-                case Unit.Kilometres:
-                    return distance / 1000;
-                default:
-                    return distance * 0.00062137;
-            }
-           
-        }
+            Unit.Metres => distance,
+            Unit.Kilometres => distance / 1000,
+            Unit.Miles => distance * 0.00062137,
+            _ => -1 // error
+        };
+    }
 }
-}
+
+//return ((Math.PI / radian) * (180 / Math.PI)); (1)
+//return Math.PI / radian * 180 / Math.PI;       (2)
