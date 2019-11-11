@@ -6,8 +6,8 @@ namespace GPS_Distance.Helpers
     public static class UnitConverter
     {
         public static double DegreesToRadians(double degree) => degree * (Math.PI / 180);
-        public static double RadiansToDegrees(double radian) => radian * (180 / Math.PI);
-        public static double ConvertUnit(Unit unit, double distance) => unit switch
+        public static double RadiansToDegrees(double radian) => radian * (180 / Math.PI); // Changed from below, ok?
+        public static double DistanceToUnit(Unit unit, double distance) => unit switch // ConvertUnit
         {
             Unit.Metres => distance,
             Unit.Kilometres => distance / 1000,

@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
 
 namespace GPS_Distance.ViewModels
 {
@@ -34,7 +33,6 @@ namespace GPS_Distance.ViewModels
         {
             var valid = validator(value);
             lock (_lock) _errors[propertyName] = valid ? new List<string>() : new List<string>() { error };
-
             OnErrorsChanged(propertyName);
             return valid;
         }

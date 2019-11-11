@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Text;
 
 namespace GPS_Distance.ViewModels
 {
@@ -14,7 +12,6 @@ namespace GPS_Distance.ViewModels
             get => _title;
             set => SetProperty(ref _title, value);
         }
-
 
         bool isBusy;
         public bool IsBusy
@@ -32,10 +29,7 @@ namespace GPS_Distance.ViewModels
 
         protected bool SetProperty<T>(ref T storage, T value, [CallerMemberName] string propertyName = null)
         {
-            if (EqualityComparer<T>.Default.Equals(storage, value))
-            {
-                return false;
-            }
+            if (EqualityComparer<T>.Default.Equals(storage, value)) return false;
 
             storage = value;
             OnPropertyChanged(propertyName);

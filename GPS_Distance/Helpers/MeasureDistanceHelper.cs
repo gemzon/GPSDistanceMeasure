@@ -35,29 +35,25 @@ namespace GPS_Distance.Helpers
             return DistanceResults;
         }
 
-
         //private static void ModifiedPythagorasMeasure(DistanceResult distanceResult, Unit selectedUnit, Location measurementInputs)
         //{
 
         //    double measureResult = ModifiedPythagoras.Measure(measurementInputs, distanceResult);
-
-        //    distanceResult.ModifiedPythagorasResult = FormatResult.FormatDouble(UnitConverter.ConvertUnit(selectedUnit, measureResult));
+        //    distanceResult.ModifiedPythagorasResult = FormatResult.FormatDouble(UnitConverter.DistanceToUnit(selectedUnit, measureResult));
         //}
 
         //private static void GreatCircleMeasure(DistanceResult distanceResult, Location endLocationInRadian, Unit selectedUnit, MeasurementInputs measurementInputs)
         //{
 
         //    double measureResult = GreaterCircle.Measure(measurementInputs, endLocationInRadian, measurementInputs.EarthRadius);
-
-        //    distanceResult.GreaterCircleResult = FormatResult.FormatDouble(UnitConverter.ConvertUnit(selectedUnit, measureResult));
+        //    distanceResult.GreaterCircleResult = FormatResult.FormatDouble(UnitConverter.DistanceToUnit(selectedUnit, measureResult));
         //}
 
         //private static void HaversineForumlaMeasure(DistanceResult distanceResult, Location endLocationInRadian,
         //    Unit selectedUnit, MeasurementInputs measurementInputs)
         //{
         //    double measureResult = HaversineFormula.Measure(measurementInputs, endLocationInRadian, measurementInputs.EarthRadius);
-
-        //    distanceResult.HaversineFormulaResult = FormatResult.FormatDouble(UnitConverter.ConvertUnit(selectedUnit, measureResult));
+        //    distanceResult.HaversineFormulaResult = FormatResult.FormatDouble(UnitConverter.DistanceToUnit(selectedUnit, measureResult));
         //}
     }
 }

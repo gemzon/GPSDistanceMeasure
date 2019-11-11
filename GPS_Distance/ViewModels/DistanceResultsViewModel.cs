@@ -1,4 +1,7 @@
+using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows.Input;
 using GPS_Distance.Helpers;
 using GPS_Distance.Models;
@@ -57,10 +60,7 @@ namespace GPS_Distance.ViewModels
             GenerateSourceDataCommand = new RelayCommand(GenreateSourceData);
             SetMeasurmentInputs();
             SetStartLocation();
-
         }
-
-
         #endregion
 
         #region Methods

@@ -47,7 +47,6 @@
                         VerticalAlignment="Center"
                         ItemsSource="{Binding Units}"
                         SelectedItem="{Binding SelectedUnit}" />
-
                 </StackPanel>
             </Grid>
             <ListView x:Name="ResultListView" Grid.Row="1" ItemsSource="{Binding DistanceResultsList}">
@@ -61,7 +60,6 @@
                 </ListView.View>
 
             </ListView>
-
         </Grid>
     </StackPanel>
 </UserControl>

@@ -6,26 +6,20 @@
     StartupUri="MainWindow.xaml">
 
     <Application.Resources>
+        
         <Style x:Key="BaseButton" TargetType="Button">
             <Setter Property="Padding" Value="5" />
             <Setter Property="FontWeight" Value="Bold" />
         </Style>
-        <Style
-            x:Key="BtnRed"
-            BasedOn="{StaticResource BaseButton}"
-            TargetType="Button">
+        
+        <Style x:Key="BtnRed" TargetType="Button" BasedOn="{StaticResource BaseButton}">
             <Setter Property="Background" Value="#FFD63535" />
         </Style>
+
         <Style
-            x:Key="BtnGreen"
-            BasedOn="{StaticResource BaseButton}"
-            TargetType="Button">
+            x:Key="BtnGreen" TargetType="Button" BasedOn="{StaticResource BaseButton}">
             <Setter Property="Background" Value="#FF19A833" />
         </Style>
-
-
-
-
 
     </Application.Resources>
 
