@@ -18,7 +18,7 @@ namespace UnitConverterTests.MetresToMiles_spec
         public void Should_return_correctly_converted_miles(double meters, double expectedMiles)
         {
             // Act
-            var actualMiles = UnitConverter.ConvertUnit(Unit.Miles, meters);
+            var actualMiles = Helper.ConvertUnit(Unit.Miles, meters);
 
             // Assert
             actualMiles.Should().BeApproximately(expectedMiles, expectedPrecision);

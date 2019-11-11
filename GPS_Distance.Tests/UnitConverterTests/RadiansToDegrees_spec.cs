@@ -16,7 +16,7 @@ namespace UnitConverterTests.RadiansToDegrees_spec
         public void Should_return_correctly_converted_degrees(double radian, double expectedDegrees)
         {
             // Act
-            var actualDegrees = UnitConverter.RadiansToDegrees(radian);
+            var actualDegrees = Helper.RadiansToDegrees(radian);
 
             // Assert
             actualDegrees.Should().BeApproximately(expectedDegrees, expectedPrecision);
@@ -33,7 +33,7 @@ namespace UnitConverterTests.RadiansToDegrees_spec
             double expectedDegrees = 0;
 
             // Act
-            var actualDegrees = UnitConverter.RadiansToDegrees(radian);
+            var actualDegrees = Helper.RadiansToDegrees(radian);
 
             // Assert
             actualDegrees.Should().BeApproximately(expectedDegrees, double.PositiveInfinity);

@@ -1,20 +1,16 @@
-﻿using GPS_Distance.MeasurementFormulas;
+﻿using System.Collections.ObjectModel;
+using GPS_Distance.MeasurementFormulas;
 using GPS_Distance.Models;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Text;
 
 namespace GPS_Distance.Helpers
 {
-    public static class MeasureDistanceHelper
+    public static partial class Helper
     {
-
         public static double GetEarthRadius(double startLatInDegree)
             => RadiusLatitudeAdjustment.LatitudeAdjustment(startLatInDegree);
 
         public static Location ConvertStartLocationToRadians(Location startLocationInDegree)
-            => PositionToRadians.ConvertToRadians(startLocationInDegree);
+            => Helper.ConvertToRadians(startLocationInDegree);
 
         public static ObservableCollection<DistanceResult> MeasureDistance(ObservableCollection<Location> endpoints,
             Unit selectedUnit, MeasurementInputs measurementInputs)
@@ -26,7 +22,7 @@ namespace GPS_Distance.Helpers
                 {
                     EndLocation = location
                 };
-                var endLocationInRadian = PositionToRadians.ConvertToRadians(location);
+                var endLocationInRadian = Helper.ConvertToRadians(location);
                 ModifiedPythagorasMeasure(result, selectedUnit, measurementInputs);
                 GreatCircleMeasure(result, endLocationInRadian, selectedUnit, measurementInputs);
                 HaversineForumlaMeasure(result, endLocationInRadian, selectedUnit, measurementInputs);
@@ -35,7 +31,7 @@ namespace GPS_Distance.Helpers
             return DistanceResults;
         }
 
-           
+
         private static void ModifiedPythagorasMeasure(DistanceResult distanceResult,
             Unit selectedUnit, MeasurementInputs measurementInputs)
         {
@@ -44,11 +40,11 @@ namespace GPS_Distance.Helpers
                 measurementInputs.StartLocationInDegrees,
                              distanceResult.EndLocation);
 
-            distanceResult.ModifiedPythagorasResult = FormatResult.FormatDouble(
-                UnitConverter.ConvertUnit(selectedUnit, measureResult));
+            distanceResult.ModifiedPythagorasResult = Helper.FormatDouble(
+                Helper.ConvertUnit(selectedUnit, measureResult));
         }
 
-        private static void GreatCircleMeasure(DistanceResult distanceResult, Location endLocationInRadian, 
+        private static void GreatCircleMeasure(DistanceResult distanceResult, Location endLocationInRadian,
             Unit selectedUnit, MeasurementInputs measurementInputs)
         {
 
@@ -56,11 +52,11 @@ namespace GPS_Distance.Helpers
                endLocationInRadian,
                measurementInputs.EarthRadius);
 
-            distanceResult.GreaterCircleResult = FormatResult.FormatDouble(
-                UnitConverter.ConvertUnit(selectedUnit, measureResult));
+            distanceResult.GreaterCircleResult = Helper.FormatDouble(
+                Helper.ConvertUnit(selectedUnit, measureResult));
         }
 
-        private static void HaversineForumlaMeasure(DistanceResult distanceResult, Location endLocationInRadian, 
+        private static void HaversineForumlaMeasure(DistanceResult distanceResult, Location endLocationInRadian,
             Unit selectedUnit, MeasurementInputs measurementInputs)
         {
             double measureResult = HaversineFormula.Measure(measurementInputs.StartLocationInRadians,
@@ -68,8 +64,8 @@ namespace GPS_Distance.Helpers
                                                   measurementInputs.EarthRadius);
 
 
-            distanceResult.HaversineFormulaResult = FormatResult.FormatDouble(
-                UnitConverter.ConvertUnit(selectedUnit, measureResult));
+            distanceResult.HaversineFormulaResult = Helper.FormatDouble(
+                Helper.ConvertUnit(selectedUnit, measureResult));
         }
 
     }

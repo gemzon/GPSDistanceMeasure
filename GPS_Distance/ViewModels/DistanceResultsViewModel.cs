@@ -1,12 +1,10 @@
-﻿using GPS_Distance.Helpers;
-using GPS_Distance.Models;
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
 using System.Windows.Input;
+using GPS_Distance.Helpers;
+using GPS_Distance.Models;
 
 namespace GPS_Distance.ViewModels
 {
@@ -76,13 +74,13 @@ namespace GPS_Distance.ViewModels
         private void SetMeasurmentInputs()
         {
             MeasurementInputs = new MeasurementInputs();
-            MeasurementInputs.StartLocationInRadians = MeasureDistanceHelper.ConvertStartLocationToRadians(MeasurementInputs.StartLocationInDegrees);
-            MeasurementInputs.EarthRadius = MeasureDistanceHelper.GetEarthRadius(MeasurementInputs.StartLocationInDegrees.Latitude);
+            MeasurementInputs.StartLocationInRadians = Helper.ConvertStartLocationToRadians(MeasurementInputs.StartLocationInDegrees);
+            MeasurementInputs.EarthRadius = Helper.GetEarthRadius(MeasurementInputs.StartLocationInDegrees.Latitude);
         }
 
         private void GenreateSourceData()
         {
-            DistanceResult = MeasureDistanceHelper.MeasureDistance(EndPositions, SelectedUnit, MeasurementInputs);
+            DistanceResult = Helper.MeasureDistance(EndPositions, SelectedUnit, MeasurementInputs);
         }
 
         private void SetStartLocation()
@@ -94,7 +92,7 @@ namespace GPS_Distance.ViewModels
 
 
         //Todo not implmented yet
-       
+
         public IEnumerable<Unit> Units
         {
             get

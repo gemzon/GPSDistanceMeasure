@@ -19,7 +19,7 @@ namespace UnitConverterTests.DegreesToRadians_spec
         public void Should_return_correctly_converted_radians(double degree, double expectedRadian)
         {
             // Act
-            var actualRadian = UnitConverter.DegreesToRadians(degree);
+            var actualRadian = Helper.DegreesToRadians(degree);
 
             // Assert
             actualRadian.Should().BeApproximately(expectedRadian, expectedPrecision);

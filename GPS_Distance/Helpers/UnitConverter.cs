@@ -3,7 +3,7 @@ using GPS_Distance.Models;
 
 namespace GPS_Distance.Helpers
 {
-    public static class UnitConverter
+    public static partial class Helper
     {
         public static double DegreesToRadians(double degree) => degree * (Math.PI / 180);
         public static double RadiansToDegrees(double radian) => radian * (180 / Math.PI);
