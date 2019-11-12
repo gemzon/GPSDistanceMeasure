@@ -7,21 +7,21 @@ namespace UnitConverterTests.MetresToMiles_spec
 {
     public class Given_boundary_values
     {
-        public const double ExpectedPrecision = 0.00000001;
+        private const double expectedPrecision = 1e-12;
 
         [Theory]
-        [InlineData(-1, -0.0006213712)]
+        [InlineData(-1, -0.000621371192237)]
         [InlineData(0, 0)]
-        [InlineData(1, 0.0006213712)]
-        [InlineData(2, 0.0012427424)]
-        [InlineData(1000, 0.62137)]
+        [InlineData(1, 0.0006213711922373339696174341844)]
+        [InlineData(2, 0.00124274238447)]
+        [InlineData(1000, 0.621371192237)]
         public void Should_return_correctly_converted_miles(double meters, double expectedMiles)
         {
             // Act
-            var actualMiles = UnitConverter.ConvertUnit(Unit.Miles, meters);
+            var actualMiles = Helper.ConvertUnit(Unit.Miles, meters);
 
             // Assert
-            actualMiles.Should().BeApproximately(expectedMiles, ExpectedPrecision);
+            actualMiles.Should().BeApproximately(expectedMiles, expectedPrecision);
         }
     }
 }

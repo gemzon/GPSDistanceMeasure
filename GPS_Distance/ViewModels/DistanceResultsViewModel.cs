@@ -1,19 +1,15 @@
-﻿using GPS_Distance.Helpers;
-using GPS_Distance.Models;
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
 using System.Windows.Input;
+using GPS_Distance.Helpers;
+using GPS_Distance.Models;
 
 namespace GPS_Distance.ViewModels
 {
     public class DistanceResultsViewModel : BaseViewModel
     {
-
-
         #region Fields
 
         private MeasurementInputs _measurementInputs;
@@ -21,6 +17,7 @@ namespace GPS_Distance.ViewModels
         private string _startLocation;
         private ObservableCollection<DistanceResult> _distanceResult;
         private Unit _selectedUnit;
+
         #endregion
 
         #region Properties
@@ -55,7 +52,6 @@ namespace GPS_Distance.ViewModels
         }
         #endregion
 
-
         #region Commands
         public ICommand GenerateSourceDataCommand { get; }
         #endregion
@@ -68,33 +64,29 @@ namespace GPS_Distance.ViewModels
             SetStartLocation();
 
         }
-
-
         #endregion
 
         #region Methods
         private void SetMeasurmentInputs()
         {
-            MeasurementInputs = new MeasurementInputs();
-            MeasurementInputs.StartLocationInRadians = MeasureDistanceHelper.ConvertStartLocationToRadians(MeasurementInputs.StartLocationInDegrees);
-            MeasurementInputs.EarthRadius = MeasureDistanceHelper.GetEarthRadius(MeasurementInputs.StartLocationInDegrees.Latitude);
+            MeasurementInputs = new MeasurementInputs(); // NOTE: Where sets Start Locations?
+            //MeasurementInputs.StartLocationInRadians = Helper.ConvertStartLocationToRadians(MeasurementInputs.StartLocationInDegrees);
+            //MeasurementInputs.EarthRadius = Helper.GetEarthRadius(MeasurementInputs.StartLocationInDegrees.Latitude);
         }
 
         private void GenreateSourceData()
         {
-            DistanceResult = MeasureDistanceHelper.MeasureDistance(EndPositions, SelectedUnit, MeasurementInputs);
+            DistanceResult = Helper.MeasureDistance(EndPositions, SelectedUnit, MeasurementInputs);
         }
 
         private void SetStartLocation()
         {
-            StartLocation = $"Start GPS Position Latitude={MeasurementInputs.StartLocationInDegrees.Latitude},Longitude={MeasurementInputs.StartLocationInDegrees.Longitude} ";
-
+            StartLocation = $"Start GPS Position Latitude={MeasurementInputs.Latitude},Longitude={MeasurementInputs.Longitude} ";
         }
         #endregion
 
-
         //Todo not implmented yet
-       
+
         public IEnumerable<Unit> Units
         {
             get
