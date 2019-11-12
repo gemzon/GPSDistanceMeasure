@@ -37,9 +37,10 @@ namespace GPS_Distance.Helpers
         private static void ModifiedPythagorasMeasure(DistanceResult distanceResult,
             Unit selectedUnit, MeasurementInputs measurementInputs)
         {
-            double measureResult = ModifiedPythagoras.Measure(measurementInputs, distanceResult);
+            //double measureResult = ModifiedPythagoras.Measure(measurementInputs, distanceResult);
+            //distanceResult.ModifiedPythagorasResult = Helper.FormatDouble(Helper.ConvertUnit(selectedUnit, measureResult));
 
-            distanceResult.ModifiedPythagorasResult = Helper.FormatDouble(Helper.ConvertUnit(selectedUnit, measureResult));
+            distanceResult.ModifiedPythagorasResult = ModifiedPythagoras.Measure(measurementInputs, distanceResult).ToUnit(selectedUnit);
         }
 
         // NOTE: distanceResult now contains endLocation, redundant parameter, or?
@@ -47,17 +48,19 @@ namespace GPS_Distance.Helpers
         private static void GreatCircleMeasure(DistanceResult distanceResult, Location endLocation,
             Unit selectedUnit, MeasurementInputs measurementInputs)
         {
-            double measureResult = GreaterCircle.Measure(measurementInputs, endLocation/*, measurementInputs.EarthRadius*/);
+            //double measureResult = GreaterCircle.Measure(measurementInputs, endLocation/*, measurementInputs.EarthRadius*/);
+            //distanceResult.GreaterCircleResult = Helper.FormatDouble(Helper.ConvertUnit(selectedUnit, measureResult));
 
-            distanceResult.GreaterCircleResult = Helper.FormatDouble(Helper.ConvertUnit(selectedUnit, measureResult));
+            distanceResult.GreaterCircleResult = GreaterCircle.Measure(measurementInputs, endLocation).ToUnit(selectedUnit);
         }
 
         private static void HaversineForumlaMeasure(DistanceResult distanceResult, Location endLocation,
             Unit selectedUnit, MeasurementInputs measurementInputs)
         {
-            double measureResult = HaversineFormula.Measure(measurementInputs, endLocation/*, measurementInputs.EarthRadius*/);
+            //double measureResult = HaversineFormula.Measure(measurementInputs, endLocation/*, measurementInputs.EarthRadius*/);
+            //distanceResult.HaversineFormulaResult = Helper.FormatDouble(Helper.ConvertUnit(selectedUnit, measureResult));
 
-            distanceResult.HaversineFormulaResult = Helper.FormatDouble(Helper.ConvertUnit(selectedUnit, measureResult));
+            distanceResult.HaversineFormulaResult = HaversineFormula.Measure(measurementInputs, endLocation).ToUnit(selectedUnit);
         }
     }
 }
