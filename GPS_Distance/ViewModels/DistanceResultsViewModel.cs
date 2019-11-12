@@ -10,8 +10,6 @@ namespace GPS_Distance.ViewModels
 {
     public class DistanceResultsViewModel : BaseViewModel
     {
-
-
         #region Fields
 
         private MeasurementInputs _measurementInputs;
@@ -19,6 +17,7 @@ namespace GPS_Distance.ViewModels
         private string _startLocation;
         private ObservableCollection<DistanceResult> _distanceResult;
         private Unit _selectedUnit;
+
         #endregion
 
         #region Properties
@@ -53,7 +52,6 @@ namespace GPS_Distance.ViewModels
         }
         #endregion
 
-
         #region Commands
         public ICommand GenerateSourceDataCommand { get; }
         #endregion
@@ -66,16 +64,14 @@ namespace GPS_Distance.ViewModels
             SetStartLocation();
 
         }
-
-
         #endregion
 
         #region Methods
         private void SetMeasurmentInputs()
         {
-            MeasurementInputs = new MeasurementInputs();
-            MeasurementInputs.StartLocationInRadians = Helper.ConvertStartLocationToRadians(MeasurementInputs.StartLocationInDegrees);
-            MeasurementInputs.EarthRadius = Helper.GetEarthRadius(MeasurementInputs.StartLocationInDegrees.Latitude);
+            MeasurementInputs = new MeasurementInputs(); // NOTE: Where sets Start Locations?
+            //MeasurementInputs.StartLocationInRadians = Helper.ConvertStartLocationToRadians(MeasurementInputs.StartLocationInDegrees);
+            //MeasurementInputs.EarthRadius = Helper.GetEarthRadius(MeasurementInputs.StartLocationInDegrees.Latitude);
         }
 
         private void GenreateSourceData()
@@ -85,11 +81,9 @@ namespace GPS_Distance.ViewModels
 
         private void SetStartLocation()
         {
-            StartLocation = $"Start GPS Position Latitude={MeasurementInputs.StartLocationInDegrees.Latitude},Longitude={MeasurementInputs.StartLocationInDegrees.Longitude} ";
-
+            StartLocation = $"Start GPS Position Latitude={MeasurementInputs.Latitude},Longitude={MeasurementInputs.Longitude} ";
         }
         #endregion
-
 
         //Todo not implmented yet
 
