@@ -114,19 +114,10 @@ namespace GPS_Distance.ViewModels
 
         private void AddEndPoint()
         {
-            if (!Helper.TryParseLatitude(EndLatitude, out var latitude))
-                return;
+            if (!Helper.TryParseLatitude(EndLatitude, out var latitude)) return;
+            if (!Helper.TryParseLongitude(EndLongitude, out var longitude)) return;
 
-            if (!Helper.TryParseLongitude(EndLongitude, out var longitude))
-                return;
-
-            var location = new Location()
-            {
-                Latitude = latitude,
-                Longitude = longitude
-            };
-
-            EndPointsLocations.Add(location);
+            EndPointsLocations.Add(new Location(latitude, longitude));
             ClearEndValues();
         }
 
@@ -144,20 +135,14 @@ namespace GPS_Distance.ViewModels
 
         private void MeasureDistance()
         {
-            var Startlocation = new Location()
-            {
-                Latitude = double.Parse(StartLatitude),
-                Longitude = double.Parse(StartLongitude)
-            };
+            if (!Helper.TryParseLatitude(StartLatitude, out var latitude)) return;
+            if (!Helper.TryParseLongitude(StartLongitude, out var longitude)) return;
+
+            var Startlocation = new Location(latitude, longitude);
+
             //todo iterate through he list of the end points and measure there distance
             //todo pass the values to the result tab
             //todo navigate to the result tab
-
-            if (!Helpers.Helper.TryParseLatitude(StartLatitude, out var latitude))
-                return;
-
-            if (!Helpers.Helper.TryParseLongitude(StartLongitude, out var longitude))
-                return;
         }
 
         #endregion
