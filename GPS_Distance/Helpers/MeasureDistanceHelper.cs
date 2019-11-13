@@ -33,6 +33,9 @@ namespace GPS_Distance.Helpers
                 result.ModifiedPythagorasResult = ModifiedPythagoras.Measure(measurementInputs, /*result*/endLocation).ToUnit(selectedUnit);
                 result.GreaterCircleResult = GreaterCircle.Measure(measurementInputs, endLocation).ToUnit(selectedUnit);
                 result.HaversineFormulaResult = HaversineFormula.Measure(measurementInputs, endLocation).ToUnit(selectedUnit);
+
+                // NOTE: Is this missing or how does it work?
+                //DistanceResults.Add(result);
             }
             return DistanceResults;
         }
