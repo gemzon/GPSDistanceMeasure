@@ -74,7 +74,9 @@ namespace GPS_Distance.ViewModels
             //MeasurementInputs.EarthRadius = Helper.GetEarthRadius(MeasurementInputs.StartLocationInDegrees.Latitude);
         }
 
-        private void GenreateSourceData()
+//Data will be passed to the from the entryForm with the data used here the data is set to fields in the costructor 
+
+        private void GenreateSourceData() 
         {
             DistanceResult = Helper.MeasureDistance(EndPositions, SelectedUnit, MeasurementInputs);
         }
