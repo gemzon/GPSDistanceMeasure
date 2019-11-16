@@ -11,7 +11,7 @@ namespace GPS_Distance.ViewModels
     public class DistanceResultsViewModel : BaseViewModel
     {
         #region Fields
-
+        // NOTE: All fields are uninitialized. Can we be sure that they will be?
         private MeasurementInputs _measurementInputs;
         private ObservableCollection<Location> _endLocations;
         private string _startLocation;

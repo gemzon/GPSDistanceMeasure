@@ -23,15 +23,17 @@ namespace GPS_Distance.ViewModels
             set => SetProperty(ref isBusy, value);
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler? PropertyChanged;
 
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs((propertyName)));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        protected bool SetProperty<T>(ref T storage, T value, [CallerMemberName] string propertyName = null)
+        protected bool SetProperty<T>(ref T storage, T value, [CallerMemberName] string? propertyName = null)
         {
+            /* if (string.IsNullOrWhiteSpace(propertyName)) throw new ArgumentNullException(propertyName); // Can propertyName ever be null in this case!? */
+
             if (EqualityComparer<T>.Default.Equals(storage, value))
             {
                 return false;
