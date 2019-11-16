@@ -1,6 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using GPS_Distance.Models;
-using static GPS_Distance.MeasurementFormulas.Measure;
+using static GPS_Distance.MeasurementFormulas.MeasureFormula;
 
 namespace GPS_Distance.Helpers
 {
@@ -30,9 +30,9 @@ namespace GPS_Distance.Helpers
                 //GreatCircleMeasure(result, endLocation, selectedUnit, measurementInputs);
                 //HaversineForumlaMeasure(result, endLocation, selectedUnit, measurementInputs);
 
-                result.ModifiedPythagorasResult = ModifiedPythagoras(measurementInputs, endLocation).ToUnit(selectedUnit);
-                result.GreaterCircleResult = GreaterCircle(measurementInputs, endLocation).ToUnit(selectedUnit);
-                result.HaversineFormulaResult = HaversineFormula(measurementInputs, endLocation).ToUnit(selectedUnit);
+                result.ModifiedPythagorasResult = ModifiedPythagorasMeasure(measurementInputs, endLocation).ToUnit(selectedUnit);
+                result.GreaterCircleResult = GreaterCircleMeasure(measurementInputs, endLocation).ToUnit(selectedUnit);
+                result.HaversineFormulaResult = HaversineMeasure(measurementInputs, endLocation).ToUnit(selectedUnit);
 
                 // NOTE: Is this missing or how does it work?
                 //DistanceResults.Add(result);

@@ -2,7 +2,7 @@
 using GPS_Distance.Models;
 using Xunit;
 using static GPS_Distance.Helpers.Helper;
-using static GPS_Distance.MeasurementFormulas.Measure;
+using static GPS_Distance.MeasurementFormulas.MeasureFormula;
 
 namespace DistanceMeasurerTests.MeasureUsingModifiedPythagorous_spec
 {
@@ -25,7 +25,7 @@ namespace DistanceMeasurerTests.MeasureUsingModifiedPythagorous_spec
             var endLocation = new Location(endLat, endLong);
 
             // Act
-            var actualDistance = ModifiedPythagoras(startLocation, endLocation).ToUnit(Unit.Kilometres, 2);
+            var actualDistance = ModifiedPythagorasMeasure(startLocation, endLocation).ToUnit(Unit.Kilometres, 2);
 
             // Assert
             actualDistance.Should().Be(expectedDistance);
