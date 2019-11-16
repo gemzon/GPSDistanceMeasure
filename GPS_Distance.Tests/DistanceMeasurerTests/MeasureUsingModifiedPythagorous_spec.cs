@@ -1,8 +1,8 @@
 ﻿using FluentAssertions;
-using GPS_Distance.Helpers;
-using GPS_Distance.MeasurementFormulas;
 using GPS_Distance.Models;
 using Xunit;
+using static GPS_Distance.Helpers.Helper;
+using static GPS_Distance.MeasurementFormulas.Measure;
 
 namespace DistanceMeasurerTests.MeasureUsingModifiedPythagorous_spec
 {
@@ -25,7 +25,7 @@ namespace DistanceMeasurerTests.MeasureUsingModifiedPythagorous_spec
             var endLocation = new Location(endLat, endLong);
 
             // Act
-            var actualDistance = ModifiedPythagoras.Measure(startLocation, endLocation).ToUnit(Unit.Kilometres,2);
+            var actualDistance = ModifiedPythagoras(startLocation, endLocation).ToUnit(Unit.Kilometres, 2);
 
             // Assert
             actualDistance.Should().Be(expectedDistance);

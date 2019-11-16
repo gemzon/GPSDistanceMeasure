@@ -3,9 +3,9 @@ using GPS_Distance.Models;
 
 namespace GPS_Distance.MeasurementFormulas
 {
-    public static class GreaterCircle
+    public static partial class Measure
     {
-        public static double Measure(MeasurementInputs startLocation, Location endLocation/*, double radius*/)
+        public static double GreaterCircle(MeasurementInputs startLocation, Location endLocation)
         {
             double sineAngle = Math.Sin(startLocation.LatitudeRadians) * Math.Sin(endLocation.LatitudeRadians);
             double cosAngle = Math.Cos(startLocation.LatitudeRadians) * Math.Cos(endLocation.LatitudeRadians)

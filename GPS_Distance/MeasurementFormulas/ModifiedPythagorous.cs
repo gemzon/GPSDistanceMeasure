@@ -3,9 +3,9 @@ using GPS_Distance.Models;
 
 namespace GPS_Distance.MeasurementFormulas
 {
-    public static class ModifiedPythagoras
+    public static partial class Measure
     {
-        public static double Measure(Location startlocation, Location endLocation)
+        public static double ModifiedPythagoras(Location startlocation, Location endLocation)
         {
             double lat = endLocation.Latitude - startlocation.Latitude;
             double lon = endLocation.Longitude - startlocation.Longitude;
@@ -15,7 +15,7 @@ namespace GPS_Distance.MeasurementFormulas
 
             var distanceMetres = Math.Sqrt(squaredLat + squaredLon);
 
-            return  distanceMetres;
+            return distanceMetres;
         }
     }
 }

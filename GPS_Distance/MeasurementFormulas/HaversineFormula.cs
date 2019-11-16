@@ -3,9 +3,9 @@ using GPS_Distance.Models;
 
 namespace GPS_Distance.MeasurementFormulas
 {
-    public static class HaversineFormula
+    public static partial class Measure
     {
-        public static double Measure(MeasurementInputs startLocation, Location endLocation/*, double radius*/)
+        public static double HaversineFormula(MeasurementInputs startLocation, Location endLocation)
         {
             double dlat = endLocation.LatitudeRadians - startLocation.LatitudeRadians;
             double dlon = endLocation.LongitudeRadians - startLocation.LongitudeRadians;
