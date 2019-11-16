@@ -1,8 +1,8 @@
 ﻿using FluentAssertions;
-using GPS_Distance.Helpers;
-using GPS_Distance.MeasurementFormulas;
 using GPS_Distance.Models;
 using Xunit;
+using static GPS_Distance.Helpers.Helper;
+using static GPS_Distance.MeasurementFormulas.MeasureFormula;
 
 namespace DistanceMeasurerTests.MeasureUsingGreaterCircle_spec
 {
@@ -25,7 +25,7 @@ namespace DistanceMeasurerTests.MeasureUsingGreaterCircle_spec
             var endLocation = new Location(endLat, endLong);
 
             // Act
-            var actualDistance = GreaterCircle.Measure(startLocation, endLocation).ToUnit(Unit.Kilometres, 2);
+            var actualDistance = GreaterCircleMeasure(startLocation, endLocation).ToUnit(Unit.Kilometres, 2);
 
             // Assert
             actualDistance.Should().Be(expectedDistance);

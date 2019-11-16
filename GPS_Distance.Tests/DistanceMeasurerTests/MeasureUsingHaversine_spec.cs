@@ -1,8 +1,8 @@
 ﻿using FluentAssertions;
-using GPS_Distance.Helpers;
-using GPS_Distance.MeasurementFormulas;
 using GPS_Distance.Models;
 using Xunit;
+using static GPS_Distance.Helpers.Helper;
+using static GPS_Distance.MeasurementFormulas.MeasureFormula;
 
 namespace DistanceMeasurerTests.HaversineFormula_spec
 {
@@ -25,7 +25,7 @@ namespace DistanceMeasurerTests.HaversineFormula_spec
             var endLocation = new Location(endLat, endLong);
 
             // Act
-            var actualDistance = HaversineFormula.Measure(startLocation, endLocation).ToUnit(Unit.Kilometres, 2);
+            var actualDistance = HaversineMeasure(startLocation, endLocation).ToUnit(Unit.Kilometres, 2);
 
             // Assert
             actualDistance.Should().Be(expectedDistance);

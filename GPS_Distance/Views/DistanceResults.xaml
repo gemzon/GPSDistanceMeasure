@@ -52,7 +52,7 @@
             </Grid>
             <ListView x:Name="ResultListView" Grid.Row="1" ItemsSource="{Binding DistanceResultsList}">
                 <ListView.View>
-                    <GridView>
+                    <GridView><!--Are these bindings ok? Not  _Result properties? And Location?-->
                         <GridViewColumn DisplayMemberBinding="{Binding Location}" Header="End GPS Position" />
                         <GridViewColumn DisplayMemberBinding="{Binding ModifiedPythagorous}" Header="Modified Pythagorous" />
                         <GridViewColumn DisplayMemberBinding="{Binding GreaterCircle}" Header="Greater Circle" />
