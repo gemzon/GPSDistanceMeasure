@@ -1,4 +1,4 @@
-﻿using GPS_Distance.MeasurementFormulas;
+﻿using static GPS_Distance.Helpers.Helper;
 
 namespace GPS_Distance.Models
 {
@@ -9,6 +9,6 @@ namespace GPS_Distance.Models
         public MeasurementInputs(double latitude, double longitude) : base(latitude, longitude) { }
 
         // Properties
-        public double EarthRadius => RadiusLatitudeAdjustment.LatitudeAdjustment(Latitude);
+        public double EarthRadius => RadiusLatitudeAdjustment(Latitude);
     }
 }

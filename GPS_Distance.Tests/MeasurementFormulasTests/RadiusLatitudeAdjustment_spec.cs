@@ -1,6 +1,6 @@
 ﻿using FluentAssertions;
-using GPS_Distance.MeasurementFormulas;
 using Xunit;
+using static GPS_Distance.Helpers.Helper;
 
 namespace MeasurementFormulasTests.RadiusLatitudeAdjustment_spec
 {
@@ -13,7 +13,7 @@ namespace MeasurementFormulasTests.RadiusLatitudeAdjustment_spec
         public void Should_return_correctly_adjusted_latitude(double actualLatitude, double expectedLatitude)
         {
             // Act
-            var actualDistance = RadiusLatitudeAdjustment.LatitudeAdjustment(actualLatitude);
+            var actualDistance = RadiusLatitudeAdjustment(actualLatitude);
 
             // Assert
             actualDistance.Should().Be(expectedLatitude);
