@@ -78,7 +78,7 @@ namespace GPS_Distance.ViewModels
 
         private void GenreateSourceData() 
         {
-            DistanceResult = MeasureDistance(EndPositions, SelectedUnit, MeasurementInputs);
+            DistanceResult = MeasureDistance(MeasurementInputs, EndPositions, SelectedUnit);
         }
 
         private void SetStartLocation()

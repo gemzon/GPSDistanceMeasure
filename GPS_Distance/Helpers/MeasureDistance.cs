@@ -12,8 +12,8 @@ namespace GPS_Distance.Helpers
         //public static Location ConvertStartLocationToRadians(Location startLocationInDegree)
         //    => Helper.ConvertToRadians(startLocationInDegree);
 
-        public static ObservableCollection<DistanceResult> MeasureDistance(ObservableCollection<Location> endpoints,
-            Unit selectedUnit, MeasurementInputs measurementInputs)
+        public static ObservableCollection<DistanceResult> MeasureDistance(MeasurementInputs measurementInputs,
+            ObservableCollection<Location> endpoints, Unit selectedUnit)
         {
             ObservableCollection<DistanceResult> DistanceResults = new ObservableCollection<DistanceResult>();
             foreach (Location endLocation in endpoints)
