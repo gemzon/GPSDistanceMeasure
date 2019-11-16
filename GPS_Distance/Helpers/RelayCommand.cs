@@ -9,7 +9,7 @@ namespace GPS_Distance.ViewModels
     {
         private readonly Action _action;
 
-        private readonly Func<bool> _canExecute = null;
+        private readonly Func<bool>? _canExecute = null;
 
         public event EventHandler CanExecuteChanged
         {
@@ -17,7 +17,7 @@ namespace GPS_Distance.ViewModels
             remove { CommandManager.RequerySuggested -= value; }
         }
 
-        public RelayCommand(Action action, Func<bool> canExecute = null)
+        public RelayCommand(Action action, Func<bool>? canExecute = null)
         {
             _action = action;
             _canExecute = canExecute;
@@ -38,7 +38,7 @@ namespace GPS_Distance.ViewModels
     {
         private readonly Action<T> _action;
 
-        private readonly Func<T, bool> _canExecute = null;
+        private readonly Func<T, bool>? _canExecute = null;
 
         public event EventHandler CanExecuteChanged
         {
@@ -46,7 +46,7 @@ namespace GPS_Distance.ViewModels
             remove { CommandManager.RequerySuggested -= value; }
         }
 
-        public RelayCommand(Action<T> action, Func<T, bool> canExecute = null)
+        public RelayCommand(Action<T> action, Func<T, bool>? canExecute = null)
         {
             _action = action;
             _canExecute = canExecute;
