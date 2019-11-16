@@ -16,3 +16,4 @@ We developed initial project live on stream - https://www.twitch.tv/copperbeardy
 - [Building a small WPF app for GPS distant measuring (Part 4)](https://www.twitch.tv/videos/499779783)
 - [Building a small WPF app for GPS distant measuring (Part 5)](https://www.twitch.tv/videos/502878682)
 - [Building a small WPF app for GPS distant measuring (Part 6)](https://www.twitch.tv/videos/505931535)
+- [Building a small WPF app for GPS distant measuring (Part 7 - mostly chat)](https://www.twitch.tv/videos/509067137)

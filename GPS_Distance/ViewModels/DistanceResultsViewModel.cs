@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Input;
-using GPS_Distance.Helpers;
 using GPS_Distance.Models;
+using static GPS_Distance.Helpers.Helper;
 
 namespace GPS_Distance.ViewModels
 {
@@ -78,7 +78,7 @@ namespace GPS_Distance.ViewModels
 
         private void GenreateSourceData() 
         {
-            DistanceResult = Helper.MeasureDistance(EndPositions, SelectedUnit, MeasurementInputs);
+            DistanceResult = MeasureDistance(EndPositions, SelectedUnit, MeasurementInputs);
         }
 
         private void SetStartLocation()

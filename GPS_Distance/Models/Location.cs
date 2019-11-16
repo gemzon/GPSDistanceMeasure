@@ -1,4 +1,4 @@
-﻿using GPS_Distance.Helpers;
+﻿using static GPS_Distance.Helpers.Helper;
 
 namespace GPS_Distance.Models
 {
@@ -11,7 +11,7 @@ namespace GPS_Distance.Models
         // Properties
         public double Latitude { get; set; }  // Degrees
         public double Longitude { get; set; } // Degrees
-        public double LatitudeRadians => Helper.DegreesToRadians(Latitude);
-        public double LongitudeRadians => Helper.DegreesToRadians(Longitude);
+        public double LatitudeRadians => DegreesToRadians(Latitude);
+        public double LongitudeRadians => DegreesToRadians(Longitude);
     }
 }

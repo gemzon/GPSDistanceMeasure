@@ -1,7 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using System.Windows.Input;
-using GPS_Distance.Helpers;
 using GPS_Distance.Models;
+using static GPS_Distance.Helpers.Helper;
 
 namespace GPS_Distance.ViewModels
 {
@@ -34,7 +34,7 @@ namespace GPS_Distance.ViewModels
             set
             {
                 if (SetProperty(ref _startLatitude, value))
-                    ValidateProperty(value, (v) => Helper.TryParseLatitude(v, out _), "Not a valid latitude");
+                    ValidateProperty(value, (v) => TryParseLatitude(v, out _), "Not a valid latitude");
             }
         }
 
@@ -44,7 +44,7 @@ namespace GPS_Distance.ViewModels
             set
             {
                 if (SetProperty(ref _startLongitude, value))
-                    ValidateProperty(value, (v) => Helper.TryParseLongitude(v, out _), "Not a valid longitude");
+                    ValidateProperty(value, (v) => TryParseLongitude(v, out _), "Not a valid longitude");
             }
         }
 
@@ -54,7 +54,7 @@ namespace GPS_Distance.ViewModels
             set
             {
                 if (SetProperty(ref _endLatitude, value))
-                    ValidateProperty(value, (v) => Helper.TryParseLatitude(v, out _), "Not a valid latitude");
+                    ValidateProperty(value, (v) => TryParseLatitude(v, out _), "Not a valid latitude");
             }
         }
 
@@ -64,7 +64,7 @@ namespace GPS_Distance.ViewModels
             set
             {
                 if (SetProperty(ref _endLongitude, value))
-                    ValidateProperty(value, (v) => Helper.TryParseLongitude(v, out _), "Not a valid longitude");
+                    ValidateProperty(value, (v) => TryParseLongitude(v, out _), "Not a valid longitude");
             }
         }
 
@@ -114,8 +114,8 @@ namespace GPS_Distance.ViewModels
 
         private void AddEndPoint()
         {
-            if (!Helper.TryParseLatitude(EndLatitude, out var latitude)) return;
-            if (!Helper.TryParseLongitude(EndLongitude, out var longitude)) return;
+            if (!TryParseLatitude(EndLatitude, out var latitude)) return;
+            if (!TryParseLongitude(EndLongitude, out var longitude)) return;
 
             EndPointsLocations.Add(new Location(latitude, longitude));
             ClearEndValues();
@@ -135,8 +135,8 @@ namespace GPS_Distance.ViewModels
 
         private void MeasureDistance()
         {
-            if (!Helper.TryParseLatitude(StartLatitude, out var latitude)) return;
-            if (!Helper.TryParseLongitude(StartLongitude, out var longitude)) return;
+            if (!TryParseLatitude(StartLatitude, out var latitude)) return;
+            if (!TryParseLongitude(StartLongitude, out var longitude)) return;
 
             var Startlocation = new Location(latitude, longitude);
 

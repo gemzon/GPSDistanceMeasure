@@ -1,6 +1,5 @@
-using GPS_Distance.Helpers;
-using GPS_Distance.Models;
 using System;
+using GPS_Distance.Models;
 
 namespace GPS_Distance.MeasurementFormulas
 {
