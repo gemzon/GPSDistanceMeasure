@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Input;
+using CommonServiceLocator;
+using GPS_Distance.Events;
 using GPS_Distance.Models;
+using Prism.Events;
 using static GPS_Distance.Helpers.Helper;
 
 namespace GPS_Distance.ViewModels
@@ -17,6 +20,7 @@ namespace GPS_Distance.ViewModels
         private string _startLocation;
         private ObservableCollection<DistanceResult> _distanceResult;
         private Unit _selectedUnit;
+        private IEventAggregator _eventAggregator;
 
         #endregion
 
@@ -59,10 +63,17 @@ namespace GPS_Distance.ViewModels
         #region Constructor
         public DistanceResultsViewModel()
         {
+            _eventAggregator = ServiceLocator.Current.GetInstance<IEventAggregator>();
+            _eventAggregator.GetEvent<DistanceResultEvent>().Subscribe(DistanceResultEventHandler);
             GenerateSourceDataCommand = new RelayCommand(GenreateSourceData);
             SetMeasurmentInputs();
             SetStartLocation();
 
+        }
+
+        private void DistanceResultEventHandler(DistanceResultEventArgs obj)
+        {
+            //Set All fields coming from the obj that matters to your view.
         }
         #endregion
 
@@ -74,9 +85,9 @@ namespace GPS_Distance.ViewModels
             //MeasurementInputs.EarthRadius = Helper.GetEarthRadius(MeasurementInputs.StartLocationInDegrees.Latitude);
         }
 
-//Data will be passed to the from the entryForm with the data used here the data is set to fields in the costructor 
+        //Data will be passed to the from the entryForm with the data used here the data is set to fields in the costructor 
 
-        private void GenreateSourceData() 
+        private void GenreateSourceData()
         {
             DistanceResult = MeasureDistance(EndPositions, SelectedUnit, MeasurementInputs);
         }

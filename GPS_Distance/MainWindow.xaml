@@ -10,14 +10,14 @@
     Height="450"
     mc:Ignorable="d">
     <StackPanel>
-    <TabControl>
-        <TabItem Header="Entry Form">
-            <views:EntryForm />
-        </TabItem>
-            <TabItem Header="Result">
+        <TabControl>
+            <TabItem Header="Entry Form">
+                <views:EntryForm />
+            </TabItem>
+            <TabItem Header="Result" IsSelected="{Binding IsResultTabSelected}">
                 <views:DistanceResults />
-                </TabItem>
+            </TabItem>
         </TabControl>
-</StackPanel>
+    </StackPanel>
 
 </Window>

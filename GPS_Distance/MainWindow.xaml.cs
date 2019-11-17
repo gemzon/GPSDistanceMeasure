@@ -1,8 +1,4 @@
-using GPS_Distance.Helpers;
-using GPS_Distance.MeasurementFormulas;
-using GPS_Distance.Models;
 using GPS_Distance.ViewModels;
-using System.ComponentModel;
 using System.Windows;
 
 namespace GPS_Distance
@@ -12,12 +8,10 @@ namespace GPS_Distance
     /// </summary>
     public partial class MainWindow : Window
     {
-       
         public MainWindow()
         {
-            
-
-         
+            InitializeComponent();
+            this.DataContext = new MainWindowViewModel();
         }
     }
 }
