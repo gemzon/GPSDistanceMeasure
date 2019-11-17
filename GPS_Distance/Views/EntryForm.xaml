@@ -176,7 +176,7 @@
                     Content="Clear List"
                     Style="{StaticResource BtnRed}" />
                 <Button
-                    Command="{Binding MeasureDistanceCommand}"
+                    Command="{Binding MeasureDistanceCommand}"                  
                     Content="Measure Distances"
                     Style="{StaticResource BtnGreen}" />
             </StackPanel>

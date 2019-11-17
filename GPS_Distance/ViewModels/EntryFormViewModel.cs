@@ -143,6 +143,8 @@ namespace GPS_Distance.ViewModels
             //todo iterate through he list of the end points and measure there distance
             //todo pass the values to the result tab
             //todo navigate to the result tab
+           
+
         }
 
         #endregion

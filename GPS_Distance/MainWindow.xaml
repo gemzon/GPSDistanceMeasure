@@ -10,14 +10,16 @@
     Height="450"
     mc:Ignorable="d">
     <StackPanel>
-    <TabControl>
-        <TabItem Header="Entry Form">
-            <views:EntryForm />
-        </TabItem>
-            <TabItem Header="Result">
+        <Button Click="Button_Click" Content="click" />
+        <TabControl x:Name="MainTabControl" SelectedIndex="{Binding SelectedIdx}">
+            <TabItem Header="Entry Form" TabIndex="0">
+                <views:EntryForm />
+            </TabItem>
+            <TabItem Header="Result" TabIndex="1">
                 <views:DistanceResults />
-                </TabItem>
+            </TabItem>
         </TabControl>
-</StackPanel>
+
+    </StackPanel>
 
 </Window>

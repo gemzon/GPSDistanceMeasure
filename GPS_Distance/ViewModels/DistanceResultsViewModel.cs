@@ -12,6 +12,8 @@ namespace GPS_Distance.ViewModels
     {
         #region Fields
         // NOTE: All fields are uninitialized. Can we be sure that they will be?
+        // NOTE: At the moment no - however the result panel wont be accessible unless there are results and if the entryform is reset access will be removed
+       
         private MeasurementInputs _measurementInputs;
         private ObservableCollection<Location> _endLocations;
         private string _startLocation;
@@ -69,12 +71,14 @@ namespace GPS_Distance.ViewModels
         #region Methods
         private void SetMeasurmentInputs()
         {
-            MeasurementInputs = new MeasurementInputs(); // NOTE: Where sets Start Locations?
+            MeasurementInputs = new MeasurementInputs(); 
+            // NOTE: Start location wil be coming into the constructor along with the endlocations
+
+
             //MeasurementInputs.StartLocationInRadians = Helper.ConvertStartLocationToRadians(MeasurementInputs.StartLocationInDegrees);
             //MeasurementInputs.EarthRadius = Helper.GetEarthRadius(MeasurementInputs.StartLocationInDegrees.Latitude);
         }
 
-//Data will be passed to the from the entryForm with the data used here the data is set to fields in the costructor 
 
         private void GenreateSourceData() 
         {
@@ -87,15 +91,7 @@ namespace GPS_Distance.ViewModels
         }
         #endregion
 
-        //Todo not implmented yet
-
-        public IEnumerable<Unit> Units
-        {
-            get
-            {
-                return Enum.GetValues(typeof(Unit)).Cast<Unit>();
-            }
-        }
+        
 
     }
 }
