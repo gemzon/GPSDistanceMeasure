@@ -10,12 +10,12 @@
     Height="450"
     mc:Ignorable="d">
     <StackPanel>
-        <Button Click="Button_Click" Content="click" />
-        <TabControl x:Name="MainTabControl" SelectedIndex="{Binding SelectedIdx}">
-            <TabItem Header="Entry Form" TabIndex="0">
+
+        <TabControl>
+            <TabItem Header="Entry Form">
                 <views:EntryForm />
             </TabItem>
-            <TabItem Header="Result" TabIndex="1">
+            <TabItem Header="Result" IsSelected="{Binding IsResultTabSelected}">
                 <views:DistanceResults />
             </TabItem>
         </TabControl>
