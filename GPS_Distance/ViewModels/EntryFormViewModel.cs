@@ -141,16 +141,9 @@ namespace GPS_Distance.ViewModels
 
         private void MeasureDistance()
         {
-            if (!TryParseLatitude(StartLatitude, out var latitude)) return;
-            if (!TryParseLongitude(StartLongitude, out var longitude)) return;
-
-            var Startlocation = new Location(latitude, longitude);
-
-            //todo iterate through he list of the end points and measure there distance
-            //todo pass the values to the result tab
-            //todo navigate to the result tab
 
             _eventAggregator.GetEvent<DistanceResultEvent>().Publish(new DistanceResultEventArgs { SomeData = 123 });
+
         }
 
         #endregion

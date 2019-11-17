@@ -10,6 +10,7 @@
     Height="450"
     mc:Ignorable="d">
     <StackPanel>
+
         <TabControl>
             <TabItem Header="Entry Form">
                 <views:EntryForm />
@@ -18,6 +19,7 @@
                 <views:DistanceResults />
             </TabItem>
         </TabControl>
+
     </StackPanel>
 
 </Window>

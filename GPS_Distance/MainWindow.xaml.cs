@@ -11,7 +11,12 @@ namespace GPS_Distance
         public MainWindow()
         {
             InitializeComponent();
+
             this.DataContext = new MainWindowViewModel();
+
         }
+
+       
+
     }
 }
