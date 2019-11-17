@@ -1,6 +1,9 @@
 ﻿using System.Collections.ObjectModel;
 using System.Windows.Input;
+using CommonServiceLocator;
+using GPS_Distance.Events;
 using GPS_Distance.Models;
+using Prism.Events;
 using static GPS_Distance.Helpers.Helper;
 
 namespace GPS_Distance.ViewModels
@@ -17,6 +20,7 @@ namespace GPS_Distance.ViewModels
         private string _startLongitude = "0";
         private string _endLatitude = "0";
         private string _endLongitude = "0";
+        private IEventAggregator _eventAggregator;
 
         #endregion
 
@@ -85,6 +89,8 @@ namespace GPS_Distance.ViewModels
 
         public EntryFormViewModel()
         {
+            _eventAggregator = ServiceLocator.Current.GetInstance<IEventAggregator>();
+
             EndPointsLocations = new ObservableCollection<Location>();
 
             // Setup Command
@@ -135,14 +141,9 @@ namespace GPS_Distance.ViewModels
 
         private void MeasureDistance()
         {
-            if (!TryParseLatitude(StartLatitude, out var latitude)) return;
-            if (!TryParseLongitude(StartLongitude, out var longitude)) return;
 
-            var Startlocation = new Location(latitude, longitude);
+            _eventAggregator.GetEvent<DistanceResultEvent>().Publish(new DistanceResultEventArgs { SomeData = 123 });
 
-            //todo iterate through he list of the end points and measure there distance
-            //todo pass the values to the result tab
-            //todo navigate to the result tab
         }
 
         #endregion

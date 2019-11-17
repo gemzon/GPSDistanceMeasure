@@ -1,4 +1,5 @@
 ﻿using GPS_Distance.Models;
+using GPS_Distance.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -24,7 +25,7 @@ namespace GPS_Distance.Views
         public DistanceResults()
         {
             InitializeComponent();
-
+            this.DataContext = new DistanceResultsViewModel();
         }
     }
 }

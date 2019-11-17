@@ -1,11 +1,12 @@
-﻿<Application
+﻿<prism:PrismApplication
     x:Class="GPS_Distance.App"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="clr-namespace:GPS_Distance"
-    StartupUri="MainWindow.xaml">
+    xmlns:prism="http://prismlibrary.com/"
+    xmlns:local="clr-namespace:GPS_Distance">
 
-    <Application.Resources>
+    <prism:PrismApplication.Resources>
+
         <Style x:Key="BaseButton" TargetType="Button">
             <Setter Property="Padding" Value="5" />
             <Setter Property="FontWeight" Value="Bold" />
@@ -27,6 +28,6 @@
 
 
 
-    </Application.Resources>
+    </prism:PrismApplication.Resources>
 
-</Application>
+</prism:PrismApplication>

@@ -25,6 +25,9 @@ namespace GPS_Distance.Views
         {
             InitializeComponent();
             DataContext = new EntryFormViewModel();
+            
         }
+
+      
     }
 }
