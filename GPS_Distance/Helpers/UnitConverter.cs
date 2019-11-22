@@ -17,8 +17,3 @@ namespace GPS_Distance.Helpers
         };
     }
 }
-
-/*
-The international mile is _precisely_ equal to 1.609344 km (or 25146/15625 km as a fraction).
-                                                           (~0,6213711922373339696174341844)
-*/

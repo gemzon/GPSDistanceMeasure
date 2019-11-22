@@ -8,7 +8,11 @@ namespace GPS_Distance.Models
         public MeasurementInputs(Location location) : base(location) { }
         public MeasurementInputs(double latitude, double longitude) : base(latitude, longitude) { }
 
+
         // Properties
         public double EarthRadius => RadiusLatitudeAdjustment(Latitude);
+
+     
+
     }
 }

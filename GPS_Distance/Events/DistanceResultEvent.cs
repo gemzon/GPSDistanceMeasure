@@ -1,7 +1,6 @@
-﻿using Prism.Events;
+﻿using GPS_Distance.Models;
+using Prism.Events;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace GPS_Distance.Events
 {
@@ -11,7 +10,7 @@ namespace GPS_Distance.Events
 
     public class DistanceResultEventArgs
     {
-        public int SomeData { get; set; }
+        public InputDTO? InputDTO { get; set; }
     }
 
 }

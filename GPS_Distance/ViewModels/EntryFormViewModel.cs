@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Windows.Input;
 using CommonServiceLocator;
 using GPS_Distance.Events;
@@ -8,25 +9,30 @@ using static GPS_Distance.Helpers.Helper;
 
 namespace GPS_Distance.ViewModels
 {
-    //todo constrain the maximum size of the listbox 
-    //todo add scrollable to the listbox control
+    //todo constrain the maximum size of the list box 
+    //todo add scrollable to the list box control
 
     public class EntryFormViewModel : ValidationBaseViewModel
-    {
+    { 
+        /*
+         need to keep the Entry page from bring in the helper classes to reduce dependency 
+         all processing for the results needs to be in the back end
+         */
         #region Fields
 
-        private ObservableCollection<Location> _endPointLocations;
-        private string _startLatitude = "0";
-        private string _startLongitude = "0";
-        private string _endLatitude = "0";
-        private string _endLongitude = "0";
+       
+        private ObservableCollection<InputLocation> _endPointLocations ;
+        private string _startLatitude ;
+        private string _startLongitude ;
+        private string _endLatitude ;
+        private string _endLongitude ;
         private IEventAggregator _eventAggregator;
 
         #endregion
 
         #region Properties
 
-        public ObservableCollection<Location> EndPointsLocations
+        public ObservableCollection<InputLocation> EndPointsLocations
         {
             get => _endPointLocations;
             set => SetProperty(ref _endPointLocations, value);
@@ -91,7 +97,7 @@ namespace GPS_Distance.ViewModels
         {
             _eventAggregator = ServiceLocator.Current.GetInstance<IEventAggregator>();
 
-            EndPointsLocations = new ObservableCollection<Location>();
+            EndPointsLocations = new ObservableCollection<InputLocation>();
 
             // Setup Command
             ClearStartValuesCommand = new RelayCommand(ClearStartValues);
@@ -105,31 +111,64 @@ namespace GPS_Distance.ViewModels
         #endregion
 
         #region Methods
+        /*
+         Values are set to empty as the textbox has no Placeholder attribute
+         if a value is put in it must be cleared before entering data this 
+         is counter intuitive 
+         */
+        
+    
 
-        private void ClearStartValues()
-        {
-            StartLatitude = "0";
-            StartLongitude = "0";
-        }
-
-        private void ClearEndValues()
-        {
-            EndLatitude = "0";
-            EndLongitude = "0";
-        }
-
+        //TODO add ability to remove endPoint from list
         private void AddEndPoint()
         {
             if (!TryParseLatitude(EndLatitude, out var latitude)) return;
             if (!TryParseLongitude(EndLongitude, out var longitude)) return;
 
-            EndPointsLocations.Add(new Location(latitude, longitude));
+            EndPointsLocations.Add(new InputLocation(latitude, longitude));
             ClearEndValues();
         }
+            
+      
 
+        private void MeasureDistance()
+        {
+            if (!TryParseLatitude(StartLatitude, out var latitude)) return;
+            if (!TryParseLongitude(StartLongitude, out var longitude)) return;
+
+            //TODO - Saturday check values are being passed correctly
+            //TODO disable the measure distance button unless there a valid value in the start location boxes and at least one valid endpoint.
+            
+        
+            _eventAggregator.GetEvent<DistanceResultEvent>().Publish(
+                new DistanceResultEventArgs { 
+                    InputDTO = new InputDTO
+                    { 
+                        StartLocation = new InputLocation(latitude, longitude),
+                        EndLocations = EndPointsLocations
+                    }
+            });
+
+        }
+
+        #endregion
+
+        #region FormResetters
         private void ClearEndPositionsList()
         {
             EndPointsLocations.Clear();
+        }
+
+        private void ClearStartValues()
+        {
+            StartLatitude = string.Empty;
+            StartLongitude = string.Empty;
+        }
+
+        private void ClearEndValues()
+        {
+            EndLatitude = string.Empty;
+            EndLongitude = string.Empty;
         }
 
         private void ResetForm()
@@ -138,14 +177,6 @@ namespace GPS_Distance.ViewModels
             ClearEndValues();
             ClearEndPositionsList();
         }
-
-        private void MeasureDistance()
-        {
-
-            _eventAggregator.GetEvent<DistanceResultEvent>().Publish(new DistanceResultEventArgs { SomeData = 123 });
-
-        }
-
         #endregion
     }
 }
