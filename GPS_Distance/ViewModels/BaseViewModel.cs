@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Text;
 
 namespace GPS_Distance.ViewModels
 {
@@ -32,7 +30,6 @@ namespace GPS_Distance.ViewModels
 
         protected bool SetProperty<T>(ref T storage, T value, [CallerMemberName] string? propertyName = null)
         {
-            /* if (string.IsNullOrWhiteSpace(propertyName)) throw new ArgumentNullException(propertyName); // Can propertyName ever be null in this case!? */
 
             if (EqualityComparer<T>.Default.Equals(storage, value))
             {

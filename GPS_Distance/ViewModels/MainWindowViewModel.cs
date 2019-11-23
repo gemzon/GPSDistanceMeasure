@@ -1,11 +1,8 @@
 
-﻿using CommonServiceLocator;
+using CommonServiceLocator;
 using GPS_Distance.Events;
 using Prism.Events;
 using System;
-
-using System.Collections.Generic;
-using System.Text;
 
 namespace GPS_Distance.ViewModels
 {

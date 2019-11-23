@@ -5,7 +5,6 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:GPS_Distance.Views"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d">
@@ -23,14 +22,17 @@
                 <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-
             <Grid Margin="10,0">
-                <Label
-                    x:Name="StartGPS"
+
+                <StackPanel
+                    HorizontalAlignment="Left"
                     VerticalAlignment="Center"
-                    Content="{Binding StartGPS}"
-                    FontSize="12"
-                    FontWeight="Bold" />
+                    Orientation="Horizontal">
+                    <TextBlock Text="Start GPS Position Latitude: " />
+                    <TextBlock Text="{Binding MeasurementInputs.Latitude}" />
+                    <TextBlock Text=", Longitude: " />
+                    <TextBlock Text="{Binding MeasurementInputs.Longitude}" />
+                </StackPanel>
                 <StackPanel
                     Margin="10"
                     HorizontalAlignment="Right"
@@ -38,7 +40,8 @@
                     <TextBlock
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
-                        Text="Units" />
+                        Text="Units: " />
+                    <!--  need to bind to unit enum & add command  -->
                     <ComboBox
                         x:Name="Unit"
                         Width="120"
@@ -47,21 +50,23 @@
                         VerticalAlignment="Center"
                         ItemsSource="{Binding Units}"
                         SelectedItem="{Binding SelectedUnit}" />
-
                 </StackPanel>
             </Grid>
-            <ListView x:Name="ResultListView" Grid.Row="1" ItemsSource="{Binding DistanceResultsList}">
+            <ListView
+                x:Name="ResultListView"
+                Grid.Row="1"
+                ItemsSource="{Binding DistanceResults}">
                 <ListView.View>
-                    <GridView><!--Are these bindings ok? Not  _Result properties? And Location?-->
-                        <GridViewColumn DisplayMemberBinding="{Binding Location}" Header="End GPS Position" />
-                        <GridViewColumn DisplayMemberBinding="{Binding ModifiedPythagorous}" Header="Modified Pythagorous" />
-                        <GridViewColumn DisplayMemberBinding="{Binding GreaterCircle}" Header="Greater Circle" />
-                        <GridViewColumn DisplayMemberBinding="{Binding Haversine}" Header="Haversine" />
+                    <GridView>
+                        <!--  End location needs be display properly ie values Lon,Lat  -->
+                        <GridViewColumn DisplayMemberBinding="{Binding EndLocation}" Header="End GPS Position" />
+                        <GridViewColumn DisplayMemberBinding="{Binding ModifiedPythagorasResult}" Header="Modified Pythagorous" />
+                        <GridViewColumn DisplayMemberBinding="{Binding GreaterCircleResult}" Header="Greater Circle" />
+                        <GridViewColumn DisplayMemberBinding="{Binding HaversineFormulaResult}" Header="Haversine" />
                     </GridView>
                 </ListView.View>
-
             </ListView>
-
         </Grid>
     </StackPanel>
+
 </UserControl>

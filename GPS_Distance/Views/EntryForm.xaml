@@ -25,8 +25,8 @@
                     Fill="Red"
                     Points="9,9 9,0 0,0"
                     Stroke="Red"
-                    StrokeThickness="1"                 
-                    ToolTip="{Binding ElementName=adorner, Path=AdornedElement.(Validation.Errors)[0].ErrorContent}"/>
+                    StrokeThickness="1"
+                    ToolTip="{Binding ElementName=adorner, Path=AdornedElement.(Validation.Errors)[0].ErrorContent}" />
             </Grid>
         </ControlTemplate>
 
@@ -83,10 +83,10 @@
                 Orientation="Horizontal">
                 <Label Content="Longitude" FontSize="14" />
                 <TextBox
-                    Text="{Binding StartLongitude, UpdateSourceTrigger=PropertyChanged}"
                     Width="150"
                     Height="25"
-                    TextAlignment="Center"/>
+                    Text="{Binding StartLongitude, UpdateSourceTrigger=PropertyChanged}"
+                    TextAlignment="Center" />
             </StackPanel>
             <Button
                 Width="110"
@@ -176,7 +176,7 @@
                     Content="Clear List"
                     Style="{StaticResource BtnRed}" />
                 <Button
-                    Command="{Binding MeasureDistanceCommand}"                  
+                    Command="{Binding MeasureDistanceCommand}"
                     Content="Measure Distances"
                     Style="{StaticResource BtnGreen}" />
             </StackPanel>
