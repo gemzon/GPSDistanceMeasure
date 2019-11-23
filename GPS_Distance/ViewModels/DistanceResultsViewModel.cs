@@ -16,26 +16,19 @@ namespace GPS_Distance.ViewModels
         #region Fields
     
         private MeasurementInputs _measurementInputs = new MeasurementInputs();
-        private List<Location> _endLocations = new List<Location>();
-        private string _startLocation = string.Empty;
-        private ObservableCollection<DistanceResult> _distanceResult = new ObservableCollection<DistanceResult>();
+        private List<Location> _endLocations = new List<Location>();      
+        private ObservableCollection<DistanceResult> _distanceResults = new ObservableCollection<DistanceResult>();
         private Unit _selectedUnit = Unit.Miles;
         private IEventAggregator _eventAggregator;
-
-        #endregion
+        
+                #endregion
 
         #region Properties
-        public ObservableCollection<DistanceResult> DistanceResult
+        public ObservableCollection<DistanceResult> DistanceResults
         {
-            get => _distanceResult;
-            set => SetProperty(ref _distanceResult, value);
-        }
-
-        public string StartLocation
-        {
-            get => _startLocation;
-            set => SetProperty(ref _startLocation, value);
-        }
+            get => _distanceResults;
+            set => SetProperty(ref _distanceResults, value);
+        }      
 
         public MeasurementInputs MeasurementInputs
         {
@@ -68,36 +61,29 @@ namespace GPS_Distance.ViewModels
             _eventAggregator = ServiceLocator.Current.GetInstance<IEventAggregator>();
             _eventAggregator.GetEvent<DistanceResultEvent>().Subscribe(DistanceResultEventHandler);
             GenerateSourceDataCommand = new RelayCommand(GenerateSourceData);
-
-            SetMeasurmentInputs();
-            SetStartLocation();
-
-        }
+                }
+               
 
         private void DistanceResultEventHandler(DistanceResultEventArgs obj)
         {
-            //TODO loop through the list of values coming in and assign them to new locations
-            //Set All fields coming from the obj that matters to your view.
+            
+            MeasurementInputs = new  MeasurementInputs(                 
+                new Location(obj.InputDTO.StartLocation.Latitude, 
+                obj.InputDTO.StartLocation.Longitude));
+
+            EndPositions.AddRange(obj.InputDTO.EndLocations.Select(inputLocation 
+                => new Location(inputLocation.Latitude, inputLocation.Longitude)));
+            GenerateSourceData();
         }
         #endregion
 
         #region Methods
-        private void SetMeasurmentInputs()
-        {
-            MeasurementInputs = new MeasurementInputs();
-        }
-
-
-
+   
         private void GenerateSourceData()
         {
-            DistanceResult = MeasureDistance(EndPositions, SelectedUnit, MeasurementInputs);
+            DistanceResults = MeasureDistance(EndPositions, SelectedUnit, MeasurementInputs);
         }
-
-        private void SetStartLocation()
-        {
-            StartLocation = $"Start GPS Position Latitude={MeasurementInputs.Latitude},Longitude={MeasurementInputs.Longitude} ";
-        }
+      
         #endregion
 
 

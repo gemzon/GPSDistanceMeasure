@@ -15,11 +15,11 @@ namespace GPS_Distance.Helpers
             foreach (Location endLocation in endpoints)
             {
                 DistanceResult result = new DistanceResult(endLocation);
-              
+                result.EndLocation = endLocation;
                 result.ModifiedPythagorasResult = ModifiedPythagorasMeasure(measurementInputs, endLocation).ToUnit(selectedUnit);
                 result.GreaterCircleResult = GreaterCircleMeasure(measurementInputs, endLocation).ToUnit(selectedUnit);
                 result.HaversineFormulaResult = HaversineMeasure(measurementInputs, endLocation).ToUnit(selectedUnit);
-
+                DistanceResults.Add(result);
              
             }
             return DistanceResults;

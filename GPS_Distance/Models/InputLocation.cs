@@ -4,6 +4,7 @@ using System.Text;
 
 namespace GPS_Distance.Models
 {
+    // class is for the entryform inputs
     public class InputLocation
     {
         
@@ -16,4 +17,6 @@ namespace GPS_Distance.Models
             Longitude = lon;
         }
     }
+
+    
 }
