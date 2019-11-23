@@ -81,16 +81,7 @@ namespace GPS_Distance.ViewModels
    
         private void GenerateSourceData()
         {
-<<<<<<< HEAD
-            DistanceResult = MeasureDistance(MeasurementInputs, EndPositions, SelectedUnit);
-        }
-
-        private void SetStartLocation()
-        {
-            StartLocation = $"Start GPS Position Latitude={MeasurementInputs.Latitude},Longitude={MeasurementInputs.Longitude} ";
-=======
             DistanceResults = MeasureDistance(EndPositions, SelectedUnit, MeasurementInputs);
->>>>>>> upstream/master
         }
       
         #endregion
