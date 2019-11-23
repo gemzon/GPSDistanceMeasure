@@ -24,5 +24,6 @@ namespace GPS_Distance.Models
         }
         public double LatitudeRadians { get; private set; }
         public double LongitudeRadians { get; private set; }
+        public string Position => $"Latitude: {Latitude}, Longitude: {Longitude}";
     }
 }

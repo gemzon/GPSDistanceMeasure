@@ -23,15 +23,16 @@
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <Grid Margin="10,0">
-
                 <StackPanel
                     HorizontalAlignment="Left"
                     VerticalAlignment="Center"
                     Orientation="Horizontal">
-                    <TextBlock Text="Start GPS Position Latitude: " />
-                    <TextBlock Text="{Binding MeasurementInputs.Latitude}" />
+                    <TextBlock Text="Start GPS Position " />
+                    <TextBlock Text="{Binding MeasurementInputs.Position}" /> <!-- ! -->
+                    <!--
                     <TextBlock Text=", Longitude: " />
                     <TextBlock Text="{Binding MeasurementInputs.Longitude}" />
+                    -->
                 </StackPanel>
                 <StackPanel
                     Margin="10"
@@ -59,7 +60,7 @@
                 <ListView.View>
                     <GridView>
                         <!--  End location needs be display properly ie values Lon,Lat  -->
-                        <GridViewColumn DisplayMemberBinding="{Binding EndLocation}" Header="End GPS Position" />
+                        <GridViewColumn DisplayMemberBinding="{Binding Position}" Header="End GPS Position" /> <!-- ! -->
                         <GridViewColumn DisplayMemberBinding="{Binding ModifiedPythagorasResult}" Header="Modified Pythagorous" />
                         <GridViewColumn DisplayMemberBinding="{Binding GreaterCircleResult}" Header="Greater Circle" />
                         <GridViewColumn DisplayMemberBinding="{Binding HaversineFormulaResult}" Header="Haversine" />
