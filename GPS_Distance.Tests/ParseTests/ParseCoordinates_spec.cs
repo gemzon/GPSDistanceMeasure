@@ -1,7 +1,7 @@
 ﻿using FluentAssertions;
-using GPS_Distance.Helpers;
 using Xunit;
 using Xunit.Abstractions;
+using DistanceCalculator.Helpers;
 
 namespace ParseTests.ParseCoordinates_spec
 {

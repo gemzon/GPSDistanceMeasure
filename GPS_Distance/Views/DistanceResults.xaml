@@ -48,7 +48,7 @@
                         Height="26"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
-                        ItemsSource="{Binding Units}"
+                        ItemsSource="{Binding }"
                         SelectedItem="{Binding SelectedUnit}" />
                 </StackPanel>
             </Grid>
@@ -59,7 +59,7 @@
                 <ListView.View>
                     <GridView>
                         <!--  End location needs be display properly ie values Lon,Lat  -->
-                        <GridViewColumn DisplayMemberBinding="{Binding EndLocation}" Header="End GPS Position" />
+                        <GridViewColumn DisplayMemberBinding="{Binding EndLocation }" Header="End GPS Position" />
                         <GridViewColumn DisplayMemberBinding="{Binding ModifiedPythagorasResult}" Header="Modified Pythagorous" />
                         <GridViewColumn DisplayMemberBinding="{Binding GreaterCircleResult}" Header="Greater Circle" />
                         <GridViewColumn DisplayMemberBinding="{Binding HaversineFormulaResult}" Header="Haversine" />

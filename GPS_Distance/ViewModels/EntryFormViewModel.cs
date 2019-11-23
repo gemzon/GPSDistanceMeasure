@@ -5,7 +5,7 @@ using CommonServiceLocator;
 using GPS_Distance.Events;
 using GPS_Distance.Models;
 using Prism.Events;
-using static GPS_Distance.Helpers.Helper;
+using static DistanceCalculator.Helpers.Helper;
 
 namespace GPS_Distance.ViewModels
 {

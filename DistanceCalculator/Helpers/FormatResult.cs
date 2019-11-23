@@ -1,7 +1,7 @@
 ﻿using System;
-using GPS_Distance.Models;
+using DistanceCalculator.Models;
 
-namespace GPS_Distance.Helpers
+namespace DistanceCalculator.Helpers
 {
     public static partial class Helper
     {

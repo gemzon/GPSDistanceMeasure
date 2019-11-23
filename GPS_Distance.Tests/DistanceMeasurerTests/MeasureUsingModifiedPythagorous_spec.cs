@@ -1,8 +1,9 @@
-﻿using FluentAssertions;
-using GPS_Distance.Models;
+﻿using DistanceCalculator.Models;
+using FluentAssertions;
+
 using Xunit;
-using static GPS_Distance.Helpers.Helper;
-using static GPS_Distance.MeasurementFormulas.MeasureFormula;
+using static DistanceCalculator.Helpers.Helper;
+using static DistanceCalculator.MeasurementFormulas.MeasureFormula;
 
 namespace DistanceMeasurerTests.MeasureUsingModifiedPythagorous_spec
 {

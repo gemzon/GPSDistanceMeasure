@@ -1,5 +1,7 @@
-﻿using FluentAssertions;
-using GPS_Distance.Helpers;
+﻿using DistanceCalculator.Helpers;
+using FluentAssertions;
+
+
 using Xunit;
 
 namespace UnitConverterTests.DegreesToRadians_spec

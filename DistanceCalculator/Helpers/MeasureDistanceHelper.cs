@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using GPS_Distance.Models;
-using static GPS_Distance.MeasurementFormulas.MeasureFormula;
+using DistanceCalculator.Models;
+using static DistanceCalculator.MeasurementFormulas.MeasureFormula;
 
-namespace GPS_Distance.Helpers
+namespace DistanceCalculator.Helpers
 {
     public static partial class Helper
     {
@@ -15,7 +15,7 @@ namespace GPS_Distance.Helpers
             foreach (Location endLocation in endpoints)
             {
                 DistanceResult result = new DistanceResult(endLocation);
-                result.EndLocation = endLocation;
+                result.EndLocation = $"Lat: {endLocation.Latitude},Lon:{endLocation.Longitude}";
                 result.ModifiedPythagorasResult = ModifiedPythagorasMeasure(measurementInputs, endLocation).ToUnit(selectedUnit);
                 result.GreaterCircleResult = GreaterCircleMeasure(measurementInputs, endLocation).ToUnit(selectedUnit);
                 result.HaversineFormulaResult = HaversineMeasure(measurementInputs, endLocation).ToUnit(selectedUnit);

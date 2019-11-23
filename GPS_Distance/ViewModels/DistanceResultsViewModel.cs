@@ -1,13 +1,14 @@
 ﻿using CommonServiceLocator;
+using DistanceCalculator.Models;
 using GPS_Distance.Events;
-using GPS_Distance.Models;
+
 using Prism.Events;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Input;
-using static GPS_Distance.Helpers.Helper;
+using static DistanceCalculator.Helpers.Helper;
 
 namespace GPS_Distance.ViewModels
 {
@@ -18,7 +19,7 @@ namespace GPS_Distance.ViewModels
         private MeasurementInputs _measurementInputs = new MeasurementInputs();
         private List<Location> _endLocations = new List<Location>();      
         private ObservableCollection<DistanceResult> _distanceResults = new ObservableCollection<DistanceResult>();
-        private Unit _selectedUnit = Unit.Miles;
+        private Unit _selectedUnit = Unit.Metres;
         private IEventAggregator _eventAggregator;
         
                 #endregion
