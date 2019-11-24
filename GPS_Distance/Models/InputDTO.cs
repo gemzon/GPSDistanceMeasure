@@ -8,7 +8,7 @@ namespace GPS_Distance.Models
      */
     public class InputDTO
     {
-        public ObservableCollection<Location> EndLocations { get; set; }
+        public ObservableCollection<InputLocation> EndLocations { get; set; }
         public Location StartLocation { get; set; }
     }
 }
