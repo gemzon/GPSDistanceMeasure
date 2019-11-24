@@ -6,8 +6,7 @@
     xmlns:local="clr-namespace:GPS_Distance.Views"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:viewModels="clr-namespace:GPS_Distance.ViewModels"
-    d:DataContext="{d:DesignInstance viewModels:EntryFormViewModel,
-                                     IsDesignTimeCreatable=True}"
+    d:DataContext="{d:DesignInstance viewModels:EntryFormViewModel,IsDesignTimeCreatable=True}"
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d">
