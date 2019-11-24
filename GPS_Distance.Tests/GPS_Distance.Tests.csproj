@@ -15,6 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\DistanceCalculator\DistanceCalculator.csproj" />
     <ProjectReference Include="..\GPS_Distance\GPS_Distance.csproj" />
   </ItemGroup>
 

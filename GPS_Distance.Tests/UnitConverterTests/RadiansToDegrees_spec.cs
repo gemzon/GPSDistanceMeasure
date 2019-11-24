@@ -1,4 +1,4 @@
-﻿using DistanceCalculator.Helpers;
+using DistanceCalculator.Helpers;
 using FluentAssertions;
 using Xunit;
 

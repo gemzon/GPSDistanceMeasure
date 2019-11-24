@@ -1,7 +1,6 @@
 using CommonServiceLocator;
 using DistanceCalculator.Models;
 using GPS_Distance.Events;
-
 using Prism.Events;
 using System;
 using System.Collections.Generic;

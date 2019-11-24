@@ -7,7 +7,6 @@ using GPS_Distance.Models;
 using Prism.Events;
 using static DistanceCalculator.Helpers.Helper;
 
-
 namespace GPS_Distance.ViewModels
 {
     //todo constrain the maximum size of the list box 
