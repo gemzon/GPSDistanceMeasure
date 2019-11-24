@@ -6,8 +6,7 @@
     xmlns:local="clr-namespace:GPS_Distance.Views"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:viewModels="clr-namespace:GPS_Distance.ViewModels"
-    d:DataContext="{d:DesignInstance viewModels:EntryFormViewModel,
-                                     IsDesignTimeCreatable=True}"
+    d:DataContext="{d:DesignInstance viewModels:EntryFormViewModel,IsDesignTimeCreatable=True}"
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d">
@@ -29,6 +28,24 @@
                     ToolTip="{Binding ElementName=adorner, Path=AdornedElement.(Validation.Errors)[0].ErrorContent}" />
             </Grid>
         </ControlTemplate>
+
+        <Style x:Key="BaseButton" TargetType="Button">
+            <Setter Property="Padding" Value="5" />
+            <Setter Property="FontWeight" Value="Bold" />
+        </Style>
+        <Style
+            x:Key="BtnRed"
+            BasedOn="{StaticResource BaseButton}"
+            TargetType="Button">
+            <Setter Property="Background" Value="#FFD63535" />
+        </Style>
+        <Style
+            x:Key="BtnGreen"
+            BasedOn="{StaticResource BaseButton}"
+            TargetType="Button">
+            <Setter Property="Background" Value="#FF19A833" />
+        </Style>
+
 
         <Style TargetType="{x:Type TextBox}">
             <Setter Property="Validation.ErrorTemplate" Value="{StaticResource validationErrorTemplate}" />
@@ -158,13 +175,10 @@
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
-                            <!--
                             <Label Content="Lat" />
                             <Label Content="{Binding Latitude}" />
                             <Label Content=", Lon" />
                             <Label Content="{Binding Longitude}" />
-                            -->
-                            <Label Content="{Binding Position}" /> <!-- ! -->
                         </StackPanel>
                     </DataTemplate>
                 </ListBox.ItemTemplate>

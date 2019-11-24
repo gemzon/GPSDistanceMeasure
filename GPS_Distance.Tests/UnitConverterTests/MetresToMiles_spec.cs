@@ -1,6 +1,6 @@
-﻿using FluentAssertions;
-using GPS_Distance.Helpers;
-using GPS_Distance.Models;
+﻿using DistanceCalculator.Helpers;
+using DistanceCalculator.Models;
+using FluentAssertions;
 using Xunit;
 
 namespace UnitConverterTests.MetresToMiles_spec

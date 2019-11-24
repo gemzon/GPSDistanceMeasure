@@ -1,10 +1,12 @@
 ﻿using System.Collections.ObjectModel;
 using System.Windows.Input;
 using CommonServiceLocator;
+
 using GPS_Distance.Events;
 using GPS_Distance.Models;
 using Prism.Events;
-using static GPS_Distance.Helpers.Helper;
+using static DistanceCalculator.Helpers.Helper;
+
 
 namespace GPS_Distance.ViewModels
 {
@@ -19,7 +21,7 @@ namespace GPS_Distance.ViewModels
          */
         #region Fields
 
-        private ObservableCollection<Location> _endPointLocations;
+        private ObservableCollection<InputLocation> _endPointLocations;
         private string _startLatitude;
         private string _startLongitude;
         private string _endLatitude;
@@ -30,7 +32,7 @@ namespace GPS_Distance.ViewModels
 
         #region Properties
 
-        public ObservableCollection<Location> EndPointsLocations
+        public ObservableCollection<InputLocation> EndPointsLocations
         {
             get => _endPointLocations;
             set => SetProperty(ref _endPointLocations, value);
@@ -95,7 +97,7 @@ namespace GPS_Distance.ViewModels
         {
             _eventAggregator = ServiceLocator.Current.GetInstance<IEventAggregator>();
 
-            EndPointsLocations = new ObservableCollection<Location>();
+            EndPointsLocations = new ObservableCollection<InputLocation>();
 
             // Setup Command
             ClearStartValuesCommand = new RelayCommand(ClearStartValues);
@@ -121,7 +123,7 @@ namespace GPS_Distance.ViewModels
             if (!TryParseLatitude(EndLatitude, out var latitude)) return;
             if (!TryParseLongitude(EndLongitude, out var longitude)) return;
 
-            EndPointsLocations.Add(new Location(latitude, longitude));
+            EndPointsLocations.Add(new InputLocation(latitude, longitude));
             ClearEndValues();
         }
 
@@ -133,15 +135,17 @@ namespace GPS_Distance.ViewModels
             //TODO - Saturday check values are being passed correctly
             //TODO disable the measure distance button unless there a valid value in the start location boxes and at least one valid endpoint.
 
+
             _eventAggregator.GetEvent<DistanceResultEvent>().Publish(
                 new DistanceResultEventArgs
                 {
                     InputDTO = new InputDTO
                     {
-                        StartLocation = new Location(latitude, longitude),
+                        StartLocation = new InputLocation(latitude, longitude),
                         EndLocations = EndPointsLocations
                     }
                 });
+
         }
 
         #endregion

@@ -1,6 +1,6 @@
 ﻿using FluentAssertions;
 using Xunit;
-using static GPS_Distance.Helpers.Helper;
+using static DistanceCalculator.Helpers.Helper;
 
 namespace MeasurementFormulasTests.RadiusLatitudeAdjustment_spec
 {
