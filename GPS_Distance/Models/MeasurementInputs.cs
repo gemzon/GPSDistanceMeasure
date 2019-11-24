@@ -1,6 +1,6 @@
-using static GPS_Distance.Helpers.Helper;
+using static DistanceCalculator.Helpers.Helper;
 
-namespace GPS_Distance.Models
+namespace DistanceCalculator.Models
 {
     public class MeasurementInputs : Location
     {
@@ -10,5 +10,5 @@ namespace GPS_Distance.Models
 
         // Properties
         public double EarthRadius => RadiusLatitudeAdjustment(Latitude);
-    }
+   }
 }
