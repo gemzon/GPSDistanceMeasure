@@ -1,4 +1,4 @@
-﻿using static GPS_Distance.Helpers.Helper;
+using static GPS_Distance.Helpers.Helper;
 
 namespace GPS_Distance.Models
 {
