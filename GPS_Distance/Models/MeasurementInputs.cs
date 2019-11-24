@@ -10,5 +10,6 @@ namespace DistanceCalculator.Models
 
         // Properties
         public double EarthRadius => RadiusLatitudeAdjustment(Latitude);
+   
    }
 }
