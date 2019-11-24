@@ -85,7 +85,15 @@ namespace GPS_Distance.ViewModels
 
         #endregion
 
-
+        #region Enum
+        public IEnumerable<Unit> Units
+        {
+            get
+            {
+                return Enum.GetValues(typeof(Unit)).Cast<Unit>();
+            }
+        }
+        #endregion
 
     }
 }

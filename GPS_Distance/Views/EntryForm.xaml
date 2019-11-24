@@ -18,7 +18,6 @@
                 <Border BorderBrush="Red" BorderThickness="1">
                     <AdornedElementPlaceholder x:Name="adorner" ToolTip="Test" />
                 </Border>
-
                 <Polygon
                     HorizontalAlignment="Right"
                     VerticalAlignment="Top"
@@ -29,7 +28,6 @@
                     ToolTip="{Binding ElementName=adorner, Path=AdornedElement.(Validation.Errors)[0].ErrorContent}" />
             </Grid>
         </ControlTemplate>
-
         <Style x:Key="BaseButton" TargetType="Button">
             <Setter Property="Padding" Value="5" />
             <Setter Property="FontWeight" Value="Bold" />
@@ -46,8 +44,6 @@
             TargetType="Button">
             <Setter Property="Background" Value="#FF19A833" />
         </Style>
-
-
         <Style TargetType="{x:Type TextBox}">
             <Setter Property="Validation.ErrorTemplate" Value="{StaticResource validationErrorTemplate}" />
             <Setter Property="VerticalContentAlignment" Value="Center" />

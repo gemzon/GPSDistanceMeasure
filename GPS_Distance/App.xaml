@@ -5,6 +5,6 @@
     xmlns:local="clr-namespace:GPS_Distance"
     xmlns:prism="http://prismlibrary.com/">
 
-    <prism:PrismApplication.Resources />
+    
 
 </prism:PrismApplication>
