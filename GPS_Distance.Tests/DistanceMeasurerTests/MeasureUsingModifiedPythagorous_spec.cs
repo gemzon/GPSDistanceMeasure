@@ -1,6 +1,5 @@
-﻿using DistanceCalculator.Models;
+using DistanceCalculator.Models;
 using FluentAssertions;
-
 using Xunit;
 using static DistanceCalculator.Helpers.Helper;
 using static DistanceCalculator.MeasurementFormulas.MeasureFormula;
