@@ -15,5 +15,7 @@ namespace GPS_Distance.Views
             DataContext = new EntryFormViewModel();
 
         }
+
+       
     }
 }

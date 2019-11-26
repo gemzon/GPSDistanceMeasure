@@ -1,6 +1,6 @@
-﻿using static GPS_Distance.Helpers.Helper;
+﻿using static DistanceCalculator.Helpers.Helper;
 
-namespace GPS_Distance.Models
+namespace DistanceCalculator.Models
 {
     public class Location
     {
@@ -24,6 +24,5 @@ namespace GPS_Distance.Models
         }
         public double LatitudeRadians { get; private set; }
         public double LongitudeRadians { get; private set; }
-        public string Position => $"Latitude: {Latitude}, Longitude: {Longitude}";
     }
 }

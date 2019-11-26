@@ -1,7 +1,7 @@
 using System;
-using GPS_Distance.Models;
+using DistanceCalculator.Models;
 
-namespace GPS_Distance.MeasurementFormulas
+namespace DistanceCalculator.MeasurementFormulas
 {
     public static partial class MeasureFormula
     {

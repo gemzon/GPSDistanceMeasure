@@ -1,7 +1,7 @@
 ﻿using System.Globalization;
 using System.Text.RegularExpressions;
 
-namespace GPS_Distance.Helpers
+namespace DistanceCalculator.Helpers
 {
     public static partial class Helper
     {

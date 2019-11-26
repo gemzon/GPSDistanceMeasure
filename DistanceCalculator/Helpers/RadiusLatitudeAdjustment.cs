@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace GPS_Distance.Helpers
+namespace DistanceCalculator.Helpers
 {
     public static partial class Helper
     {
