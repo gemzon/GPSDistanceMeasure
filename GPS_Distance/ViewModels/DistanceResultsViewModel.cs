@@ -76,5 +76,6 @@ namespace GPS_Distance.ViewModels
             DistanceResults = GenerateResults(MeasurementInputs, SelectedUnit);
         }
         #endregion
+
     }
 }

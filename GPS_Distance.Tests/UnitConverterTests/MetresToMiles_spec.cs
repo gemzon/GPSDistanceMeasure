@@ -1,6 +1,7 @@
 using DistanceCalculator.Helpers;
 using DistanceCalculator.Models;
 using FluentAssertions;
+
 using Xunit;
 
 namespace UnitConverterTests.MetresToMiles_spec
