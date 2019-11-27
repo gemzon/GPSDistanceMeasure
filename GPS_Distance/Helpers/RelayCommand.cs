@@ -1,8 +1,8 @@
-﻿using System;
-using System.Windows.Input;
-
-namespace GPS_Distance.ViewModels
+﻿namespace GPS_Distance.ViewModels
 {
+    using System;
+    using System.Windows.Input;
+
     public class RelayCommand : ICommand
     {
         private readonly Action _action;
@@ -21,15 +21,8 @@ namespace GPS_Distance.ViewModels
             _canExecute = canExecute;
         }
 
-        public bool CanExecute(object parameter)
-        {
-            return _canExecute?.Invoke() ?? true;
-        }
-
-        public void Execute(object parameter)
-        {
-            _action?.Invoke();
-        }
+        public bool CanExecute(object parameter) => _canExecute?.Invoke() ?? true;
+        public void Execute(object parameter) => _action?.Invoke();
     }
 
     public class RelayCommand<T> : ICommand
@@ -50,14 +43,7 @@ namespace GPS_Distance.ViewModels
             _canExecute = canExecute;
         }
 
-        public bool CanExecute(object parameter)
-        {
-            return _canExecute?.Invoke((T)parameter) ?? true;
-        }
-
-        public void Execute(object parameter)
-        {
-            _action?.Invoke((T)parameter);
-        }
+        public bool CanExecute(object parameter) => _canExecute?.Invoke((T)parameter) ?? true;
+        public void Execute(object parameter) => _action?.Invoke((T)parameter);
     }
 }

@@ -175,10 +175,11 @@
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
-                            <Label Content="Lat" />
+                            <Label Content="{Binding LocationShort}" />
+                            <!--<Label Content="Lat" />
                             <Label Content="{Binding Latitude}" />
                             <Label Content=", Lon" />
-                            <Label Content="{Binding Longitude}" />
+                            <Label Content="{Binding Longitude}" />-->
                         </StackPanel>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
@@ -207,3 +208,4 @@
     </Grid>
 
 </UserControl>
+    

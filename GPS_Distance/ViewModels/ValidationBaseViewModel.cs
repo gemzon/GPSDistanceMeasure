@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Runtime.CompilerServices;
-
-namespace GPS_Distance.ViewModels
+﻿namespace GPS_Distance.ViewModels
 {
+    using System;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.Linq;
+    using System.Runtime.CompilerServices;
+
     public class ValidationBaseViewModel : BaseViewModel, INotifyDataErrorInfo
     {
         private readonly Dictionary<string, List<string>> _errors = new Dictionary<string, List<string>>();
@@ -31,7 +31,7 @@ namespace GPS_Distance.ViewModels
 
         public bool ValidateProperty<T>(T value, Predicate<T> validator, string error, [CallerMemberName]string? propertyName = null)
         {
-            if (string.IsNullOrWhiteSpace(propertyName)) throw new ArgumentNullException(propertyName); // for _errors[propertyName]
+            if (string.IsNullOrWhiteSpace(propertyName)) return false; // for _errors[propertyName]
 
             var valid = validator(value);
             lock (_lock) _errors[propertyName] = valid ? new List<string>() : new List<string>() { error };

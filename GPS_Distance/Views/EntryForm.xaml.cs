@@ -1,9 +1,8 @@
-﻿using GPS_Distance.ViewModels;
-using System;
-using System.Windows.Controls;
-
-namespace GPS_Distance.Views
+﻿namespace GPS_Distance.Views
 {
+    using System.Windows.Controls;
+    using GPS_Distance.ViewModels;
+
     /// <summary>
     /// Interaction logic for EntryForm.xaml
     /// </summary>
@@ -13,9 +12,6 @@ namespace GPS_Distance.Views
         {
             InitializeComponent();
             DataContext = new EntryFormViewModel();
-
         }
-
-       
     }
 }
