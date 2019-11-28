@@ -1,0 +1,20 @@
+the plan is to - 
+
+1. get the print and export functionality working on the results page.
+2. sort change unit commands out.
+3. I want to look at disabling/enabling the results tab depending on whether there is any result to view
+4. enabling/disabling the 'Measure distance' button on the front page if there are no start or endpoints.
+5. adding remove the capability to the end location list incase someone enters are the wrong result.
+6. implementing import for JSON or CSV for start and end location created else were.
+7. center the end locaiton list
+8. fix the look of the output window so the list is spaced out and not all squashed on the left side
+9. Refactor the XAML 
+
+--------------------------------------------------------------------------------------------------------------------
+
+possible directions ---
+
+A. add map tab which displays the result on a map with customized pins
+B. look at creating a mobile applation that incorporates the diatance measure calculator
+C. create a web version of the applciation 
+D. export the measurement calculator into a nuget package - will require extensive testing, documentation and support 
