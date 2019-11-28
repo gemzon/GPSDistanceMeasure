@@ -1,10 +1,11 @@
-using System;
-using DistanceCalculator.Models;
-
 namespace DistanceCalculator.MeasurementFormulas
 {
+    using System;
+    using DistanceCalculator.Models;
+
     public static partial class MeasureFormula
     {
+        public static double ModifiedPythagorasMeasure(Route route) => ModifiedPythagorasMeasure(route.Start, route.End);
         public static double ModifiedPythagorasMeasure(Location startlocation, Location endLocation)
         {
             double lat = endLocation.Latitude - startlocation.Latitude;
@@ -19,3 +20,5 @@ namespace DistanceCalculator.MeasurementFormulas
         }
     }
 }
+
+// Probably not gonna need two functions, backward compatibility for now.

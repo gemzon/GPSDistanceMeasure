@@ -1,7 +1,9 @@
 namespace GPS_Distance.ViewModels
 {
+    using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.Linq;
     using System.Windows.Input;
     using CommonServiceLocator;
     using DistanceCalculator.Models;
@@ -76,5 +78,16 @@ namespace GPS_Distance.ViewModels
             DistanceResults = GenerateResults(MeasurementInputs, SelectedUnit);
         }
         #endregion
+
+        #region Enum
+        public IEnumerable<Unit> Units
+        {
+            get
+            {
+                return Enum.GetValues(typeof(Unit)).Cast<Unit>();
+            }
+        }
+        #endregion
+
     }
 }
