@@ -1,6 +1,7 @@
 ﻿namespace GPS_Distance.ViewModels
 {
     using System.Collections.ObjectModel;
+    using System.Runtime.InteropServices.ComTypes;
     using System.Windows.Input;
     using CommonServiceLocator;
     using DistanceCalculator.Models;
@@ -8,6 +9,7 @@
     using GPS_Distance.Models;
     using Prism.Events;
     using static DistanceCalculator.Helpers.Helper;
+    using static GPS_Distance.Helpers.Helper;
 
     //todo constrain the maximum size of the list box 
     //todo add scrollable to the list box control
@@ -19,7 +21,7 @@
          all processing for the results needs to be in the back end
          */
         #region Fields
-        private ObservableCollection<Location> _endPointLocations=new ObservableCollection<Location>();
+        private ObservableCollection<Location> _endPointLocations = new ObservableCollection<Location>();
         private string _startLatitude = string.Empty;
         private string _startLongitude = string.Empty;
         private string _endLatitude = string.Empty;
@@ -82,6 +84,7 @@
         public ICommand ClearEndPositionsListCommand { get; }
         public ICommand ResetFormCommand { get; }
         public ICommand MeasureDistanceCommand { get; }
+        public ICommand ImportDataCommand { get; }
         #endregion
 
         #region Constructor
@@ -90,12 +93,14 @@
             _eventAggregator = ServiceLocator.Current.GetInstance<IEventAggregator>();
 
             // Setup Command
-            ClearStartValuesCommand = new RelayCommand(ClearStartValues);
+            ClearStartValuesCommand = new RelayCommand(ImportData); // NOTE: Borrowed for test.
+            //ClearStartValuesCommand = new RelayCommand(ClearStartValues);
             ClearEndValuesCommand = new RelayCommand(ClearEndValues);
             AddEndPointCommand = new RelayCommand(AddEndPoint);
             ClearEndPositionsListCommand = new RelayCommand(ClearEndPositionsList);
             ResetFormCommand = new RelayCommand(ResetForm);
             MeasureDistanceCommand = new RelayCommand(MeasureDistance);
+            ImportDataCommand = new RelayCommand(ImportData);
         }
         #endregion
 
@@ -131,6 +136,25 @@
                     {
                         StartLocation = new Location(latitude, longitude),
                         EndLocations = EndPointsLocations
+                    }
+                });
+        }
+
+        private void ImportData()
+        {
+            // TODO: Get fileName from user. What about reading filesystem..
+
+            var fileName = @"?{""start"":[10.2,23.8],""end"":[[15.3,16.4],[10.1,11.2],[9.8,9.2]]}"; // Testdata starts with '?'.
+
+            if (!ImportFromJson(fileName, out var startPoint, out var endPoints)) return;
+
+            _eventAggregator.GetEvent<DistanceResultEvent>().Publish(
+                new DistanceResultEventArgs
+                {
+                    InputDTO = new InputDTO
+                    {
+                        StartLocation = startPoint,
+                        EndLocations = endPoints
                     }
                 });
         }

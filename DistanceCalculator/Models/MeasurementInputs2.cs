@@ -11,6 +11,12 @@
             Start = new Location(latitude, longitude);
             Routes = new List<Route>();
         }
+
+        // Properties
+        public Location Start { get; }
+        public List<Route> Routes { get; }
+
+        // Methods
         public void AddEndPoint(double latitude, double longitude)
         {
             Routes.Add(new Route(Start, new Location(latitude, longitude)));
@@ -19,7 +25,5 @@
         {
             foreach (var location in locations) AddEndPoint(location.Latitude, location.Longitude);
         }
-        public Location Start { get; }
-        public List<Route> Routes { get; }
     }
 }

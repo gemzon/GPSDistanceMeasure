@@ -18,3 +18,10 @@ A. add map tab which displays the result on a map with customized pins
 B. look at creating a mobile applation that incorporates the diatance measure calculator
 C. create a web version of the applciation 
 D. export the measurement calculator into a nuget package - will require extensive testing, documentation and support 
+
+--------------------------------------------------------------------------------------------------------------------
+comments:
+
+- many great ideas
+- started embryo to #6
+/gemzon
