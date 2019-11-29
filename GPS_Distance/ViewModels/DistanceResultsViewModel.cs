@@ -1,32 +1,31 @@
-using CommonServiceLocator;
-using DistanceCalculator.Models;
-using GPS_Distance.Events;
-using Prism.Events;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Windows.Input;
-using static DistanceCalculator.Helpers.Helper;
-
 namespace GPS_Distance.ViewModels
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.Linq;
+    using System.Windows.Input;
+    using CommonServiceLocator;
+    using DistanceCalculator.Models;
+    using GPS_Distance.Events;
+    using GPS_Distance.Models;
+    using Prism.Events;
+    using static GPS_Distance.Helpers.Helper;
+
     public class DistanceResultsViewModel : BaseViewModel
     {
         #region Fields
-
-        private MeasurementInputs _measurementInputs = new MeasurementInputs();
+        private MeasurementInputs2? _measurementInputs;
         private List<Location> _endLocations = new List<Location>();
         private ObservableCollection<DistanceResult> _distanceResults = new ObservableCollection<DistanceResult>();
         private Unit _selectedUnit = Unit.Metres;
-        private IEventAggregator _eventAggregator;
-
+        private readonly IEventAggregator _eventAggregator;
         #endregion
 
         #region Properties
-        public MeasurementInputs MeasurementInputs
+        public MeasurementInputs2? MeasurementInputs
         {
-            get => _measurementInputs;
+            get => _measurementInputs ?? null;
             set => SetProperty(ref _measurementInputs, value);
         }
 
@@ -40,7 +39,7 @@ namespace GPS_Distance.ViewModels
         {
             get => _distanceResults;
             set => SetProperty(ref _distanceResults, value);
-        }  
+        }
 
         public Unit SelectedUnit
         {
@@ -56,46 +55,29 @@ namespace GPS_Distance.ViewModels
         #region Constructor
         public DistanceResultsViewModel()
         {
-           
             _eventAggregator = ServiceLocator.Current.GetInstance<IEventAggregator>();
             _eventAggregator.GetEvent<DistanceResultEvent>().Subscribe(DistanceResultEventHandler);
             GenerateSourceDataCommand = new RelayCommand(GenerateSourceData);
         }
 
-
         private void DistanceResultEventHandler(DistanceResultEventArgs obj)
         {
+            if (obj.InputDTO is null) return;
 
-            MeasurementInputs = new MeasurementInputs(
-                new Location(obj.InputDTO.StartLocation.Latitude,
-                obj.InputDTO.StartLocation.Longitude));
-
-            EndPositions.AddRange(obj.InputDTO.EndLocations.Select(inputLocation
-                => new Location(inputLocation.Latitude, inputLocation.Longitude)));
+            MeasurementInputs = new MeasurementInputs2(obj.InputDTO.StartLocation);
+            MeasurementInputs.AddEndPoints(obj.InputDTO.EndLocations);
             GenerateSourceData();
         }
         #endregion
 
         #region Methods
-
         private void GenerateSourceData()
         {
-            DistanceResults = MeasureDistance(EndPositions, SelectedUnit, MeasurementInputs);
-        }
+            if (MeasurementInputs is null) return;
 
-        #endregion
-
-        #region Enum
-        public IEnumerable<Unit> Units
-        {
-            get
-            {
-                return Enum.GetValues(typeof(Unit)).Cast<Unit>();
-            }
+            DistanceResults = GenerateResults(MeasurementInputs, SelectedUnit);
         }
         #endregion
 
     }
 }
-
-

@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
-
-namespace GPS_Distance.ViewModels
+﻿namespace GPS_Distance.ViewModels
 {
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.Runtime.CompilerServices;
+
     public class BaseViewModel : INotifyPropertyChanged
     {
         string _title = string.Empty;
@@ -13,12 +13,11 @@ namespace GPS_Distance.ViewModels
             set => SetProperty(ref _title, value);
         }
 
-
-        bool isBusy;
+        bool _isBusy;
         public bool IsBusy
         {
-            get => isBusy;
-            set => SetProperty(ref isBusy, value);
+            get => _isBusy;
+            set => SetProperty(ref _isBusy, value);
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;
@@ -30,11 +29,7 @@ namespace GPS_Distance.ViewModels
 
         protected bool SetProperty<T>(ref T storage, T value, [CallerMemberName] string? propertyName = null)
         {
-
-            if (EqualityComparer<T>.Default.Equals(storage, value))
-            {
-                return false;
-            }
+            if (EqualityComparer<T>.Default.Equals(storage, value)) return false;
 
             storage = value;
             OnPropertyChanged(propertyName);

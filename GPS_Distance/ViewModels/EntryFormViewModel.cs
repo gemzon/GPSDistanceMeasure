@@ -1,14 +1,17 @@
-﻿using System.Collections.ObjectModel;
-using System.Windows.Input;
-using CommonServiceLocator;
-
-using GPS_Distance.Events;
-using GPS_Distance.Models;
-using Prism.Events;
-using static DistanceCalculator.Helpers.Helper;
-
-namespace GPS_Distance.ViewModels
+﻿namespace GPS_Distance.ViewModels
 {
+    using System.Collections.ObjectModel;
+    using System.Runtime.InteropServices.ComTypes;
+    using System.Windows.Input;
+    using CommonServiceLocator;
+    using DistanceCalculator.Models;
+    using GPS_Distance.Events;
+    using GPS_Distance.Models;
+    using Microsoft.Win32;
+    using Prism.Events;
+    using static DistanceCalculator.Helpers.Helper;
+    using static GPS_Distance.Helpers.Helper;
+
     //todo constrain the maximum size of the list box 
     //todo add scrollable to the list box control
 
@@ -19,19 +22,16 @@ namespace GPS_Distance.ViewModels
          all processing for the results needs to be in the back end
          */
         #region Fields
-
-        private ObservableCollection<InputLocation> _endPointLocations;
-        private string _startLatitude;
-        private string _startLongitude;
-        private string _endLatitude;
-        private string _endLongitude;
-        private IEventAggregator _eventAggregator;
-
+        private ObservableCollection<Location> _endPointLocations = new ObservableCollection<Location>();
+        private string _startLatitude = string.Empty;
+        private string _startLongitude = string.Empty;
+        private string _endLatitude = string.Empty;
+        private string _endLongitude = string.Empty;
+        private readonly IEventAggregator _eventAggregator;
         #endregion
 
         #region Properties
-
-        public ObservableCollection<InputLocation> EndPointsLocations
+        public ObservableCollection<Location> EndPointsLocations
         {
             get => _endPointLocations;
             set => SetProperty(ref _endPointLocations, value);
@@ -76,37 +76,33 @@ namespace GPS_Distance.ViewModels
                     ValidateProperty(value, (v) => TryParseLongitude(v, out _), "Not a valid longitude");
             }
         }
-
         #endregion
 
         #region Commands
-
         public ICommand ClearStartValuesCommand { get; }
         public ICommand ClearEndValuesCommand { get; }
         public ICommand AddEndPointCommand { get; }
         public ICommand ClearEndPositionsListCommand { get; }
         public ICommand ResetFormCommand { get; }
         public ICommand MeasureDistanceCommand { get; }
-
+        public ICommand ImportDataCommand { get; }
         #endregion
 
         #region Constructor
-
         public EntryFormViewModel()
         {
             _eventAggregator = ServiceLocator.Current.GetInstance<IEventAggregator>();
 
-            EndPointsLocations = new ObservableCollection<InputLocation>();
-
             // Setup Command
-            ClearStartValuesCommand = new RelayCommand(ClearStartValues);
+            ClearStartValuesCommand = new RelayCommand(ImportData); // NOTE: Borrowed for test.
+            //ClearStartValuesCommand = new RelayCommand(ClearStartValues);
             ClearEndValuesCommand = new RelayCommand(ClearEndValues);
             AddEndPointCommand = new RelayCommand(AddEndPoint);
             ClearEndPositionsListCommand = new RelayCommand(ClearEndPositionsList);
             ResetFormCommand = new RelayCommand(ResetForm);
             MeasureDistanceCommand = new RelayCommand(MeasureDistance);
+            ImportDataCommand = new RelayCommand(ImportData);
         }
-
         #endregion
 
         #region Methods
@@ -122,7 +118,7 @@ namespace GPS_Distance.ViewModels
             if (!TryParseLatitude(EndLatitude, out var latitude)) return;
             if (!TryParseLongitude(EndLongitude, out var longitude)) return;
 
-            EndPointsLocations.Add(new InputLocation(latitude, longitude));
+            EndPointsLocations.Add(new Location(latitude, longitude));
             ClearEndValues();
         }
 
@@ -134,19 +130,36 @@ namespace GPS_Distance.ViewModels
             //TODO - Saturday check values are being passed correctly
             //TODO disable the measure distance button unless there a valid value in the start location boxes and at least one valid endpoint.
 
-
             _eventAggregator.GetEvent<DistanceResultEvent>().Publish(
                 new DistanceResultEventArgs
                 {
                     InputDTO = new InputDTO
                     {
-                        StartLocation = new InputLocation(latitude, longitude),
+                        StartLocation = new Location(latitude, longitude),
                         EndLocations = EndPointsLocations
                     }
                 });
-
         }
 
+        private void ImportData()
+        {
+            var fileName = @"?{""start"":[52.1,-3.2],""end"":[[15.3,16.4],[52.2,-3.3],[19.8,19.2]]}"; // Testdata starts with '?'.
+
+            if (false) // Skip dialog (or not)..
+            {
+                var openFileDialog = new OpenFileDialog();
+                openFileDialog.Filter = "JSON files (*.json)|*.json|Text files (*.txt)|*.txt|All files (*.*)|*.*";
+                if (openFileDialog.ShowDialog() == false) return;
+                fileName = openFileDialog.FileName;
+            }
+
+            if (!ImportFromJson(fileName, out var startPoint, out var endPoints)) return;
+
+            _eventAggregator.GetEvent<DistanceResultEvent>().Publish(new DistanceResultEventArgs
+            {
+                InputDTO = new InputDTO { StartLocation = startPoint, EndLocations = endPoints }
+            });
+        }
         #endregion
 
         #region FormResetters

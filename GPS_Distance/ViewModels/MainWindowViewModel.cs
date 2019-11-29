@@ -1,33 +1,27 @@
-
-using CommonServiceLocator;
-using GPS_Distance.Events;
-using Prism.Events;
-using System;
-
 namespace GPS_Distance.ViewModels
 {
+    using CommonServiceLocator;
+    using GPS_Distance.Events;
+    using Prism.Events;
+
     public class MainWindowViewModel : BaseViewModel
     {
-
-        private IEventAggregator _eventAggregator;
+        private readonly IEventAggregator _eventAggregator;
         public MainWindowViewModel()
         {
             _eventAggregator = ServiceLocator.Current.GetInstance<IEventAggregator>();
             _eventAggregator.GetEvent<DistanceResultEvent>().Subscribe(args => IsResultTabSelected = true);
         }
 
-
-        private bool _IsResultTabSelected;
-
+        private bool _isResultTabSelected;
         public bool IsResultTabSelected
         {
-            get { return _IsResultTabSelected; }
+            get => _isResultTabSelected;
             set
             {
-                _IsResultTabSelected = value;
+                _isResultTabSelected = value;
                 OnPropertyChanged();
             }
         }
-
     }
 }

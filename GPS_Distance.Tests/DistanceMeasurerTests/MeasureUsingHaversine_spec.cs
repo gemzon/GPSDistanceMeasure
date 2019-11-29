@@ -1,12 +1,11 @@
-﻿using DistanceCalculator.Models;
-using FluentAssertions;
-
-using Xunit;
-using static DistanceCalculator.Helpers.Helper;
-using static DistanceCalculator.MeasurementFormulas.MeasureFormula;
-
-namespace DistanceMeasurerTests.HaversineFormula_spec
+﻿namespace DistanceMeasurerTests.HaversineFormula_spec
 {
+    using DistanceCalculator.Models;
+    using FluentAssertions;
+    using Xunit;
+    using static DistanceCalculator.Helpers.Helper;
+    using static DistanceCalculator.MeasurementFormulas.MeasureFormula;
+
     public class Given_some_precondition
     {
         [Theory]
@@ -24,12 +23,16 @@ namespace DistanceMeasurerTests.HaversineFormula_spec
             // Arrange
             var startLocation = new MeasurementInputs(startLat, startLong);
             var endLocation = new Location(endLat, endLong);
+            var route = new Route(startLocation, endLocation);
 
             // Act
             var actualDistance = HaversineMeasure(startLocation, endLocation).ToUnit(Unit.Kilometres, 2);
+            var actualDistance2 = HaversineMeasure(route).ToUnit(Unit.Kilometres, 2);
 
             // Assert
             actualDistance.Should().Be(expectedDistance);
+            actualDistance2.Should().Be(actualDistance);
+            actualDistance2.Should().Be(expectedDistance);
         }
     }
 }

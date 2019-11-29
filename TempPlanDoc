@@ -18,3 +18,14 @@ A. add map tab which displays the result on a map with customized pins
 B. look at creating a mobile applation that incorporates the diatance measure calculator
 C. create a web version of the applciation 
 D. export the measurement calculator into a nuget package - will require extensive testing, documentation and support 
+
+--------------------------------------------------------------------------------------------------------------------
+comments:
+
+- many great ideas..
+- started embryo to #6
+- about D:
+	- I don't know if readme points to the right references, can you complement your sources?
+	- there are some constants that differ on various sites, earth/polar radius?
+	- how do we get correct(!) test data? a long straight road!
+/gemzon

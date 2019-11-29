@@ -1,11 +1,12 @@
-using System;
-using DistanceCalculator.Models;
-
 namespace DistanceCalculator.MeasurementFormulas
 {
+    using System;
+    using DistanceCalculator.Models;
+
     public static partial class MeasureFormula
     {
-        public static double HaversineMeasure(MeasurementInputs startLocation, Location endLocation)
+        public static double HaversineMeasure(Route route) => HaversineMeasure(route.Start, route.End);
+        public static double HaversineMeasure(Location startLocation, Location endLocation)
         {
             double dlat = endLocation.LatitudeRadians - startLocation.LatitudeRadians;
             double dlon = endLocation.LongitudeRadians - startLocation.LongitudeRadians;
@@ -23,3 +24,5 @@ namespace DistanceCalculator.MeasurementFormulas
         }
     }
 }
+
+// Probably not gonna need two functions, backward compatibility for now.

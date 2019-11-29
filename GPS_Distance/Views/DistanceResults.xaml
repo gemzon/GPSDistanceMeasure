@@ -1,5 +1,4 @@
-﻿
-<UserControl
+﻿<UserControl
     x:Class="GPS_Distance.Views.DistanceResults"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -24,15 +23,16 @@
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <Grid Margin="10,0">
-
                 <StackPanel
                     HorizontalAlignment="Left"
                     VerticalAlignment="Center"
                     Orientation="Horizontal">
-                    <TextBlock Text="Start GPS Position Latitude: " />
-                    <TextBlock Text="{Binding MeasurementInputs.Latitude}" />
+                    <TextBlock Text="Start GPS Position " />
+                    <TextBlock Text="{Binding MeasurementInputs.Start.LocationLong}" />
+                    <!--<TextBlock Text="Start GPS Position Latitude: " />
+                    <TextBlock Text="{Binding MeasurementInputs.Start.Latitude}" />
                     <TextBlock Text=", Longitude: " />
-                    <TextBlock Text="{Binding MeasurementInputs.Longitude}" />
+                    <TextBlock Text="{Binding MeasurementInputs.Start.Longitude}" />-->
                 </StackPanel>
                 <StackPanel
                     Margin="10"
@@ -64,6 +64,7 @@
                         <GridViewColumn DisplayMemberBinding="{Binding ModifiedPythagorasResult}" Header="Modified Pythagorous" />
                         <GridViewColumn DisplayMemberBinding="{Binding GreaterCircleResult}" Header="Greater Circle" />
                         <GridViewColumn DisplayMemberBinding="{Binding HaversineFormulaResult}" Header="Haversine" />
+                        <GridViewColumn DisplayMemberBinding="{Binding Message}" Header="Other" /> <!-- Only testing.. -->
                     </GridView>
                 </ListView.View>
             </ListView>
@@ -71,3 +72,4 @@
     </StackPanel>
 
 </UserControl>
+    
