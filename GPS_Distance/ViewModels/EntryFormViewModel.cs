@@ -155,15 +155,10 @@
 
             if (!ImportFromJson(fileName, out var startPoint, out var endPoints)) return;
 
-            _eventAggregator.GetEvent<DistanceResultEvent>().Publish(
-                new DistanceResultEventArgs
-                {
-                    InputDTO = new InputDTO
-                    {
-                        StartLocation = startPoint,
-                        EndLocations = endPoints
-                    }
-                });
+            _eventAggregator.GetEvent<DistanceResultEvent>().Publish(new DistanceResultEventArgs
+            {
+                InputDTO = new InputDTO { StartLocation = startPoint, EndLocations = endPoints }
+            });
         }
         #endregion
 
