@@ -7,6 +7,7 @@
     using DistanceCalculator.Models;
     using GPS_Distance.Events;
     using GPS_Distance.Models;
+    using Microsoft.Win32;
     using Prism.Events;
     using static DistanceCalculator.Helpers.Helper;
     using static GPS_Distance.Helpers.Helper;
@@ -142,9 +143,15 @@
 
         private void ImportData()
         {
-            // TODO: Get fileName from user. What about reading filesystem..
-
             var fileName = @"?{""start"":[52.1,-3.2],""end"":[[15.3,16.4],[52.2,-3.3],[19.8,19.2]]}"; // Testdata starts with '?'.
+
+            if (false) // Skip dialog (or not)..
+            {
+                var openFileDialog = new OpenFileDialog();
+                openFileDialog.Filter = "JSON files (*.json)|*.json|Text files (*.txt)|*.txt|All files (*.*)|*.*";
+                if (openFileDialog.ShowDialog() == false) return;
+                fileName = openFileDialog.FileName;
+            }
 
             if (!ImportFromJson(fileName, out var startPoint, out var endPoints)) return;
 
