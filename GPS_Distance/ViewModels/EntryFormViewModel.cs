@@ -144,7 +144,7 @@
         {
             // TODO: Get fileName from user. What about reading filesystem..
 
-            var fileName = @"?{""start"":[10.2,23.8],""end"":[[15.3,16.4],[10.1,11.2],[9.8,9.2]]}"; // Testdata starts with '?'.
+            var fileName = @"?{""start"":[52.1,-3.2],""end"":[[15.3,16.4],[52.2,-3.3],[19.8,19.2]]}"; // Testdata starts with '?'.
 
             if (!ImportFromJson(fileName, out var startPoint, out var endPoints)) return;
 
