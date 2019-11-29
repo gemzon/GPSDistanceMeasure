@@ -1,13 +1,11 @@
 ﻿namespace GPS_Distance.ViewModels
 {
     using System.Collections.ObjectModel;
-    using System.Runtime.InteropServices.ComTypes;
     using System.Windows.Input;
     using CommonServiceLocator;
     using DistanceCalculator.Models;
     using GPS_Distance.Events;
     using GPS_Distance.Models;
-    using Microsoft.Win32;
     using Prism.Events;
     using static DistanceCalculator.Helpers.Helper;
     using static GPS_Distance.Helpers.Helper;
@@ -143,22 +141,21 @@
 
         private void ImportData()
         {
-            var fileName = @"?{""start"":[52.1,-3.2],""end"":[[15.3,16.4],[52.2,-3.3],[19.8,19.2]]}"; // Testdata starts with '?'.
+            if (!ImportFromJson(out var startPoint, out var endPoints)) return;
+            if (startPoint is null) return;
 
-            if (false) // Skip dialog (or not)..
+            StartLatitude = startPoint.Latitude.ToString(); // Update screen.
+            StartLongitude = startPoint.Longitude.ToString();
+
+            foreach (var endPoint in endPoints) // Longer way but less redundant.
             {
-                var openFileDialog = new OpenFileDialog();
-                openFileDialog.Filter = "JSON files (*.json)|*.json|Text files (*.txt)|*.txt|All files (*.*)|*.*";
-                if (openFileDialog.ShowDialog() == false) return;
-                fileName = openFileDialog.FileName;
+                EndLatitude = endPoint.Latitude.ToString();
+                EndLongitude = endPoint.Longitude.ToString();
+                AddEndPoint();
             }
+            //EndPointsLocations = endPoints;
 
-            if (!ImportFromJson(fileName, out var startPoint, out var endPoints)) return;
-
-            _eventAggregator.GetEvent<DistanceResultEvent>().Publish(new DistanceResultEventArgs
-            {
-                InputDTO = new InputDTO { StartLocation = startPoint, EndLocations = endPoints }
-            });
+            MeasureDistance();
         }
         #endregion
 
