@@ -62,7 +62,7 @@
                 data.end[i] = new double[] { endPoints[i].Latitude, endPoints[i].Longitude };
             }
 
-            var json = JsonSerializer.Serialize(data);
+            var json = JsonSerializer.Serialize(data, new JsonSerializerOptions { WriteIndented = true });
             File.WriteAllText(fileName, json);
 
             return true;
