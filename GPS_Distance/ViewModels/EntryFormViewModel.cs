@@ -143,17 +143,16 @@
 
         private void ImportData()
         {
-            var fileName = @"?{""start"":[52.1,-3.2],""end"":[[15.3,16.4],[52.2,-3.3],[19.8,19.2]]}"; // Testdata starts with '?'.
+            if (!ImportFromJson(out var startPoint, out var endPoints)) return;
+            if (startPoint is null) return;
 
-            if (false) // Skip dialog (or not)..
-            {
-                var openFileDialog = new OpenFileDialog();
-                openFileDialog.Filter = "JSON files (*.json)|*.json|Text files (*.txt)|*.txt|All files (*.*)|*.*";
-                if (openFileDialog.ShowDialog() == false) return;
-                fileName = openFileDialog.FileName;
-            }
+            StartLatitude = startPoint.Latitude.ToString(); // Update screen.
+            StartLongitude = startPoint.Longitude.ToString();
+            EndPointsLocations = endPoints;
 
-            if (!ImportFromJson(fileName, out var startPoint, out var endPoints)) return;
+            MeasureDistance(); // Check input.
+
+            return; // Leave here for now.
 
             _eventAggregator.GetEvent<DistanceResultEvent>().Publish(new DistanceResultEventArgs
             {

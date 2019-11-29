@@ -4,14 +4,25 @@
     using System.IO;
     using System.Text.Json;
     using DistanceCalculator.Models;
+    using Microsoft.Win32;
     using static DistanceCalculator.Helpers.Helper;
 
     public static partial class Helper
     {
-        public static bool ImportFromJson(string fileName, out Location? startPoint, out ObservableCollection<Location> endPoints)
+        public static bool ImportFromJson(out Location? startPoint, out ObservableCollection<Location> endPoints)
         {
             startPoint = null; // Set out parameters.
             endPoints = new ObservableCollection<Location>();
+
+            var fileName = @"?{""start"":[52.1,-3.2],""end"":[[15.3,16.4],[52.2,-3.3],[19.8,19.2]]}"; // Testdata starts with '?'.
+
+            if (false) // Skip dialog (or not)..
+            {
+                var openFileDialog = new OpenFileDialog();
+                openFileDialog.Filter = "JSON files (*.json)|*.json|Text files (*.txt)|*.txt|All files (*.*)|*.*";
+                if (openFileDialog.ShowDialog() == false) return false;
+                fileName = openFileDialog.FileName;
+            }
 
             var json = fileName[0] == '?' ? fileName[1..] : File.ReadAllText(fileName); // REM: File reading may be moved later.
 
