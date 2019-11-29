@@ -1,13 +1,11 @@
 ﻿namespace GPS_Distance.ViewModels
 {
     using System.Collections.ObjectModel;
-    using System.Runtime.InteropServices.ComTypes;
     using System.Windows.Input;
     using CommonServiceLocator;
     using DistanceCalculator.Models;
     using GPS_Distance.Events;
     using GPS_Distance.Models;
-    using Microsoft.Win32;
     using Prism.Events;
     using static DistanceCalculator.Helpers.Helper;
     using static GPS_Distance.Helpers.Helper;
@@ -148,16 +146,16 @@
 
             StartLatitude = startPoint.Latitude.ToString(); // Update screen.
             StartLongitude = startPoint.Longitude.ToString();
-            EndPointsLocations = endPoints;
 
-            MeasureDistance(); // Check input.
-
-            return; // Leave here for now.
-
-            _eventAggregator.GetEvent<DistanceResultEvent>().Publish(new DistanceResultEventArgs
+            foreach (var endPoint in endPoints) // Longer way but less redundant.
             {
-                InputDTO = new InputDTO { StartLocation = startPoint, EndLocations = endPoints }
-            });
+                EndLatitude = endPoint.Latitude.ToString();
+                EndLongitude = endPoint.Longitude.ToString();
+                AddEndPoint();
+            }
+            //EndPointsLocations = endPoints;
+
+            MeasureDistance();
         }
         #endregion
 
