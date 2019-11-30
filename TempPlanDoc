@@ -28,4 +28,5 @@ comments:
 	- I don't know if readme points to the right references, can you complement your sources?
 	- there are some constants that differ on various sites, earth/polar radius?
 	- how do we get correct(!) test data? a long straight road!
+- created export to JSON from input data, if nothing else good for testing purposes (all buttons are now occupied..)
 /gemzon

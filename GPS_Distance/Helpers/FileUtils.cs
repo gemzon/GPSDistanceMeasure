@@ -3,11 +3,13 @@
     using System.Collections.ObjectModel;
     using System.IO;
     using System.Text.Json;
+    using DistanceCalculator.Helpers;
     using DistanceCalculator.Models;
     using Microsoft.Win32;
 
     public static partial class Helper
     {
+        private static readonly string fileFilter = "JSON files (*.json)|*.json|Text files (*.txt)|*.txt|All files (*.*)|*.*";
         public static bool ImportFromJson(out Location? startPoint, out Collection<Location> endPoints)
         {
             startPoint = null; // Set out parameters.
@@ -17,8 +19,7 @@
 
             if (true) // Skip dialog (or not)..
             {
-                var openFileDialog = new OpenFileDialog();
-                openFileDialog.Filter = "JSON files (*.json)|*.json|Text files (*.txt)|*.txt|All files (*.*)|*.*";
+                var openFileDialog = new OpenFileDialog { Filter = fileFilter };
                 if (openFileDialog.ShowDialog() == false) return false;
                 fileName = openFileDialog.FileName;
             }
@@ -36,6 +37,35 @@
             foreach (var item in data.end) if (item.Length == 2) endPoints.Add(new Location(item[0], item[1]));
 
             return endPoints.Count > 0; // At least 1 valid route.
+        }
+
+        public static bool ExportToJson(string startLat, string startLon, Collection<Location> endPoints)
+        {
+            var fileName = @"testdata2.json"; // For test purpose.
+
+            if (true) // Skip dialog (or not)..
+            {
+                var saveFileDialog = new SaveFileDialog
+                { FileName = "GPS_Distance", DefaultExt = ".json", Filter = fileFilter };
+
+                if (saveFileDialog.ShowDialog() == false) return false;
+
+                fileName = saveFileDialog.FileName;
+            }
+
+            var data = new Data();
+            data.start = new double[] { startLat.ToDouble(), startLon.ToDouble() };
+
+            data.end = new double[endPoints.Count][];
+            for (var i = 0; i < endPoints.Count; i++)
+            {
+                data.end[i] = new double[] { endPoints[i].Latitude, endPoints[i].Longitude };
+            }
+
+            var json = JsonSerializer.Serialize(data, new JsonSerializerOptions { WriteIndented = true });
+            File.WriteAllText(fileName, json);
+
+            return true;
         }
         private class Data
         {

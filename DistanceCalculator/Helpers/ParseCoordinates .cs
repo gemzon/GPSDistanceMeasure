@@ -17,7 +17,7 @@ namespace DistanceCalculator.Helpers
         private static bool TryParseRegexToDouble(string input, string regex, out double value)
         {
             var valid = !string.IsNullOrWhiteSpace(input) && Regex.IsMatch(input, regex);
-            value = valid ? double.Parse(input.Replace(',', '.'), NumberFormatInfo.InvariantInfo) : 0;
+            value = valid ? input.ToDouble() : 0;
             return valid;
         }
     }

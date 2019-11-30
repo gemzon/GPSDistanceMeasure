@@ -84,6 +84,7 @@
         public ICommand ResetFormCommand { get; }
         public ICommand MeasureDistanceCommand { get; }
         public ICommand ImportDataCommand { get; }
+        public ICommand ExportDataCommand { get; }
         #endregion
 
         #region Constructor
@@ -94,12 +95,14 @@
             // Setup Command
             ClearStartValuesCommand = new RelayCommand(ImportData); // NOTE: Borrowed for test.
             //ClearStartValuesCommand = new RelayCommand(ClearStartValues);
-            ClearEndValuesCommand = new RelayCommand(ClearEndValues);
+            ClearEndValuesCommand = new RelayCommand(ExportData); // NOTE: Borrowed for test.
+            //ClearEndValuesCommand = new RelayCommand(ClearEndValues);
             AddEndPointCommand = new RelayCommand(AddEndPoint);
             ClearEndPositionsListCommand = new RelayCommand(ClearEndPositionsList);
             ResetFormCommand = new RelayCommand(ResetForm);
             MeasureDistanceCommand = new RelayCommand(MeasureDistance);
             ImportDataCommand = new RelayCommand(ImportData);
+            ExportDataCommand = new RelayCommand(ExportData);
         }
         #endregion
 
@@ -156,6 +159,12 @@
             //EndPointsLocations = endPoints;
 
             MeasureDistance();
+        }
+
+        private void ExportData()
+        {
+            if (ExportToJson(StartLatitude, StartLongitude, EndPointsLocations)) { /* MsgBox="ok"; */}
+            else { /* MsgBox="fail"; */ }
         }
         #endregion
 
