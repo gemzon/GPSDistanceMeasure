@@ -28,7 +28,9 @@
                     VerticalAlignment="Center"
                     Orientation="Horizontal">
                     <TextBlock Text="Start GPS Position " />
-                    <TextBlock Text="{Binding MeasurementInputs.Start.LocationLong}" />
+                    <TextBlock Text="{Binding MeasurementInputs.Start.LocationShort}" />
+                    <TextBlock Text=" - " />
+                    <TextBlock Text="{Binding MeasurementInputs.Start.DisplayName}" />
                     <!--<TextBlock Text="Start GPS Position Latitude: " />
                     <TextBlock Text="{Binding MeasurementInputs.Start.Latitude}" />
                     <TextBlock Text=", Longitude: " />
@@ -38,6 +40,11 @@
                     Margin="10"
                     HorizontalAlignment="Right"
                     Orientation="Horizontal">
+
+                    <!-- NOTE: Temp!  -->
+                    <Button Width="110" Height="25" Command="{Binding TempToggleUnitCommand}" Content="Toggle Unit"/>
+                    <!-- ^^^^^^^^^^^  -->
+                    
                     <TextBlock
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"

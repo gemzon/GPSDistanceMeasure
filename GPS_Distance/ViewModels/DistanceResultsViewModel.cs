@@ -50,6 +50,7 @@ namespace GPS_Distance.ViewModels
 
         #region Commands
         public ICommand GenerateSourceDataCommand { get; }
+        public ICommand TempToggleUnitCommand { get; }
         #endregion
 
         #region Constructor
@@ -58,6 +59,7 @@ namespace GPS_Distance.ViewModels
             _eventAggregator = ServiceLocator.Current.GetInstance<IEventAggregator>();
             _eventAggregator.GetEvent<DistanceResultEvent>().Subscribe(DistanceResultEventHandler);
             GenerateSourceDataCommand = new RelayCommand(GenerateSourceData);
+            TempToggleUnitCommand = new RelayCommand(TempToggleUnit);
         }
 
         private void DistanceResultEventHandler(DistanceResultEventArgs obj)
@@ -77,7 +79,14 @@ namespace GPS_Distance.ViewModels
 
             DistanceResults = GenerateResults(MeasurementInputs, SelectedUnit);
         }
-        #endregion
 
+        private int x = 0;
+        private void TempToggleUnit() // NOTE: Only testing.
+        {
+            if (++x > 2) x = 0; SelectedUnit = (Unit)x;
+            foreach (var item in DistanceResults) item.ChangeUnit(SelectedUnit);
+            // Update screen!
+        }
+        #endregion
     }
 }

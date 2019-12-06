@@ -15,21 +15,25 @@
         public double ModifiedPythagorasResult { get; private set; }
         public double GreaterCircleResult { get; private set; }
         public double HaversineFormulaResult { get; private set; }
-        public string Message // Just for fun, but real logic and other properties may be handy.
-        {
-            get // Don't do night flight navigation after these coordinates or tell your English teacher about the sentence structure.
-            {
-                var s = Start.Latitude >= 51.4 && Start.Latitude <= 53.4 && Start.Longitude >= -5.3 && Start.Longitude <= -2.9
-                    ? "You are probably in Wales. "
-                    : "Seems that you are not in Wales. ";
+        public string StartName => Start.DisplayName; // Temp name.
+        public string Message => End.DisplayName;     // Temp name.
+        public string District => End.District;       // Temp name.
 
-                s += End.Latitude >= 51.4 && End.Latitude <= 53.4 && End.Longitude >= -5.3 && End.Longitude <= -2.9
-                    ? "Are you going to Wales?"
-                    : "Are you leaving Wales?";
-                
-                return s;
-            }
-        }
+        //public string Message // Just for fun, but real logic and other properties may be handy.
+        //{
+        //    get // Don't do night flight navigation after these coordinates or tell your English teacher about the sentence structure.
+        //    {
+        //        var s = Start.Latitude >= 51.229 && Start.Latitude <= 53.635 && Start.Longitude >= -5.807 && Start.Longitude <= -2.649
+        //            ? "You are probably in Wales. "
+        //            : "Seems that you are not in Wales. ";
+
+        //        s += End.Latitude >= 51.4 && End.Latitude <= 53.4 && End.Longitude >= -5.3 && End.Longitude <= -2.9
+        //            ? "Are you going to Wales?"
+        //            : "Are you leaving Wales?";
+
+        //        return s;
+        //    }
+        //}
 
         // Methods
         public void ChangeUnit(Unit selectedUnit)

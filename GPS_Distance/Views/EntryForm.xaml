@@ -173,6 +173,8 @@
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
                             <Label Content="{Binding LocationShort}" />
+                            <Label Content=" - " />
+                            <Label Content="{Binding District}" />
                             <!--<Label Content="Lat" />
                             <Label Content="{Binding Latitude}" />
                             <Label Content=", Lon" />
