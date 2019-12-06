@@ -30,3 +30,9 @@ comments:
 	- how do we get correct(!) test data? a long straight road!
 - created export to JSON from input data, if nothing else good for testing purposes (all buttons are now occupied..)
 /gemzon
+
+There is obviously more to do with maps and so forth, but I also think that the UI part needs some more functionally.
+- Scroll bars for the list views (if/when they become full)?
+- Some open/save file buttons?
+- Maybe a display field for start location?
+/gemzon

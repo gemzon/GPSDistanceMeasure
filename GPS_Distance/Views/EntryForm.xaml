@@ -181,11 +181,16 @@
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <Label Content="{Binding LocationShort}" />
-
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
-            
+                            <Label Content=" - " />
+                            <Label Content="{Binding District}" />
+                            <!--<Label Content="Lat" />
+                            <Label Content="{Binding Latitude}" />
+                            <Label Content=", Lon" />
+                            <Label Content="{Binding Longitude}" />-->
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
             <StackPanel
                 Margin="15,5"
                 HorizontalAlignment="Center"

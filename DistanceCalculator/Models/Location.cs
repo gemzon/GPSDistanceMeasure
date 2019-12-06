@@ -1,6 +1,7 @@
 ﻿namespace DistanceCalculator.Models
 {
     using static DistanceCalculator.Helpers.Helper;
+    using static MapUtils.Lookup;
 
     public class Location
     {
@@ -19,5 +20,7 @@
         public double EarthRadius => RadiusLatitudeAdjustment(Latitude);
         public string LocationShort => $"Lat: {Latitude}, Lon: {Longitude}";
         public string LocationLong => $"Latitude: {Latitude}, Longitude: {Longitude}";
+        public string DisplayName => DisplayName(Latitude, Longitude);
+        public string District => District(Latitude, Longitude);
     }
 }
