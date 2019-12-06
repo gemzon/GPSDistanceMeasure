@@ -12,32 +12,46 @@
             return displayName;
         }
 
-        public static string District(double latitude, double longitude) // Under construction..
+        public static string District(double latitude, double longitude) // Under construction.. Kind of messy right now..
         {
             var adr = geo.Lookup(latitude, longitude, out _);
 
-            string grp1 = "", grp2 = "", grp3 = "", grp5 = "", grp6 = ""; // Find out the `right´ order for each (G)roup.
+            string grp1, grp2, grp3, grp5 = "", grp6 = ""; // Find out the `right´ order for each (G)roup.
+            int n = 0, max = 3;
 
-            if (adr.Name != "") grp1 = adr.Name + " (n)"; // Temp (_).
+            grp1 = abc(new string[] { adr.Name + " (n)" }, ref n); // Temp (_).
 
-            if (adr.HouseNumber != "") grp2 = adr.HouseNumber + " (h)";
-            else if  (adr.Road != "") grp2 = adr.Road + " (r)";
-            else if  (adr.PostCode != "") grp2 = adr.PostCode + " (p)";
+            grp2 = abc(new string[] { adr.HouseNumber + " (h)", adr.Road + " (r)", adr.PostCode + " (p)" }, ref n);
 
-            if (adr.Hamlet != "") grp3 = adr.Hamlet + " (h)";
-            else if (adr.Village != "") grp3 = adr.Village + " (v)";
-            else if (adr.Suburb != "") grp3 = adr.Suburb + " (s)";
-            else if (adr.Town != "") grp3 = adr.Town + " (t)";
-            else if (adr.City != "") grp3 = adr.City + " (c)";
+            grp3 = abc(new string[] { adr.Hamlet + " (h)", adr.Village + " (v)", adr.Suburb + " (s)", adr.Town + " (t)", adr.City + " (c)" }, ref n);
 
-            if (adr.County != "") grp5 += adr.County + " (c)";
-            else if (adr.District != "") grp5 += adr.District + " (d)";
-            else if (adr.Region != "") grp5 += adr.Region + " (r)";
-            else if (adr.State != "") grp5 += adr.State + " (s)";
+            if (n < max)
+                grp5 = abc(new string[] { adr.County + " (c)", adr.District + " (d)", adr.Region + " (r)", adr.State + " (s)" }, ref n);
 
-            if (adr.Country != "") grp6 += adr.Country;
+            if (n < max)
+                grp6 = abc(new string[] { adr.Country }, ref n);
 
-            return $"{grp1}, {grp2} , {grp3}, {grp5}, {grp6}"; // What if strings are empty... Show the 3 most significant.
+            return def(new string[] { grp1, grp2, grp3, grp5, grp6 }, max); // What if strings are empty... Show the 3 most significant.
+
+            static string abc(string[] fields, ref int n)
+            {
+                foreach (var f in fields)
+                    if (!string.IsNullOrWhiteSpace(f)) { n++; return f; };
+
+                return string.Empty;
+            }
+
+            static string def(string[] fields, int max)
+            {
+                var s = string.Empty;
+                var n = 0;
+                foreach (var f in fields)
+                {
+                    if (!string.IsNullOrWhiteSpace(f)) if (n == 0) s = f; else s += ", " + f;
+                    if (++n >= max) return s;
+                }
+                return string.Empty;
+            }
         }
     }
 }
