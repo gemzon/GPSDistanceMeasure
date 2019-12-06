@@ -81,7 +81,7 @@ namespace GPS_Distance.ViewModels
         }
 
         private int x = 0;
-        private void TempToggleUnit() // NOTE: Only testing.
+        private void TempToggleUnit() // NOTE: Only testing. Temp until ComboBox works.
         {
             if (++x > 2) x = 0; SelectedUnit = (Unit)x;
             foreach (var item in DistanceResults) item.ChangeUnit(SelectedUnit);
