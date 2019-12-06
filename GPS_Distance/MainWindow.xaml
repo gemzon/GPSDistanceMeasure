@@ -6,11 +6,12 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:views="clr-namespace:GPS_Distance.Views"
     Title="MainWindow"
-    Width="800"
-    Height="450"
+    Width="900"
+    Height="500"
+    ResizeMode="NoResize"
     mc:Ignorable="d">
-    <StackPanel>
 
+    <StackPanel>
         <TabControl>
             <TabItem Header="Entry Form">
                 <views:EntryForm />
@@ -19,7 +20,6 @@
                 <views:DistanceResults />
             </TabItem>
         </TabControl>
-
     </StackPanel>
 
 </Window>
