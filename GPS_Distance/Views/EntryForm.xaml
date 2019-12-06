@@ -8,8 +8,8 @@
     xmlns:viewModels="clr-namespace:GPS_Distance.ViewModels"
     d:DataContext="{d:DesignInstance viewModels:EntryFormViewModel,
                                      IsDesignTimeCreatable=True}"
-    d:DesignHeight="450"
-    d:DesignWidth="800"
+    Height="450"
+    Width="800"
     mc:Ignorable="d">
 
     <UserControl.Resources>
@@ -43,6 +43,12 @@
             BasedOn="{StaticResource BaseButton}"
             TargetType="Button">
             <Setter Property="Background" Value="#FF19A833" />
+        </Style>
+        <Style
+            x:Key="BtnOrange"
+            BasedOn="{StaticResource BaseButton}"
+            TargetType="Button">
+            <Setter Property="Background" Value="#ffb732" />
         </Style>
         <Style TargetType="{x:Type TextBox}">
             <Setter Property="Validation.ErrorTemplate" Value="{StaticResource validationErrorTemplate}" />
@@ -165,13 +171,15 @@
                 Content="End GPS Positions"
                 FontSize="20"
                 FontWeight="Bold" />
-            <ListBox
-                MinHeight="250"
-                Margin="10,5"
-                ItemsSource="{Binding EndPointsLocations}">
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel Orientation="Horizontal">
+            
+                <ListBox x:Name="EndPointListBox"
+                    Height="220"
+                    Margin="15,5"
+                    HorizontalContentAlignment="Center"
+                    ItemsSource="{Binding EndPointsLocations}"
+                         SelectedItem="{Binding SelectedItem}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
                             <Label Content="{Binding LocationShort}" />
                             <Label Content=" - " />
                             <Label Content="{Binding District}" />
@@ -184,7 +192,23 @@
                 </ListBox.ItemTemplate>
             </ListBox>
             <StackPanel
-                Margin="10,5"
+                Margin="15,5"
+                HorizontalAlignment="Center"
+                Orientation="Horizontal">
+
+                <Button
+                    Margin="0,0,25,0"
+                    Command="{Binding RemoveEndPositionCommand}"
+                    Content="Remove Selected Position"
+                    Style="{StaticResource BtnOrange}" />
+
+                <Button
+                    Command="{Binding MeasureDistanceCommand}"
+                    Content="Measure Distances"
+                    Style="{StaticResource BtnGreen}" />
+            </StackPanel>
+            <StackPanel
+                Margin="0,5,0,0"
                 HorizontalAlignment="Center"
                 Orientation="Horizontal">
                 <Button
@@ -193,18 +217,12 @@
                     Content="Clear List"
                     Style="{StaticResource BtnRed}" />
                 <Button
-                    Command="{Binding MeasureDistanceCommand}"
-                    Content="Measure Distances"
-                    Style="{StaticResource BtnGreen}" />
+                    HorizontalAlignment="Center"
+                    Command="{Binding ResetFormCommand}"
+                    Content="Reset Form"
+                    Style="{StaticResource BtnRed}" />
             </StackPanel>
-            <Button
-                Margin="0,15,0,0"
-                HorizontalAlignment="Center"
-                Command="{Binding ResetFormCommand}"
-                Content="Reset Form"
-                Style="{StaticResource BtnRed}" />
         </StackPanel>
     </Grid>
 
 </UserControl>
-    

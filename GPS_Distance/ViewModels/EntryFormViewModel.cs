@@ -26,6 +26,8 @@
         private string _endLatitude = string.Empty;
         private string _endLongitude = string.Empty;
         private readonly IEventAggregator _eventAggregator;
+        private Location _selectedItem = null;
+       
         #endregion
 
         #region Properties
@@ -34,7 +36,10 @@
             get => _endPointLocations;
             set => SetProperty(ref _endPointLocations, value);
         }
-
+        public Location SelectedItem {
+            get => _selectedItem;
+            set => SetProperty(ref _selectedItem, value);
+        }
         public string StartLatitude
         {
             get => _startLatitude;
@@ -85,6 +90,10 @@
         public ICommand MeasureDistanceCommand { get; }
         public ICommand ImportDataCommand { get; }
         public ICommand ExportDataCommand { get; }
+        public ICommand RemoveEndPositionCommand { get; }
+
+        
+
         #endregion
 
         #region Constructor
@@ -103,6 +112,7 @@
             MeasureDistanceCommand = new RelayCommand(MeasureDistance);
             ImportDataCommand = new RelayCommand(ImportData);
             ExportDataCommand = new RelayCommand(ExportData);
+            RemoveEndPositionCommand = new RelayCommand(RemoveEndPosition);
         }
         #endregion
 
@@ -122,6 +132,15 @@
             EndPointsLocations.Add(new Location(latitude, longitude));
             ClearEndValues();
         }
+
+        private void RemoveEndPosition() 
+        {
+            if(SelectedItem != null)
+            {
+                EndPointsLocations.Remove(SelectedItem);
+            }
+        }
+
 
         private void MeasureDistance()
         {
