@@ -1,8 +1,11 @@
 ﻿namespace MapUtils
 {
+    using System;
     using Geocoder.API.Address;
+    using static System.String;
+    using static System.StringSplitOptions;
 
-    public class Lookup
+    public static class Lookup
     {
         private static readonly GeoSearcher geo = new GeoSearcher();
         public static string DisplayName(double latitude, double longitude) // Work in progress..
@@ -12,73 +15,58 @@
             return displayName;
         }
 
-        public static string District(double latitude, double longitude) // Under construction.. Kind of messy right now..
+        public static string ShortName(double latitude, double longitude) // Still under construction..
         {
             var adr = geo.Lookup(latitude, longitude, out _);
 
-            string grp1, grp2, grp3, grp5 = "", grp6 = ""; // Find out the `right´ order for each (G)roup.
-            int n = 0, max = 3;
+            if (adr is null) return Empty;
 
-            grp1 = abc(new string[] { adr.Name + " (n)" }, ref n); // Temp (_).
+            string grp1, grp2, grp3, grp5, grp6; // Find out the `right´ order for each group.
 
-            grp2 = abc(new string[] { adr.HouseNumber + " (h)", adr.Road + " (r)", adr.PostCode + " (p)" }, ref n);
+            grp1 = adr.Name.Z('n');
 
-            grp3 = abc(new string[] { adr.Hamlet + " (h)", adr.Village + " (v)", adr.Suburb + " (s)", adr.Town + " (t)", adr.City + " (c)" }, ref n);
+            grp2 = TakeN(new string[] { Join(' ', new string[] { adr.HouseNumber.Z('h'), adr.Road.Z('r') }).Trim(), adr.PostCode.Z('p') });
 
-            if (n < max)
-                grp5 = abc(new string[] { adr.County + " (c)", adr.District + " (d)", adr.Region + " (r)", adr.State + " (s)" }, ref n);
+            grp3 = TakeN(new string[] { adr.Hamlet.Z('h'), adr.Village.Z('v'), adr.Suburb.Z('s'), adr.Town.Z('t'), adr.City.Z('c') });
 
-            if (n < max)
-                grp6 = abc(new string[] { adr.Country }, ref n);
+            grp5 = TakeN(new string[] { adr.County.Z('c'), adr.District.Z('d'), adr.Region.Z('r'), adr.State.Z('s') });
 
-            return def(new string[] { grp1, grp2, grp3, grp5, grp6 }, max); // What if strings are empty... Show the 3 most significant.
+            grp6 = TakeN(new string[] { adr.Country.Z('c'), adr.CountryCode.Z('y') });
 
-            static string abc(string[] fields, ref int n)
-            {
-                foreach (var f in fields)
-                    if (!string.IsNullOrWhiteSpace(f)) { n++; return f; };
-
-                return string.Empty;
-            }
-
-            static string def(string[] fields, int max)
-            {
-                var s = string.Empty;
-                var n = 0;
-                foreach (var f in fields)
-                {
-                    if (!string.IsNullOrWhiteSpace(f)) if (n == 0) s = f; else s += ", " + f;
-                    if (++n >= max) return s;
-                }
-                return string.Empty;
-            }
+            return TakeN(new string[] { grp1, grp2, grp3, grp5, grp6 }, 3); // Return the 3 most significant fields (if they exist).
+        }
+        static string Z(this string s, char ch) => IsNullOrEmpty(s) ? Empty : $"{s} ({ch})"; // Add temp suffix.
+        static string TakeN(string[] fields, int n = 1) // Return max N fields (default 1 field).
+        {
+            var arr = Join('|', fields).TrimStart('|').Split('|', RemoveEmptyEntries);
+            return Join(", ", arr, 0, Math.Min(n, arr.Length));
         }
     }
 }
 
-/*                  Group   Order   (my personal guess (not native English address understanding))
----------------------------------
-Pedestrian          0       -
+/*               Group   Order  (regroup/reorder?)
+------------------------------
+Pedestrian         0       -
 
-Name                1       ?
+Name               1       ?
 
-HouseNumber         2       1
-Road                2       2
-PostCode            2       3
+HouseNumber        2       1
+Road               2       2
+PostCode           2       3
 
-Hamlet              3       1
-Village             3       2
-Suburb              3       3
-Town                3       4
-City                3       5
+Hamlet             3       1
+Village            3       2
+Suburb             3       3
+Town               3       4    Split to subgroup?
+City               3       5
 
-Neighborhood        4
+Neighborhood       4       -
 
-County              5
-District            5
-Region              5
-State               5
+County             5
+District           5
+Region             5            Split to subgroup?
+State              5
 
-CountryCode         6
-Country             6
+CountryCode        6
+Country            6
 */

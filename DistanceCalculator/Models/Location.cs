@@ -5,7 +5,7 @@
 
     public class Location
     {
-        public Location()
+        public Location() // NOTE: See note '_selectedItem'..
         {
         }
 
@@ -25,6 +25,6 @@
         public string LocationShort => $"Lat: {Latitude}, Lon: {Longitude}";
         public string LocationLong => $"Latitude: {Latitude}, Longitude: {Longitude}";
         public string DisplayName => DisplayName(Latitude, Longitude);
-        public string District => District(Latitude, Longitude);
+        public string ShortName => ShortName(Latitude, Longitude);
     }
 }

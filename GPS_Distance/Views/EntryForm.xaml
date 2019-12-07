@@ -206,9 +206,8 @@
                     <DataTemplate>
                         <StackPanel>
                             <Label Content="{Binding LocationShort}" />
-                            <!--<Label Content=" - " />
-                            <Label Content="{Binding District}" />-->
-
+                            <Label Content=" - " />
+                            <Label Content="{Binding ShortName}" />
                         </StackPanel>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
