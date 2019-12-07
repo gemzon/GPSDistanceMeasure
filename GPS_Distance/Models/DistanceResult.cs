@@ -17,7 +17,7 @@
         public double HaversineFormulaResult { get; private set; }
         public string StartName => Start.DisplayName; // Temp name.
         public string Message => End.DisplayName;     // Temp name.
-        public string District => End.District;       // Temp name.
+        public string ShortName => End.ShortName;     // Temp name.
 
         //public string Message // Just for fun, but real logic and other properties may be handy.
         //{

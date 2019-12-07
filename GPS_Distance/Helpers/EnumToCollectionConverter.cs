@@ -12,7 +12,8 @@ namespace GPS_Distance.Helpers
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return Enum.GetValues(value.GetType());
+            return null;                            // NOTE: Temp.
+            return Enum.GetValues(value.GetType()); // NOTE: Compiler error.
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

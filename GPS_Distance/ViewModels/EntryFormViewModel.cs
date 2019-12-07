@@ -27,9 +27,8 @@
         private string _endLatitude = string.Empty;
         private string _endLongitude = string.Empty;
         private readonly IEventAggregator _eventAggregator;
-        private Location _selectedItem = new Location();
-        private string _notification = string.Empty;
-
+        private Location _selectedItem = new Location(); // NOTE: Not a fan of empty locations. Where is that? Another galaxy! Do the formulas cover that :)
+        private string _notification = string.Empty;     //       In that case, it may be better to select the North Pole (0,0). That's at least a place. Santa Claus lives there..
         #endregion
 
         #region Properties
@@ -101,8 +100,6 @@
         public ICommand ExportDataCommand { get; }
         public ICommand RemoveEndPositionCommand { get; }
 
-
-
         #endregion
 
         #region Constructor
@@ -111,10 +108,8 @@
             _eventAggregator = ServiceLocator.Current.GetInstance<IEventAggregator>();
 
             // Setup Command
-            ClearStartValuesCommand = new RelayCommand(ImportData); // NOTE: Borrowed for test.
-            //ClearStartValuesCommand = new RelayCommand(ClearStartValues);
-            ClearEndValuesCommand = new RelayCommand(ExportData); // NOTE: Borrowed for test.
-            //ClearEndValuesCommand = new RelayCommand(ClearEndValues);
+            ClearStartValuesCommand = new RelayCommand(ClearStartValues);
+            ClearEndValuesCommand = new RelayCommand(ClearEndValues);
             AddEndPointCommand = new RelayCommand(AddEndPoint);
             ClearEndPositionsListCommand = new RelayCommand(ClearEndPositionsList);
             ResetFormCommand = new RelayCommand(ResetForm);
@@ -172,51 +167,52 @@
 
         private void ImportData()
         {
+            // NOTE: I choose the wrong word 'Fail'. It frightened you.. Should have been, 'button cancel pressed'.
+            //       This function will not fail more than any other in that respect. Disk full! 
             try
             {
-                if (!ImportFromJson(out var startPoint, out var endPoints)) return;
-                if (startPoint is null) return;
+                var fileName = ImportFromJson(out var startPoint, out var endPoints);
 
-                //need to grab the file name that was imported
-                Notification = "Import of file ..... Success";
-           
+                if (fileName == string.Empty) Notification = "Import canceled by the user.";
+                else if (startPoint is null) Notification = "Nothing imported from file '{fileName}', please try again.";
+                else
+                {
+                    Notification = $"Import of file '{fileName}'. Success";
 
-            StartLatitude = startPoint.Latitude.ToString(); // Update screen.
-            StartLongitude = startPoint.Longitude.ToString();
+                    StartLatitude = startPoint.Latitude.ToString(); // Updates screen.
+                    StartLongitude = startPoint.Longitude.ToString();
 
-            foreach (var endPoint in endPoints) // Longer way but less redundant.
-            {
-                EndLatitude = endPoint.Latitude.ToString();
-                EndLongitude = endPoint.Longitude.ToString();
-                AddEndPoint();
-            }
-            
+                    foreach (var endPoint in endPoints)
+                    {
+                        EndLatitude = endPoint.Latitude.ToString(); // Updates screen.
+                        EndLongitude = endPoint.Longitude.ToString();
+                        AddEndPoint();
+                    }
+                }
             }
             catch (Exception ex)
             {
                 Notification = "Import data error, please try again";
             }
-            //EndPointsLocations = endPoints;
 
             //   MeasureDistance();
         }
 
         private void ExportData()
         {
-
-            try
+            try // // NOTE: Se above. But better safe than not..
             {
-                if (ExportToJson(StartLatitude, StartLongitude, EndPointsLocations))
-                {
-                    //add file name that was exported to 
-                    Notification = "Export of file ....  was successfully";
-                }
+                var fileName = ExportToJson(StartLatitude, StartLongitude, EndPointsLocations);
+
+                if (fileName == string.Empty)
+                    Notification = "Export canceled by the user.";
+                else
+                    Notification = $"Export of file '{fileName}'. Success";
             }
             catch (Exception ex)
-            { 
+            {
                 Notification = "Export failed to complete";
-               // throw new Exception("error occured when exporting",ex);
-               
+                // throw new Exception("error occured when exporting",ex);
             }
         }
         #endregion
