@@ -1,5 +1,6 @@
 ﻿namespace GPS_Distance.ViewModels
 {
+    using System;
     using System.Collections.ObjectModel;
     using System.Windows.Input;
     using CommonServiceLocator;
@@ -26,8 +27,9 @@
         private string _endLatitude = string.Empty;
         private string _endLongitude = string.Empty;
         private readonly IEventAggregator _eventAggregator;
-        private Location _selectedItem = null;
-       
+        private Location _selectedItem = new Location();
+        private string _notification = string.Empty;
+
         #endregion
 
         #region Properties
@@ -36,10 +38,17 @@
             get => _endPointLocations;
             set => SetProperty(ref _endPointLocations, value);
         }
-        public Location SelectedItem {
+        public Location SelectedItem
+        {
             get => _selectedItem;
             set => SetProperty(ref _selectedItem, value);
         }
+        public string Notification
+        {
+            get => _notification;
+            set => SetProperty(ref _notification, value);
+        }
+
         public string StartLatitude
         {
             get => _startLatitude;
@@ -92,7 +101,7 @@
         public ICommand ExportDataCommand { get; }
         public ICommand RemoveEndPositionCommand { get; }
 
-        
+
 
         #endregion
 
@@ -133,9 +142,9 @@
             ClearEndValues();
         }
 
-        private void RemoveEndPosition() 
+        private void RemoveEndPosition()
         {
-            if(SelectedItem != null)
+            if (SelectedItem != null)
             {
                 EndPointsLocations.Remove(SelectedItem);
             }
@@ -163,8 +172,14 @@
 
         private void ImportData()
         {
-            if (!ImportFromJson(out var startPoint, out var endPoints)) return;
-            if (startPoint is null) return;
+            try
+            {
+                if (!ImportFromJson(out var startPoint, out var endPoints)) return;
+                if (startPoint is null) return;
+
+                //need to grab the file name that was imported
+                Notification = "Import of file ..... Success";
+           
 
             StartLatitude = startPoint.Latitude.ToString(); // Update screen.
             StartLongitude = startPoint.Longitude.ToString();
@@ -175,15 +190,34 @@
                 EndLongitude = endPoint.Longitude.ToString();
                 AddEndPoint();
             }
+            
+            }
+            catch (Exception ex)
+            {
+                Notification = "Import data error, please try again";
+            }
             //EndPointsLocations = endPoints;
 
-            MeasureDistance();
+            //   MeasureDistance();
         }
 
         private void ExportData()
         {
-            if (ExportToJson(StartLatitude, StartLongitude, EndPointsLocations)) { /* MsgBox="ok"; */}
-            else { /* MsgBox="fail"; */ }
+
+            try
+            {
+                if (ExportToJson(StartLatitude, StartLongitude, EndPointsLocations))
+                {
+                    //add file name that was exported to 
+                    Notification = "Export of file ....  was successfully";
+                }
+            }
+            catch (Exception ex)
+            { 
+                Notification = "Export failed to complete";
+               // throw new Exception("error occured when exporting",ex);
+               
+            }
         }
         #endregion
 

@@ -6,10 +6,10 @@
     xmlns:local="clr-namespace:GPS_Distance.Views"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:viewModels="clr-namespace:GPS_Distance.ViewModels"
+    Width="800"
+    Height="450"
     d:DataContext="{d:DesignInstance viewModels:EntryFormViewModel,
                                      IsDesignTimeCreatable=True}"
-    Height="450"
-    Width="800"
     mc:Ignorable="d">
 
     <UserControl.Resources>
@@ -73,6 +73,25 @@
             Content="GPS Distance Measure Entry"
             FontSize="25"
             FontWeight="Bold" />
+
+        <StackPanel
+            Grid.Column="2"
+            Margin="0,20,20,20"
+            HorizontalAlignment="Right"
+            Orientation="Horizontal">
+            <!-- Replace buttons with icon images -->
+            <Button
+                Margin="0,0,20,0"
+                Padding="3"
+                Command="{Binding ExportDataCommand}"
+                Content="Export" />
+            <Button
+                Padding="3"
+                Command="{Binding ImportDataCommand}"
+                Content=" Import" />
+        </StackPanel>
+
+
         <StackPanel Grid.Row="1">
             <Label
                 Margin="0,5,0,0"
@@ -166,27 +185,30 @@
             Grid.Row="1"
             Grid.RowSpan="2"
             Grid.Column="1">
+            <TextBlock
+                x:Name="NotificationTextBlock"
+                HorizontalAlignment="Center"
+                Text="{Binding Notification}" />
             <Label
                 HorizontalContentAlignment="Center"
                 Content="End GPS Positions"
                 FontSize="20"
                 FontWeight="Bold" />
-            
-                <ListBox x:Name="EndPointListBox"
-                    Height="220"
-                    Margin="15,5"
-                    HorizontalContentAlignment="Center"
-                    ItemsSource="{Binding EndPointsLocations}"
-                         SelectedItem="{Binding SelectedItem}">
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
+
+            <ListBox
+                x:Name="EndPointListBox"
+                Height="220"
+                Margin="15,5"
+                HorizontalContentAlignment="Center"
+                ItemsSource="{Binding EndPointsLocations}"
+                SelectedItem="{Binding SelectedItem}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel>
                             <Label Content="{Binding LocationShort}" />
-                            <Label Content=" - " />
-                            <Label Content="{Binding District}" />
-                            <!--<Label Content="Lat" />
-                            <Label Content="{Binding Latitude}" />
-                            <Label Content=", Lon" />
-                            <Label Content="{Binding Longitude}" />-->
+                            <!--<Label Content=" - " />
+                            <Label Content="{Binding District}" />-->
+
                         </StackPanel>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
@@ -195,13 +217,11 @@
                 Margin="15,5"
                 HorizontalAlignment="Center"
                 Orientation="Horizontal">
-
                 <Button
                     Margin="0,0,25,0"
                     Command="{Binding RemoveEndPositionCommand}"
                     Content="Remove Selected Position"
                     Style="{StaticResource BtnOrange}" />
-
                 <Button
                     Command="{Binding MeasureDistanceCommand}"
                     Content="Measure Distances"
