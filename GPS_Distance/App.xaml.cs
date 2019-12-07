@@ -9,6 +9,7 @@ namespace GPS_Distance
     /// </summary>
     public partial class App : PrismApplication
     {
+        //TODO add logging for errors
         protected override Window CreateShell()
         {
             return new MainWindow();

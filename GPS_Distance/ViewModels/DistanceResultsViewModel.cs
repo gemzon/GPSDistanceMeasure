@@ -20,6 +20,7 @@ namespace GPS_Distance.ViewModels
         private ObservableCollection<DistanceResult> _distanceResults = new ObservableCollection<DistanceResult>();
         private Unit _selectedUnit = Unit.Metres;
         private readonly IEventAggregator _eventAggregator;
+        private ObservableCollection<Unit> _units = new ObservableCollection<Unit>();
         #endregion
 
         #region Properties
@@ -39,6 +40,11 @@ namespace GPS_Distance.ViewModels
         {
             get => _distanceResults;
             set => SetProperty(ref _distanceResults, value);
+        }
+        public ObservableCollection<Unit> Units
+        {
+            get => _units;
+            set => SetProperty(ref _units, value);
         }
 
         public Unit SelectedUnit

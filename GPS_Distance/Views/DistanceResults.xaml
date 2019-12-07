@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:GPS_Distance.Views"
+    xmlns:converter="clr-namespace:GPS_Distance.Helpers"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     d:DesignHeight="450"
     d:DesignWidth="800"
@@ -31,20 +32,21 @@
                     <TextBlock Text="{Binding MeasurementInputs.Start.LocationShort}" />
                     <TextBlock Text=" - " />
                     <TextBlock Text="{Binding MeasurementInputs.Start.DisplayName}" />
-                    <!--<TextBlock Text="Start GPS Position Latitude: " />
-                    <TextBlock Text="{Binding MeasurementInputs.Start.Latitude}" />
-                    <TextBlock Text=", Longitude: " />
-                    <TextBlock Text="{Binding MeasurementInputs.Start.Longitude}" />-->
+            
                 </StackPanel>
                 <StackPanel
                     Margin="10"
                     HorizontalAlignment="Right"
                     Orientation="Horizontal">
 
-                    <!-- NOTE: Temp!  -->
-                    <Button Width="110" Height="25" Command="{Binding TempToggleUnitCommand}" Content="Toggle Unit"/>
-                    <!-- ^^^^^^^^^^^  -->
-                    
+                    <!--  NOTE: Temp!  -->
+                    <Button
+                        Width="110"
+                        Height="25"
+                        Command="{Binding TempToggleUnitCommand}"
+                        Content="Toggle Unit" />
+                    <!--  ^^^^^^^^^^^  -->
+
                     <TextBlock
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
@@ -56,8 +58,10 @@
                         Height="26"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
-                        ItemsSource="{Binding Units}"
-                        SelectedItem="{Binding SelectedUnit}" />
+                        ItemsSource="{Binding Path=Units,Converter={converter:EnumToCollectionConverter}, Mode=OneTime}"
+                        SelectedValuePath="Value"
+                        SelectedValue="{Binding Path=SelectedUnit}" 
+                        />
                 </StackPanel>
             </Grid>
             <ListView
@@ -71,7 +75,8 @@
                         <GridViewColumn DisplayMemberBinding="{Binding ModifiedPythagorasResult}" Header="Modified Pythagorous" />
                         <GridViewColumn DisplayMemberBinding="{Binding GreaterCircleResult}" Header="Greater Circle" />
                         <GridViewColumn DisplayMemberBinding="{Binding HaversineFormulaResult}" Header="Haversine" />
-                        <GridViewColumn DisplayMemberBinding="{Binding Message}" Header="Other" /> <!-- Only testing.. -->
+                        <GridViewColumn DisplayMemberBinding="{Binding Message}" Header="Other" /> 
+                        <!--  Only testing..  -->
                     </GridView>
                 </ListView.View>
             </ListView>
@@ -79,4 +84,3 @@
     </StackPanel>
 
 </UserControl>
-    
