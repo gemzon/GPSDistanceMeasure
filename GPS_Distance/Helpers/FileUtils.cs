@@ -7,78 +7,55 @@
     using DistanceCalculator.Models;
     using Microsoft.Win32;
 
-    public static partial class Helper
+    public static partial class Helper // These methods and structure will change during development.
     {
-        private static readonly string fileFilter = "JSON files (*.json)|*.json|All files (*.*)|*.*";
+        private static readonly string filter = "JSON files (*.json)|*.json|All files (*.*)|*.*";
 
         public static string ImportFromJson(out Location? startPoint, out Collection<Location> endPoints)
         {
-            startPoint = null; // Set out parameters.
+            startPoint = default; // Set out parameters.
             endPoints = new Collection<Location>();
 
-            var fileName = @"?{""start"":[52.1,-3.2],""end"":[[15.3,16.4],[52.2,-3.3],[19.8,19.2]]}"; // Testdata starts with '?'.
+            var open = new OpenFileDialog { Filter = filter };
+            if (open.ShowDialog() == false) return string.Empty; // Import canceled.
 
-            if (true) // Skip dialog (or not)..
+            var data = new Data();
+            try { data = JsonSerializer.Deserialize<Data>(File.ReadAllText(open.FileName)); }
+            catch (JsonException) { }
+
+            if (data.startpoint?.Length == 2 && data.endpoints?[0].Length == 2) // At least 1 input ok?
             {
-                var openFileDialog = new OpenFileDialog { Filter = fileFilter };
-                if (openFileDialog.ShowDialog() == false) return string.Empty;
+                startPoint = new Location(data.startpoint[0], data.startpoint[1]);
 
-                fileName = openFileDialog.FileName;
+                foreach (var item in data.endpoints)// May change as might add a reference name for each of the locations.
+                    if (item.Length == 2)
+                        endPoints.Add(new Location(item[0], item[1]));
             }
 
-            var json = fileName[0] == '?' ? fileName[1..] : File.ReadAllText(fileName); // REM: File reading may be moved later.
-
-            Data data;
-            try { data = JsonSerializer.Deserialize<Data>(json/*, options*/); } // No options right now.
-            catch (JsonException) { return string.Empty; }
-
-            if (data is null || data.start?.Length != 2 || data.end?[0].Length != 2) return string.Empty;
-
-            startPoint = new Location(data.start[0], data.start[1]);
-
-            // may change as might add a reference name for each of the locations.
-            // OK. This is just a start for testing data.
-            foreach (var item in data.end)
-                if (item.Length == 2)
-                    endPoints.Add(new Location(item[0], item[1]));
-
-
-            return Path.GetFileName(fileName);
+            return Path.GetFileName(open.FileName);
         }
 
         public static string ExportToJson(string startLat, string startLon, Collection<Location> endPoints)
         {
-            var fileName = "GPS_Distance";
-
-            if (true) // Skip dialog (or not)..
-            {
-                var saveFileDialog = new SaveFileDialog
-                { FileName = fileName, DefaultExt = ".json", Filter = fileFilter };
-
-                if (saveFileDialog.ShowDialog() == false) return string.Empty;
-
-                fileName = saveFileDialog.FileName;
-            }
+            var save = new SaveFileDialog { FileName = "GPS_Distance", DefaultExt = ".json", Filter = filter };
+            if (save.ShowDialog() == false) return string.Empty; // Export canceled.
 
             var data = new Data();
-            data.start = new double[] { startLat.ToDouble(), startLon.ToDouble() };
+            data.startpoint = new double[] { startLat.ToDouble(), startLon.ToDouble() };
+            data.endpoints = new double[endPoints.Count][];
 
-            data.end = new double[endPoints.Count][];
-            for (var i = 0; i < endPoints.Count; i++)
-            {
-                data.end[i] = new double[] { endPoints[i].Latitude, endPoints[i].Longitude };
-            }
+            for (var i = 0; i < endPoints.Count; i++) // May change as might add a reference name for each of the locations.
+                data.endpoints[i] = new double[] { endPoints[i].Latitude, endPoints[i].Longitude };
 
-            var json = JsonSerializer.Serialize(data, new JsonSerializerOptions { WriteIndented = true });
-            File.WriteAllText(fileName, json);
+            File.WriteAllText(save.FileName, JsonSerializer.Serialize(data, new JsonSerializerOptions { WriteIndented = true }));
 
-            return Path.GetFileName(fileName);
+            return Path.GetFileName(save.FileName);
         }
 
-        private class Data // Note: Will be changed.
+        private class Data // Will change later on.
         {
-            public double[]? start { get; set; }
-            public double[][]? end { get; set; }
+            public double[]? startpoint { get; set; }
+            public double[][]? endpoints { get; set; }
         }
     }
 }

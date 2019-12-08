@@ -5,7 +5,7 @@
 
     public class Location
     {
-        public Location() // NOTE: See note '_selectedItem'..
+        public Location()
         {
         }
 

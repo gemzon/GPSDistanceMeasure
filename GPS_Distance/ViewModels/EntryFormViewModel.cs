@@ -27,8 +27,8 @@
         private string _endLatitude = string.Empty;
         private string _endLongitude = string.Empty;
         private readonly IEventAggregator _eventAggregator;
-        private Location _selectedItem = new Location(); // NOTE: Not a fan of empty locations. Where is that? Another galaxy! Do the formulas cover that :)
-        private string _notification = string.Empty;     //       In that case, it may be better to select the North Pole (0,0). That's at least a place. Santa Claus lives there..
+        private Location _selectedItem = new Location();
+        private string _notification = string.Empty;
         #endregion
 
         #region Properties
@@ -167,14 +167,12 @@
 
         private void ImportData()
         {
-            // NOTE: I choose the wrong word 'Fail'. It frightened you.. Should have been, 'button cancel pressed'.
-            //       This function will not fail more than any other in that respect. Disk full! 
-            try
+            try // NOTE: I choose the wrong word 'Fail'. Should have been, 'button cancel pressed'.
             {
                 var fileName = ImportFromJson(out var startPoint, out var endPoints);
 
                 if (fileName == string.Empty) Notification = "Import canceled by the user.";
-                else if (startPoint is null) Notification = "Nothing imported from file '{fileName}', please try again.";
+                else if (startPoint is null) Notification = $"Nothing imported from file '{fileName}', try another file.";
                 else
                 {
                     Notification = $"Import of file '{fileName}'. Success";
@@ -194,13 +192,11 @@
             {
                 Notification = "Import data error, please try again";
             }
-
-            //   MeasureDistance();
         }
 
         private void ExportData()
         {
-            try // // NOTE: Se above. But better safe than not..
+            try // NOTE: I choose the wrong word 'Fail'. Should have been, 'button cancel pressed'.
             {
                 var fileName = ExportToJson(StartLatitude, StartLongitude, EndPointsLocations);
 
