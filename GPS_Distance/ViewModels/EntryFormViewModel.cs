@@ -172,10 +172,10 @@
                 var fileName = ImportFromJson(out var startPoint, out var endPoints);
 
                 if (fileName == string.Empty) Notification = "Import canceled by the user.";
-                else if (startPoint is null) Notification = $"Nothing imported from file '{fileName}', try another file.";
+                else if (startPoint is null) Notification = $"No End GPS Positions found in file '{fileName}', try another file.";
                 else
                 {
-                    Notification = $"Import of file '{fileName}'. Success";
+                    Notification = $"Imported {endPoints.Count} End GPS Positions from file '{fileName}'.";
 
                     StartLatitude = startPoint.Latitude.ToString(); // Updates screen.
                     StartLongitude = startPoint.Longitude.ToString();
@@ -198,12 +198,14 @@
         {
             try // NOTE: I choose the wrong word 'Fail'. Should have been, 'button cancel pressed'.
             {
-                var fileName = ExportToJson(StartLatitude, StartLongitude, EndPointsLocations);
-
-                if (fileName == string.Empty)
-                    Notification = "Export canceled by the user.";
+                if (EndPointsLocations.Count == 0) Notification = "No End GPS Positions to Export.";
                 else
-                    Notification = $"Export of file '{fileName}'. Success";
+                {
+                    var fileName = ExportToJson(StartLatitude, StartLongitude, EndPointsLocations);
+                    Notification = fileName == string.Empty 
+                        ? "Export canceled by the user."
+                        : $"Exported {EndPointsLocations.Count} End GPS Positions to file '{fileName}'.";
+                }
             }
             catch (Exception ex)
             {
