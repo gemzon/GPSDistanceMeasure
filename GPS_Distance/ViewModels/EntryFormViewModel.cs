@@ -27,8 +27,8 @@
         private string _endLatitude = string.Empty;
         private string _endLongitude = string.Empty;
         private readonly IEventAggregator _eventAggregator;
-        private Location _selectedItem = new Location(); // NOTE: Not a fan of empty locations. Where is that? Another galaxy! Do the formulas cover that :)
-        private string _notification = string.Empty;     //       In that case, it may be better to select the North Pole (0,0). That's at least a place. Santa Claus lives there..
+        private Location _selectedItem = new Location();
+        private string _notification = string.Empty;
         #endregion
 
         #region Properties
@@ -167,17 +167,15 @@
 
         private void ImportData()
         {
-            // NOTE: I choose the wrong word 'Fail'. It frightened you.. Should have been, 'button cancel pressed'.
-            //       This function will not fail more than any other in that respect. Disk full! 
-            try
+            try // NOTE: I choose the wrong word 'Fail'. Should have been, 'button cancel pressed'.
             {
                 var fileName = ImportFromJson(out var startPoint, out var endPoints);
 
                 if (fileName == string.Empty) Notification = "Import canceled by the user.";
-                else if (startPoint is null) Notification = "Nothing imported from file '{fileName}', please try again.";
+                else if (startPoint is null) Notification = $"No End GPS Positions found in file '{fileName}', try another file.";
                 else
                 {
-                    Notification = $"Import of file '{fileName}'. Success";
+                    Notification = $"Imported {endPoints.Count} End GPS Positions from file '{fileName}'.";
 
                     StartLatitude = startPoint.Latitude.ToString(); // Updates screen.
                     StartLongitude = startPoint.Longitude.ToString();
@@ -194,20 +192,20 @@
             {
                 Notification = "Import data error, please try again";
             }
-
-            //   MeasureDistance();
         }
 
         private void ExportData()
         {
-            try // // NOTE: Se above. But better safe than not..
+            try // NOTE: I choose the wrong word 'Fail'. Should have been, 'button cancel pressed'.
             {
-                var fileName = ExportToJson(StartLatitude, StartLongitude, EndPointsLocations);
-
-                if (fileName == string.Empty)
-                    Notification = "Export canceled by the user.";
+                if (EndPointsLocations.Count == 0) Notification = "No End GPS Positions to Export.";
                 else
-                    Notification = $"Export of file '{fileName}'. Success";
+                {
+                    var fileName = ExportToJson(StartLatitude, StartLongitude, EndPointsLocations);
+                    Notification = fileName == string.Empty 
+                        ? "Export canceled by the user."
+                        : $"Exported {EndPointsLocations.Count} End GPS Positions to file '{fileName}'.";
+                }
             }
             catch (Exception ex)
             {
