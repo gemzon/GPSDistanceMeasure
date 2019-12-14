@@ -50,7 +50,11 @@ namespace GPS_Distance.ViewModels
         public Unit SelectedUnit
         {
             get => _selectedUnit;
-            set => SetProperty(ref _selectedUnit, value);
+            set
+            {
+                SetProperty(ref _selectedUnit, value);
+                UnitChanged();
+            }
         }
         #endregion
 
@@ -66,6 +70,12 @@ namespace GPS_Distance.ViewModels
             _eventAggregator.GetEvent<DistanceResultEvent>().Subscribe(DistanceResultEventHandler);
             GenerateSourceDataCommand = new RelayCommand(GenerateSourceData);
             TempToggleUnitCommand = new RelayCommand(TempToggleUnit);
+
+            foreach (Unit item in Enum.GetValues(typeof(Unit)))
+            {
+                Units.Add(item);
+            }
+   
         }
 
         private void DistanceResultEventHandler(DistanceResultEventArgs obj)
@@ -92,6 +102,16 @@ namespace GPS_Distance.ViewModels
             if (++x > 2) x = 0; SelectedUnit = (Unit)x;
             foreach (var item in DistanceResults) item.ChangeUnit(SelectedUnit);
             // Update screen!
+        }
+        private void UnitChanged()
+        {
+            if(SelectedUnit == null)
+            {
+                SelectedUnit = Unit.Metres;
+            }
+
+            var c = "";
+
         }
         #endregion
     }
