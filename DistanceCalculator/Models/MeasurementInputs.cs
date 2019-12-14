@@ -1,18 +1,29 @@
-﻿using static DistanceCalculator.Helpers.Helper;
-
-namespace DistanceCalculator.Models
+﻿namespace DistanceCalculator.Models
 {
-    public class MeasurementInputs : Location
-    {
-        //public MeasurementInputs() { }
-        public MeasurementInputs(Location location) : base(location) { }
-        public MeasurementInputs(double latitude, double longitude) : base(latitude, longitude) { }
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
 
+    public class MeasurementInputs
+    {
+        public MeasurementInputs(Location start) : this(start.Latitude, start.Longitude) { }
+        public MeasurementInputs(double latitude, double longitude)
+        {
+            Start = new Location(latitude, longitude);
+            Routes = new List<Route>();
+        }
 
         // Properties
-        //public double EarthRadius => RadiusLatitudeAdjustment(Latitude);
+        public Location Start { get; }
+        public List<Route> Routes { get; }
 
-     
-
+        // Methods
+        public void AddEndPoint(double latitude, double longitude)
+        {
+            Routes.Add(new Route(Start, new Location(latitude, longitude)));
+        }
+        public void AddEndPoints(Collection<Location> locations)
+        {
+            foreach (var loc in locations) AddEndPoint(loc.Latitude, loc.Longitude);
+        }
     }
 }

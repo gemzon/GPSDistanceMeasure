@@ -15,7 +15,7 @@ namespace GPS_Distance.ViewModels
     public class DistanceResultsViewModel : BaseViewModel
     {
         #region Fields
-        private MeasurementInputs2? _measurementInputs;
+        private MeasurementInputs? _measurementInputs;
         private List<Location> _endLocations = new List<Location>();
         private ObservableCollection<DistanceResult> _distanceResults = new ObservableCollection<DistanceResult>();
         private Unit _selectedUnit = Unit.Metres;
@@ -24,7 +24,7 @@ namespace GPS_Distance.ViewModels
         #endregion
 
         #region Properties
-        public MeasurementInputs2? MeasurementInputs
+        public MeasurementInputs? MeasurementInputs
         {
             get => _measurementInputs ?? null;
             set => SetProperty(ref _measurementInputs, value);
@@ -52,15 +52,15 @@ namespace GPS_Distance.ViewModels
             get => _selectedUnit;
             set
             {
-                SetProperty(ref _selectedUnit, value);
-                GenerateSourceData();
+                if (SetProperty(ref _selectedUnit, value))
+                    GenerateSourceData();
             }
         }
         #endregion
 
         #region Commands
         public ICommand GenerateSourceDataCommand { get; }
-        
+
         #endregion
 
         #region Constructor
@@ -69,7 +69,7 @@ namespace GPS_Distance.ViewModels
             _eventAggregator = ServiceLocator.Current.GetInstance<IEventAggregator>();
             _eventAggregator.GetEvent<DistanceResultEvent>().Subscribe(DistanceResultEventHandler);
             GenerateSourceDataCommand = new RelayCommand(GenerateSourceData);
-           
+
             foreach (Unit unit in (Unit[])Enum.GetValues(typeof(Unit)))
             {
                 Units.Add(unit);
@@ -80,7 +80,7 @@ namespace GPS_Distance.ViewModels
         {
             if (obj.InputDTO is null) return;
 
-            MeasurementInputs = new MeasurementInputs2(obj.InputDTO.StartLocation);
+            MeasurementInputs = new MeasurementInputs(obj.InputDTO.StartLocation);
             MeasurementInputs.AddEndPoints(obj.InputDTO.EndLocations);
             GenerateSourceData();
         }

@@ -161,7 +161,7 @@
                 });
 
             _eventAggregator.GetEvent<ResultTabEnablerEvent>().Publish(
-                new ResultTabEnablerEventArgs { Enabled = true });
+                new ResultTabEnablerEventArgs { Enable = true });
         }
 
         private void ImportData() // Errors handled during import.

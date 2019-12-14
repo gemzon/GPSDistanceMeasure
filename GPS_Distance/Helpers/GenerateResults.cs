@@ -6,7 +6,7 @@
 
     public static partial class Helper
     {
-        public static ObservableCollection<DistanceResult> GenerateResults(MeasurementInputs2 measurementInputs, Unit selectedUnit)
+        public static ObservableCollection<DistanceResult> GenerateResults(MeasurementInputs measurementInputs, Unit selectedUnit)
         {
             var DistanceResults = new ObservableCollection<DistanceResult>();
 
