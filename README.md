@@ -8,14 +8,12 @@ This application is designed to take in 2 GPS positions in degrees and then, wor
 
 This application is open for modification.
 
-We developed initial project live on stream - https://www.twitch.tv/copperbeardy 5th October 2019.
+We developed initial project live on stream <https://www.twitch.tv/copperbeardy> 5th October 2019.
 
-- [Building a small WPF app for GPS distant measuring (Part 1)](https://www.twitch.tv/videos/490461483)
-- [Building a small WPF app for GPS distant measuring (Part 2)](https://www.twitch.tv/videos/490688681)
-- [Building a small WPF app for GPS distant measuring (Part 3)](https://www.twitch.tv/videos/493488643)
-- [Building a small WPF app for GPS distant measuring (Part 4)](https://www.twitch.tv/videos/499779783)
-- [Building a small WPF app for GPS distant measuring (Part 5)](https://www.twitch.tv/videos/502878682)
-- [Building a small WPF app for GPS distant measuring (Part 6)](https://www.twitch.tv/videos/505931535)
-- [Building a small WPF app for GPS distant measuring (Part 7)](https://www.twitch.tv/videos/509067137)
-- [Building a small WPF app for GPS distant measuring (Part 8)](https://www.twitch.tv/videos/512178985)
-- [Building a small WPF app for GPS distant measuring (Part 9)](https://www.twitch.tv/videos/518240061)
+- [Building a small WPF app for GPS distance measuring (Sat 26th Oct)](https://www.twitch.tv/videos/499779783)
+- [Building a small WPF app for GPS distance measuring (Sat 2nd Nov)](https://www.twitch.tv/videos/502878682)
+- [Building a small WPF app for GPS distance measuring (Sat 9th Nov)](https://www.twitch.tv/videos/505931535)
+- [Building a small WPF app for GPS distance measuring (Sat 16th Nov)](https://www.twitch.tv/videos/509067137)
+- [Building a small WPF app for GPS distance measuring (Sat 23th Nov)](https://www.twitch.tv/videos/512178985)
+- [Building a small WPF app for GPS distance measuring (Sat 7th Dec)](https://www.twitch.tv/videos/518240061)
+- [Building a small WPF app for GPS distance measuring (Sat 14th Dec)](https://www.twitch.tv/videos/521308560)
