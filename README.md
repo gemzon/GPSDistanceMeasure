@@ -10,10 +10,10 @@ This application is open for modification.
 
 We developed initial project live on stream <https://www.twitch.tv/copperbeardy> 5th October 2019.
 
-- [Building a small WPF app for GPS distant measuring (Sat 26th Oct)](https://www.twitch.tv/videos/499779783)
-- [Building a small WPF app for GPS distant measuring (Sat 2nd Nov)](https://www.twitch.tv/videos/502878682)
-- [Building a small WPF app for GPS distant measuring (Sat 9th Nov)](https://www.twitch.tv/videos/505931535)
-- [Building a small WPF app for GPS distant measuring (Sat 16th Nov)](https://www.twitch.tv/videos/509067137)
-- [Building a small WPF app for GPS distant measuring (Sat 23th Nov)](https://www.twitch.tv/videos/512178985)
-- [Building a small WPF app for GPS distant measuring (Sat 7th Dec)](https://www.twitch.tv/videos/518240061)
-- [Building a small WPF app for GPS distant measuring (Sat 14th Dec)](https://www.twitch.tv/videos/521308560)
+- [Building a small WPF app for GPS distance measuring (Sat 26th Oct)](https://www.twitch.tv/videos/499779783)
+- [Building a small WPF app for GPS distance measuring (Sat 2nd Nov)](https://www.twitch.tv/videos/502878682)
+- [Building a small WPF app for GPS distance measuring (Sat 9th Nov)](https://www.twitch.tv/videos/505931535)
+- [Building a small WPF app for GPS distance measuring (Sat 16th Nov)](https://www.twitch.tv/videos/509067137)
+- [Building a small WPF app for GPS distance measuring (Sat 23th Nov)](https://www.twitch.tv/videos/512178985)
+- [Building a small WPF app for GPS distance measuring (Sat 7th Dec)](https://www.twitch.tv/videos/518240061)
+- [Building a small WPF app for GPS distance measuring (Sat 14th Dec)](https://www.twitch.tv/videos/521308560)
