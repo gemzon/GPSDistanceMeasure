@@ -16,7 +16,8 @@
             <TabItem Header="Entry Form">
                 <views:EntryForm />
             </TabItem>
-            <TabItem Header="Result" IsSelected="{Binding IsResultTabSelected}">
+            <TabItem Header="Result" IsSelected="{Binding IsResultTabSelected}"
+                     IsEnabled="{Binding IsEnabled}">
                 <views:DistanceResults />
             </TabItem>
         </TabControl>

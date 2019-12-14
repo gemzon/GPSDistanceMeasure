@@ -8,11 +8,10 @@
     /// </summary>
     public partial class DistanceResults : UserControl
     {
-      //TODO Hook up the vm and result to the View
         public DistanceResults()
         {
             InitializeComponent();
-            DataContext = new DistanceResultsViewModel();
+            DataContext = new DistanceResultsViewModel();          
         }
     }
 }
