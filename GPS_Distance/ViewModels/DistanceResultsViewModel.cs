@@ -70,11 +70,10 @@ namespace GPS_Distance.ViewModels
             _eventAggregator.GetEvent<DistanceResultEvent>().Subscribe(DistanceResultEventHandler);
             GenerateSourceDataCommand = new RelayCommand(GenerateSourceData);
            
-            foreach (Unit unit in Enum.GetValues(typeof(Unit)))
+            foreach (Unit unit in (Unit[])Enum.GetValues(typeof(Unit)))
             {
                 Units.Add(unit);
             }
-            
         }
 
         private void DistanceResultEventHandler(DistanceResultEventArgs obj)
@@ -94,9 +93,6 @@ namespace GPS_Distance.ViewModels
 
             DistanceResults = GenerateResults(MeasurementInputs, SelectedUnit);
         }
-
-       
-     
         #endregion
     }
 }

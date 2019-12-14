@@ -145,13 +145,11 @@
             }
         }
 
-
         private void MeasureDistance()
         {
             if (!TryParseLatitude(StartLatitude, out var latitude)) return;
             if (!TryParseLongitude(StartLongitude, out var longitude)) return;
 
-           
             _eventAggregator.GetEvent<DistanceResultEvent>().Publish(
                 new DistanceResultEventArgs
                 {
@@ -163,55 +161,42 @@
                 });
 
             _eventAggregator.GetEvent<ResultTabEnablerEvent>().Publish(
-                new ResultTabEnablerEventArgs { Enable =true});
+                new ResultTabEnablerEventArgs { Enabled = true });
         }
 
-        private void ImportData()
+        private void ImportData() // Errors handled during import.
         {
-            try // NOTE: I choose the wrong word 'Fail'. Should have been, 'button cancel pressed'.
-            {
-                var fileName = ImportFromJson(out var startPoint, out var endPoints);
+            var fileName = ImportFromJson(out var startPoint, out var endPoints);
 
-                if (fileName == string.Empty) Notification = "Import canceled by the user.";
-                else if (startPoint is null) Notification = $"No End GPS Positions found in file '{fileName}', try another file.";
-                else
+            if (fileName == string.Empty) Notification = "Import canceled by the user.";
+            else if (fileName == "?") Notification = "Import failed to complete!";
+            else if (startPoint is null) Notification = $"No End GPS Positions found in file '{fileName}', try another file.";
+            else
+            {
+                Notification = $"Imported {endPoints.Count} End GPS Positions from file '{fileName}'.";
+
+                StartLatitude = startPoint.Latitude.ToString(); // Updates screen.
+                StartLongitude = startPoint.Longitude.ToString();
+
+                foreach (var endPoint in endPoints)
                 {
-                    Notification = $"Imported {endPoints.Count} End GPS Positions from file '{fileName}'.";
-
-                    StartLatitude = startPoint.Latitude.ToString(); // Updates screen.
-                    StartLongitude = startPoint.Longitude.ToString();
-
-                    foreach (var endPoint in endPoints)
-                    {
-                        EndLatitude = endPoint.Latitude.ToString(); // Updates screen.
-                        EndLongitude = endPoint.Longitude.ToString();
-                        AddEndPoint();
-                    }
+                    EndLatitude = endPoint.Latitude.ToString(); // Updates screen.
+                    EndLongitude = endPoint.Longitude.ToString();
+                    AddEndPoint();
                 }
-            }
-            catch (Exception ex)
-            {
-                Notification = "Import data error, please try again";
             }
         }
 
-        private void ExportData()
+        private void ExportData() // Errors handled during export.
         {
-            try // NOTE: I choose the wrong word 'Fail'. Should have been, 'button cancel pressed'.
+            if (EndPointsLocations.Count == 0) Notification = "No End GPS Positions to Export.";
+            else
             {
-                if (EndPointsLocations.Count == 0) Notification = "No End GPS Positions to Export.";
-                else
-                {
-                    var fileName = ExportToJson(StartLatitude, StartLongitude, EndPointsLocations);
-                    Notification = fileName == string.Empty 
-                        ? "Export canceled by the user."
-                        : $"Exported {EndPointsLocations.Count} End GPS Positions to file '{fileName}'.";
-                }
-            }
-            catch (Exception ex)
-            {
-                Notification = "Export failed to complete";
-                // throw new Exception("error occured when exporting",ex);
+                var fileName = ExportToJson(StartLatitude, StartLongitude, EndPointsLocations);
+
+                Notification = fileName == string.Empty ? "Export canceled by the user."
+                             : fileName == "?" ? "Export failed to complete!"
+                             : $"Exported {EndPointsLocations.Count} End GPS Positions to file '{fileName}'.";
             }
         }
         #endregion
