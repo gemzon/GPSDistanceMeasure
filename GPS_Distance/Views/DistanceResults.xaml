@@ -31,26 +31,18 @@
                     <TextBlock Text="{Binding MeasurementInputs.Start.LocationShort}" />
                     <TextBlock Text=" - " />
                     <TextBlock Text="{Binding MeasurementInputs.Start.DisplayName}" />
-            
+
                 </StackPanel>
                 <StackPanel
                     Margin="10"
                     HorizontalAlignment="Right"
                     Orientation="Horizontal">
 
-                    <!--  NOTE: Temp!  -->
-                    <Button
-                        Width="110"
-                        Height="25"
-                        Command="{Binding TempToggleUnitCommand}"
-                        Content="Toggle Unit" />
-                    <!--  ^^^^^^^^^^^  -->
-
                     <TextBlock
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
                         Text="Units: " />
-                  
+
                     <ComboBox
                         x:Name="Unit"
                         Width="120"
@@ -58,8 +50,7 @@
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
                         ItemsSource="{Binding Path=Units}"
-                        SelectedValue="{Binding Path=SelectedUnit}" 
-                        />
+                        SelectedValue="{Binding Path=SelectedUnit}" />
                 </StackPanel>
             </Grid>
             <ListView
@@ -73,7 +64,7 @@
                         <GridViewColumn DisplayMemberBinding="{Binding ModifiedPythagorasResult}" Header="Modified Pythagorous" />
                         <GridViewColumn DisplayMemberBinding="{Binding GreaterCircleResult}" Header="Greater Circle" />
                         <GridViewColumn DisplayMemberBinding="{Binding HaversineFormulaResult}" Header="Haversine" />
-                        <GridViewColumn DisplayMemberBinding="{Binding Message}" Header="Other" /> 
+                        <GridViewColumn DisplayMemberBinding="{Binding Message}" Header="Other" />
                         <!--  Only testing..  -->
                     </GridView>
                 </ListView.View>

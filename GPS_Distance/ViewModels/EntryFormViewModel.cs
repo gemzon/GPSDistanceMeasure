@@ -151,9 +151,7 @@
             if (!TryParseLatitude(StartLatitude, out var latitude)) return;
             if (!TryParseLongitude(StartLongitude, out var longitude)) return;
 
-            //TODO - Saturday check values are being passed correctly
-            //TODO disable the measure distance button unless there a valid value in the start location boxes and at least one valid endpoint.
-
+           
             _eventAggregator.GetEvent<DistanceResultEvent>().Publish(
                 new DistanceResultEventArgs
                 {
@@ -163,6 +161,9 @@
                         EndLocations = EndPointsLocations
                     }
                 });
+
+            _eventAggregator.GetEvent<ResultTabEnablerEvent>().Publish(
+                new ResultTabEnablerEventArgs { Enable =true});
         }
 
         private void ImportData()

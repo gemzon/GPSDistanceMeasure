@@ -53,14 +53,14 @@ namespace GPS_Distance.ViewModels
             set
             {
                 SetProperty(ref _selectedUnit, value);
-                UnitChanged();
+                GenerateSourceData();
             }
         }
         #endregion
 
         #region Commands
         public ICommand GenerateSourceDataCommand { get; }
-        public ICommand TempToggleUnitCommand { get; }
+        
         #endregion
 
         #region Constructor
@@ -69,13 +69,12 @@ namespace GPS_Distance.ViewModels
             _eventAggregator = ServiceLocator.Current.GetInstance<IEventAggregator>();
             _eventAggregator.GetEvent<DistanceResultEvent>().Subscribe(DistanceResultEventHandler);
             GenerateSourceDataCommand = new RelayCommand(GenerateSourceData);
-            TempToggleUnitCommand = new RelayCommand(TempToggleUnit);
-
-            foreach (Unit item in Enum.GetValues(typeof(Unit)))
+           
+            foreach (Unit unit in Enum.GetValues(typeof(Unit)))
             {
-                Units.Add(item);
+                Units.Add(unit);
             }
-   
+            
         }
 
         private void DistanceResultEventHandler(DistanceResultEventArgs obj)
@@ -96,23 +95,8 @@ namespace GPS_Distance.ViewModels
             DistanceResults = GenerateResults(MeasurementInputs, SelectedUnit);
         }
 
-        private int x = 0;
-        private void TempToggleUnit() // NOTE: Only testing. Temp until ComboBox works.
-        {
-            if (++x > 2) x = 0; SelectedUnit = (Unit)x;
-            foreach (var item in DistanceResults) item.ChangeUnit(SelectedUnit);
-            // Update screen!
-        }
-        private void UnitChanged()
-        {
-            if(SelectedUnit == null)
-            {
-                SelectedUnit = Unit.Metres;
-            }
-
-            var c = "";
-
-        }
+       
+     
         #endregion
     }
 }
