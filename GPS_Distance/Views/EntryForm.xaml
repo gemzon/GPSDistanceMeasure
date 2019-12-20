@@ -198,9 +198,10 @@
                 x:Name="EndPointListBox"
                 Height="220"
                 Margin="15,5"
-                HorizontalContentAlignment="Center"
+                HorizontalContentAlignment="Left"
                 ItemsSource="{Binding EndPointsLocations}"
                 SelectedItem="{Binding SelectedItem}">
+                <!--HorizontalContentAlignment="Center" CHANGED to Left -->
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
