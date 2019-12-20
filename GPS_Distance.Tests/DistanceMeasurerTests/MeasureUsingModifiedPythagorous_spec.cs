@@ -21,7 +21,7 @@ namespace DistanceMeasurerTests.MeasureUsingModifiedPythagorous_spec
         public void Should_return_correct_distance(double startLat, double startLong, double endLat, double endLong, double expectedDistance)
         {
             // Arrange
-            var startLocation = new MeasurementInputs(startLat, startLong); // Location
+            var startLocation = new Location(startLat, startLong);
             var endLocation = new Location(endLat, endLong);
             var route = new Route(startLocation, endLocation);
 
@@ -31,7 +31,6 @@ namespace DistanceMeasurerTests.MeasureUsingModifiedPythagorous_spec
 
             // Assert
             actualDistance.Should().Be(expectedDistance);
-            actualDistance2.Should().Be(actualDistance);
             actualDistance2.Should().Be(expectedDistance);
         }
     }
